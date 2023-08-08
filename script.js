@@ -10,8 +10,8 @@ function detectDisplayDirection(){
 
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV( dir = '' ){
-
-    /*.then(
+    fetch(dir)
+    .then(
         function(response){  //response
             if (!response.ok) {  //error
                 return Promise.reject(new Error('error'));
@@ -30,9 +30,11 @@ function getCSV( dir = '' ){
             console.error('fetch error', err);  //  error処理
             const dist = [];
         }
-    );*/
-    const res = await fetch(dir);
-    console.log(res);
+    ).finally(
+        function(dist){
+            return dist;
+        }
+    );
 }
 
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
