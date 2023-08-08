@@ -1,9 +1,29 @@
+let displayDirection = '';
+
+function detectDisplayDirection(){
+    if(window.innerWidth > window.innerHeight){
+        displayDirection = 'landscape';
+    }else{
+        displayDirection = 'portrait';
+    }
+}
+
 //CSVファイルを読み込む関数getCSV()の定義
-function getCSV( filename = '', array = [] ){
+function getCSV( dir = '', dist = [] ){
     try{
+        const params = '';
         let req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
-        req.open('get', filename, true); // アクセスするファイルを指定
+        req.open('get', dir, true); // アクセスするファイルを指定
         req.send(null); // HTTPリクエストの発行
+
+        fetch(
+            dir,
+            params
+        ).then(
+            response => response.json()
+        ).then(
+            data => console.log(data)
+        );
     }catch(err){
         console.log(err);
     }
@@ -27,7 +47,7 @@ function convertCSVtoArray( str ){ // 読み込んだCSVデータが文字列と
     return result;
 }
 
-function searchColumun( array = [], key = ''){
+function searchColumunByName( array = [], key = ''){
     return array[0].indexOf(key);
 }
 
@@ -53,12 +73,12 @@ function createBandTable(section = '', dir = '' ){
 
     switch(section){
         case '3GPP':
-            ulUpColumun = searchColumun(data, 'ULup');
-            ulDownColumun = searchColumun(data, 'ULdown');
-            dlUpColumun = searchColumun(data, 'DLup');
-            dlDownColumun = searchColumun(data, 'DLdown');
-            nameColumun = searchColumun(data, 'Name');
-            modeColumun = searchColumun(data, 'Mode');
+            ulUpColumun = searchColumunByName(data, 'ULup');
+            ulDownColumun = searchColumunByName(data, 'ULdown');
+            dlUpColumun = searchColumunByName(data, 'DLup');
+            dlDownColumun = searchColumunByName(data, 'DLdown');
+            nameColumun = searchColumunByName(data, 'Name');
+            modeColumun = searchColumunByName(data, 'Mode');
 
             for( i = 1; i < data; i++){
                 let mode = data[i][modeColumun];
@@ -93,8 +113,14 @@ function createBandTable(section = '', dir = '' ){
     }
 }
 
+function setBoxSizeByCSS(){}
+
 function main(){
+    detectDisplayDirection();
+
     createBandTable('3GPP' , '3GPPBandPlan.csv');
+
+    setBoxSizeByCSS();
 }
 
 document.onload = main();
