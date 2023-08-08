@@ -18,17 +18,30 @@ function getCSV( dir = '', dist = [] ){
         console.log(err);
     }
 
-    try{
-        fetch(dir).
-        then(response => response.json())
-        .then(data => console.log(data));
-    }catch(err){
-        console.log(err);
-    }
+    fetch(dir)
+    .then(
+        function(response){                        // response
+            if (!response.ok) {
+                return Promise.reject(new Error("error"));
+            }  //  error
+
+            return response.text();                         // ok string utf-8
+        }
+    )
+    .then(
+        function(text){
+            console.log(text) ;
+        }
+    )
+    .catch(
+        function(err){
+            console.error("fetch error", err);  //  error処理
+        }
+    );
 
     // レスポンスが返ってきたらconvertCSVtoArray()を呼ぶ
     req.onload = function(){
-	    array = convertCSVtoArray(req.responseText); // 渡されるのは読み込んだCSVデータ
+	    dist = convertCSVtoArray(req.responseText); // 渡されるのは読み込んだCSVデータ
     }
 }
 
@@ -63,19 +76,18 @@ function createBox(parent = '', name = '', up = 0, down = 0){
     box.innerText = name;
 }
 
-function createBandTable(section = '', dir = '' ){
-    const data = [];
-    const ulUpColumun = 0, ulDownColumun = 0, dlUpColumun = 0, dlDownColumun = 0, nameColumun = 0, modeColumun = 0;
-
-    getCSV(dir, data);
+function createBandTable(section = '' ){
+    let data = [];
 
     switch(section){
         case '3GPP':
-            ulUpColumun = searchColumunByName(data, 'ULup');
-            ulDownColumun = searchColumunByName(data, 'ULdown');
-            dlUpColumun = searchColumunByName(data, 'DLup');
-            dlDownColumun = searchColumunByName(data, 'DLdown');
-            nameColumun = searchColumunByName(data, 'Name');
+            getCSV('/BandPlanVisualize/3GPPBandPlan.csv', data);
+
+            const ulUpColumun = searchColumunByName(data, 'ULup'),
+            ulDownColumun = searchColumunByName(data, 'ULdown'),
+            dlUpColumun = searchColumunByName(data, 'DLup'),
+            dlDownColumun = searchColumunByName(data, 'DLdown'),
+            nameColumun = searchColumunByName(data, 'Name'),
             modeColumun = searchColumunByName(data, 'Mode');
 
             for( i = 1; i < data; i++){
@@ -116,7 +128,7 @@ function setBoxSizeByCSS(){}
 function main(){
     detectDisplayDirection();
 
-    createBandTable('3GPP' , '3GPPBandPlan.csv');
+    createBandTable('3GPP');
 
     setBoxSizeByCSS();
 }
