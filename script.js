@@ -14,7 +14,11 @@ function getCSV( dir = '', dist = [] ){
         let req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
         req.open('get', dir, true); // アクセスするファイルを指定
         req.send(null); // HTTPリクエストの発行
+    }catch(err){
+        console.log(err);
+    }
 
+    try{
         fetch(dir).
         then(response => response.json())
         .then(data => console.log(data));
