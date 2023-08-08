@@ -47,6 +47,8 @@ function convertCSVtoArray( str ){ // 読み込んだCSVデータが文字列と
 }
 
 function searchColumunByName( array = [], key = ''){
+    console.log(array);
+
     return array[0].indexOf(key);
 }
 
