@@ -9,7 +9,7 @@ function detectDisplayDirection(){
 }
 
 //CSVファイルを読み込む関数getCSV()の定義
-function getCSV( dir = '', dist = [] ){
+function getCSV( dir = '' ){
 
     fetch(dir)
     .then(
@@ -23,8 +23,7 @@ function getCSV( dir = '', dist = [] ){
     )
     .then(
         function(text){
-            dist = convertCSVtoArray(text);
-            console.log(dist);
+            return convertCSVtoArray(text);
         }
     )
     .catch(
@@ -66,11 +65,9 @@ function createBox(parent = '', name = '', up = 0, down = 0){
 }
 
 function createBandTable(section = '' ){
-    let data = [];
-
     switch(section){
         case '3GPP':
-            getCSV('/BandPlanVisualize/3GPPBandPlan.csv', data);
+            const data = getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
