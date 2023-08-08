@@ -31,12 +31,8 @@ function getCSV( dir = '' ){
             const dist = [];
         }
     );*/
-    try{
-        const csv = await fetch(dir);
-        console.log(csv);
-    }catch(err){
-        console.log(err);
-    }
+    const res = await fetch(dir);
+    console.log(res);
 }
 
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
