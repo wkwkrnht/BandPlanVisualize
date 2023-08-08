@@ -70,6 +70,7 @@ function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
             const data = getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
+            console.log(data);
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
