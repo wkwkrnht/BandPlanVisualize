@@ -83,7 +83,7 @@ function createBandTable(section = '', dir = '' ){
                         name = name + '↑';
                         createBox(section, name, data[i][ulUpColumun], data[i][ulDownColumun]);
                         name = name + '↓';
-                        createBox(section', name, data[i][dlUpColumun], data[i][dlDownColumun]);
+                        createBox(section, name, data[i][dlUpColumun], data[i][dlDownColumun]);
                         break;
                     case 'SUL':
                         name = name + '↑';
