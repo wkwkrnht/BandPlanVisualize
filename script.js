@@ -15,7 +15,7 @@ function getCSV( dir = '', dist = [] ){
     .then(
         function(response){                        // response
             if (!response.ok) {
-                return Promise.reject(new Error("error"));
+                return Promise.reject(new Error('error'));
             }  //  error
 
             return response.text();                         // ok string utf-8
@@ -24,11 +24,12 @@ function getCSV( dir = '', dist = [] ){
     .then(
         function(text){
             dist = convertCSVtoArray(text);
+            console.log(dist);
         }
     )
     .catch(
         function(err){
-            console.error("fetch error", err);  //  error処理
+            console.error('fetch error', err);  //  error処理
         }
     );
 }
