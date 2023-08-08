@@ -45,48 +45,56 @@ function createBox(parent = '', name = '', up = 0, down = 0){
     box.innerText = name;
 }
 
-function create3GPPTable( dir = '../3GPPBandPlan.csv'){
+function createBandTable(section = '', dir = '' ){
     const data = [];
     const ulUpColumun = 0, ulDownColumun = 0, dlUpColumun = 0, dlDownColumun = 0, nameColumun = 0, modeColumun = 0;
 
     getCSV(dir, data);
 
-    ulUpColumun = searchColumun(data, 'ULup');
-    ulDownColumun = searchColumun(data, 'ULdown');
-    dlUpColumun = searchColumun(data, 'DLup');
-    dlDownColumun = searchColumun(data, 'DLdown');
-    nameColumun = searchColumun(data, 'Name');
-    modeColumun = searchColumun(data, 'Mode');
+    switch(section){
+        case '3GPP':
+            ulUpColumun = searchColumun(data, 'ULup');
+            ulDownColumun = searchColumun(data, 'ULdown');
+            dlUpColumun = searchColumun(data, 'DLup');
+            dlDownColumun = searchColumun(data, 'DLdown');
+            nameColumun = searchColumun(data, 'Name');
+            modeColumun = searchColumun(data, 'Mode');
 
-    for( i = 1; i < data; i++){
-        let mode = data[i][modeColumun];
-        let name = data[i][nameColumun];
+            for( i = 1; i < data; i++){
+                let mode = data[i][modeColumun];
+                let name = data[i][nameColumun];
 
-        switch(mode){
-            case 'FDD':
-                name = name + '↑';
-                createBox('3GPP', name, data[i][ulUpColumun], data[i][ulDownColumun]);
-                name = name + '↓';
-                createBox('3GPP', name, data[i][dlUpColumun], data[i][dlDownColumun]);
-                break;
-            case 'SUL':
-                name = name + '↑';
-                createBox('3GPP', name, data[i][ulUpColumun], data[i][ulDownColumun]);
-                break;
-            case 'TDD':
-            case 'SDL':
-                name = name + '↓';
-                createBox('3GPP', name, data[i][dlUpColumun], data[i][dlDownColumun]);
-                break;
-            default:
-                console.log('Mode has not set.');
-                break;
-        }
+                switch(mode){
+                    case 'FDD':
+                        name = name + '↑';
+                        createBox(section, name, data[i][ulUpColumun], data[i][ulDownColumun]);
+                        name = name + '↓';
+                        createBox(section', name, data[i][dlUpColumun], data[i][dlDownColumun]);
+                        break;
+                    case 'SUL':
+                        name = name + '↑';
+                        createBox(section, name, data[i][ulUpColumun], data[i][ulDownColumun]);
+                        break;
+                    case 'TDD':
+                    case 'SDL':
+                        name = name + '↓';
+                        createBox(section, name, data[i][dlUpColumun], data[i][dlDownColumun]);
+                        break;
+                    default:
+                        console.log('Mode has not set.');
+                        break;
+                }
+            }
+            break;
+        case 'JP':
+            break;
+        default:
+            break;
     }
 }
 
 function main(){
-    create3GPPTable();
+    createBandTable('3GPP' , '3GPPBandPlan.csv');
 }
 
 document.onload = main();
