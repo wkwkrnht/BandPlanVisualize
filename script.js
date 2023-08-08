@@ -11,19 +11,13 @@ function detectDisplayDirection(){
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV( dir = '', dist = [] ){
     try{
-        const params = '';
         let req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
         req.open('get', dir, true); // アクセスするファイルを指定
         req.send(null); // HTTPリクエストの発行
 
-        fetch(
-            dir,
-            params
-        ).then(
-            response => response.json()
-        ).then(
-            data => console.log(data)
-        );
+        fetch(dir).
+        then(response => response.json())
+        .then(data => console.log(data));
     }catch(err){
         console.log(err);
     }
