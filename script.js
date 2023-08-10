@@ -171,6 +171,7 @@ function tuneingBoxColision(){
                         let d1 = sourceElments[i].getBoundingClientRect();
                         let d2 = sourceElments[j].getBoundingClientRect();
                         let di = !(d1.top > d2.bottom || d1.bottom < d2.top);
+                        console.log(di);
 
                         if(di){
                             targets.push([i, number]);
