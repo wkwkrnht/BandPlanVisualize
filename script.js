@@ -96,7 +96,7 @@ function createBandTable(section = '' ){
             console.log(data.value);
             console.log(data.result);
             console.log(data.response);
-            console.log(data.value);
+            console.log(data.keys());
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
