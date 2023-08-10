@@ -6,15 +6,19 @@
         <title>Network Air Band Visualizer</title>
         <script defer src='./script.js'></script>
         <style>
-            :root{}
+            :root{
+                --black:#333;
+                --white:#fff;
+                --red:red;
+            }
 
             body{
                 margin:0;
             }
 
             header{
-                background-color:#333;
-                color:#fff;
+                background-color:var(--black);
+                color:var(--white);
                 height:10%;
                 margin:0 0 5%;
                 padding:2em;
@@ -29,11 +33,11 @@
             }
 
             #3GPP .box{
-                border-color:#333;
+                border-color:var(--black);
             }
 
             #JP .box{
-                border-color:red;
+                border-color:var(--red);
             }
         </style>
     </head>
