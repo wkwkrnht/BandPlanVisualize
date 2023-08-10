@@ -130,15 +130,15 @@ function setBoxSizeByCSS(){
     switch(displayDirection){
         case 'landscape':
             for( i = 1; i < targets.length; i++ ){
-                targets[i].style.left = targets[i].dataset.down;
-                targets[i].style.width = targets[i].dataset.width;
+                targets[i].style.left = targets[i].dataset.down + 'px';
+                targets[i].style.width = targets[i].dataset.width + 'px';
                 targets[i].style.height = '20%';
             }
             break;
         case 'portrait':
             for( i = 1; i < targets.length; i++ ){
-                targets[i].style.top = targets[i].dataset.down;
-                targets[i].style.height = targets[i].dataset.width;
+                targets[i].style.top = targets[i].dataset.down + 'px';
+                targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = '20%';
             }
             break;
@@ -154,7 +154,7 @@ async function main(){
     await createBandTable('3GPP');
     await createBandTable('JP');
 
-    //setBoxSizeByCSS();
+    setBoxSizeByCSS();
 }
 
 document.onload = main();
