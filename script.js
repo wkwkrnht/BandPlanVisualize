@@ -151,8 +151,9 @@ function tuneingBoxColision(){
                     if( i !== j ){
                         let d1 = sourceElments[i].getBoundingClientRect();
                         let d2 = sourceElments[j].getBoundingClientRect();
+                        let di = !(d1.right < d2.left || d1.left > d2.right);
 
-                        if(!(d1.right < d2.left || d1.left > d2.right)){
+                        if(di){
                             targets.push([i, number]);
                             number++;
                         }
@@ -169,8 +170,9 @@ function tuneingBoxColision(){
                     if( i !== j ){
                         let d1 = sourceElments[i].getBoundingClientRect();
                         let d2 = sourceElments[j].getBoundingClientRect();
+                        let di = !(d1.top > d2.bottom || d1.bottom < d2.top);
 
-                        if(!(d1.top > d2.bottom || d1.bottom < d2.top)){
+                        if(di){
                             targets.push([i, number]);
                             number++;
                         }
