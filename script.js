@@ -27,8 +27,8 @@ function detectDisplayDirection(){
 })();*/
 
 //CSVファイルを読み込む関数getCSV()の定義
-async function getCSV( dir = '' ){
-    /*await fetch(dir)
+function getCSV( dir = '' ){
+    return fetch(dir)
     .then(
         response => {
             return response.text();
@@ -43,18 +43,7 @@ async function getCSV( dir = '' ){
         err => {
             console.log(err);
         }
-    );*/
-    const temp = await (await fetch(dir)).text();
-    console.log(temp);
-    return temp;
-}
-
-function readCSV( dir = '' ){
-    let temp = getCSV(dir);
-    console.log(temp);
-    temp = convertCSVtoArray(temp);
-    console.log(temp);
-    return temp;
+    );
 }
 
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
@@ -88,17 +77,10 @@ function createBox(parent = '', name = '', up = 0, down = 0){
     box.innerText = name;
 }
 
-function createBandTable(section = '' ){
+async function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
-            /*const data = (async() => {
-                let temp = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
-                temp = temp.text();
-                temp = convertCSVtoArray(temp);
-                return temp;
-            })();*/
-            const data = readCSV('/BandPlanVisualize/3GPPBandPlan.csv');
-            console.log(data);
+            let data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
