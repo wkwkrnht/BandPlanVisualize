@@ -24,7 +24,7 @@ function getCSV( dir = '' ){
     .then(
         function(text){
             csv = convertCSVtoArray(text);
-            //this.resolve(csv);
+            console.log(csv);
             //return csv;
         }
     )
@@ -33,6 +33,7 @@ function getCSV( dir = '' ){
             console.error('fetch error', err);  //  error処理
         }
     );
+    console.log(csv);
 
     return csv;
 }
