@@ -89,14 +89,13 @@ function createBandTable(section = '' ){
         case '3GPP':
             let data = (async() => {
                 const temp = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
-                console.log(temp);
                 return temp;
             })();
 
+            console.log(data);
             console.log(data.value);
             console.log(data.result);
             console.log(data.response);
-            console.log(data.keys());
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
