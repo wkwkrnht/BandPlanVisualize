@@ -28,9 +28,7 @@ function detectDisplayDirection(){
 
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV( dir = '' ){
-    //let csv = [];
-
-    return fetch(dir)
+    return await fetch(dir)
     .then(
         response => {
             return response.text();
@@ -46,9 +44,6 @@ function getCSV( dir = '' ){
             console.log(err);
         }
     );
-    //console.log(csv);
-
-    //return csv;
 }
 
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
@@ -91,7 +86,7 @@ function createBandTable(section = '' ){
             })();
 
             console.log(data);
-            console.log(data.text());
+            //console.log(data.text());
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
