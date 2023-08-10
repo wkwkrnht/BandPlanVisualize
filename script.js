@@ -111,14 +111,16 @@ function setBasicBoxStyleAtCSS(){ // Set size and position for each air band box
     switch(displayDirection){
         case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
             for( let i = 0; i < targets.length; i++ ){
+                targets[i].style.top = 'calc((100vh - var(--header-height)) / 3)';
                 targets[i].style.left = targets[i].dataset.down + 'px';
-                targets[i].style.width = targets[i].dataset.width + 'px';
                 targets[i].style.height = fixedLength;
+                targets[i].style.width = targets[i].dataset.width + 'px';
             }
             break;
         case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
             for( let i = 0; i < targets.length; i++ ){
                 targets[i].style.top = targets[i].dataset.down + 'px';
+                targets[i].style.left = 'calc(100vw / 3)';
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLength;
             }

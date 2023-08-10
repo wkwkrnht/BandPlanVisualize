@@ -10,6 +10,7 @@
 
 header,
 .box{
+    background-color:var(--black);
     color:var(--white);
 }
 
@@ -34,22 +35,6 @@ header{
     padding:0;
 }
 
-#3GPP .box{
-    background-color:var(--black);
-}
-
 #JP .box{
     background-color:var(--red);
-}
-
-@media (min-aspect-ratio: 1/1) {
-    #3GPP .box{
-        top:calc((100vh - var(--header-height)) / 3);
-    }
-}
-
-@media (max-aspect-ratio: 1/1) {
-    #3GPP .box{
-        left:calc(100vw / 3);
-    }
 }
