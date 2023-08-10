@@ -142,10 +142,12 @@ async function tuneingBoxColision(){
                 d1 = await sources[i].getBoundingClientRect();
                 d2 = await sources[j].getBoundingClientRect();
 
-                if(!(d1.top > d2.bottom || d1.right < d2.left || d1.bottom < d2.top || d1.left > d2.right)){
-                    targets.push([i, number]);
-                    number++;
-                }
+                Promise.all([d1, d2]).then(() => {
+                    if(!(d1.top > d2.bottom || d1.right < d2.left || d1.bottom < d2.top || d1.left > d2.right)){
+                        targets.push([i, number]);
+                        number++;
+                    }
+                });
             }
         }
     }
