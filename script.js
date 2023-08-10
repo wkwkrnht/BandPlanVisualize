@@ -17,6 +17,8 @@ function getDataSet( dir = '' ){
 
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV( dir = '' ){
+    let csv = [];
+
     fetch(dir)
     .then(
         function(response){  //response
@@ -28,7 +30,7 @@ function getCSV( dir = '' ){
     )
     .then(
         function(text){
-            const csv = convertCSVtoArray(text);
+            csv = convertCSVtoArray(text);
             //this.resolve(csv);
             return csv;
         }
@@ -36,7 +38,6 @@ function getCSV( dir = '' ){
     .catch(
         function(err){
             console.error('fetch error', err);  //  error処理
-            const csv = [];
         }
     );
 
