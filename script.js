@@ -1,3 +1,4 @@
+const fixedLength = '60px'; // Constructor of fixed part of box size.
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 
 function detectDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
@@ -67,7 +68,7 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
             nameColumun = searchColumunByName(data, 'Name'),
             modeColumun = searchColumunByName(data, 'Mode');
 
-            for( i = 1; i < data.length; i++ ){
+            for( let i = 1; i < data.length; i++ ){
                 let mode = data[i][modeColumun];
                 let name = data[i][nameColumun];
 
@@ -104,20 +105,19 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
     }
 }
 
-function setBoxSizeByCSS(){ // Set styles for each air band boxes.
-    const fixedLength = '60px'; // Constructor of box size.
+function setBasicBoxStyleAtCSS(){ // Set size and position for each air band boxes.
     const targets = document.getElementsByClassName('box'); // List of air band boxes
 
     switch(displayDirection){
         case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
-            for( i = 1; i < targets.length; i++ ){
+            for( let i = 0; i < targets.length; i++ ){
                 targets[i].style.left = targets[i].dataset.down + 'px';
                 targets[i].style.width = targets[i].dataset.width + 'px';
                 targets[i].style.height = fixedLength;
             }
             break;
         case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
-            for( i = 1; i < targets.length; i++ ){
+            for( let i = 0; i < targets.length; i++ ){
                 targets[i].style.top = targets[i].dataset.down + 'px';
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLength;
@@ -126,7 +126,47 @@ function setBoxSizeByCSS(){ // Set styles for each air band boxes.
         default:
             break;
     }
+}
 
+function checkColision(elm1, elm2){
+    const d1 = elm1.getBoundingClientRect();
+    const d2 = elm2.getBoundingClientRect();
+    return !(
+        d1.top > d2.bottom ||
+        d1.right < d2.left ||
+        d1.bottom < d2.top ||
+        d1.left > d2.right
+    );
+}
+
+function tuneingBoxColision(){
+    const sources = document.getElementsByClassName('box'); // List of air band boxes
+    let targets = [];
+    let number = 1;
+
+    for( let i = 0; i < sources.length; i++ ){
+        for( let j = 0; j < sources.length; i++ ){
+            if(i!==j && checkColision(sources[i], sources[j])){
+                targets.push([i, number]);
+                number++;
+            }
+        }
+    }
+
+    switch(displayDirection){
+        case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
+            for( let i = 0; i < targets.length; i++ ){
+                targets[i][0].style.top = targets[i][0].style.top + ((fixedLength * targets[i][1]) / 2) + 'px';
+            }
+            break;
+        case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
+            for( let i = 0; i < targets.length; i++ ){
+                targets[i][0].style.top = targets[i][0].style.top + ((fixedLength * targets[i][1]) / 2) + 'px';
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 async function main(){ // Main function.
@@ -135,7 +175,8 @@ async function main(){ // Main function.
     await createBandTable('3GPP');
     await createBandTable('JP');
 
-    setBoxSizeByCSS();
+    setBasicBoxStyleAtCSS();
+    tuneingBoxColision();
 }
 
 document.onload = main(); // Fire main() after loaded whole of the HTML document.
