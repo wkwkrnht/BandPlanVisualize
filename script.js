@@ -88,10 +88,7 @@ async function createBandTable(section = '' ){
             nameColumun = searchColumunByName(data, 'Name'),
             modeColumun = searchColumunByName(data, 'Mode');
 
-            console.log(data);
-            console.log(ulUpColumun);
-
-            for( i = 1; i < data; i++){
+            for( i = 1; i < data.length; i++){
                 let mode = data[i][modeColumun];
                 let name = data[i][nameColumun];
 
