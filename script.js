@@ -139,36 +139,47 @@ function setBasicBoxStyleAtCSS(){ // Set size and position for each air band box
     "bottom": 518.1499938964844,
     "left": 1920
 }*/
-async function tuneingBoxColision(){
-    const sources = document.getElementsByClassName('box'); // List of air band boxes
+function tuneingBoxColision(){
+    const sourceElments = document.getElementsByClassName('box'); // List of air band boxes
     let targets = [];
     let number = 1;
-
-    for( let i = 0; i < sources.length; i++ ){
-        for( let j = 0; j < sources.length; i++ ){
-            if( i !== j ){
-                let d1 = await sources[i].getBoundingClientRect();
-                let d2 = await sources[j].getBoundingClientRect();
-
-                Promise.all([d1, d2]).then(() => {
-                    if(!(d1.top > d2.bottom || d1.right < d2.left || d1.bottom < d2.top || d1.left > d2.right)){
-                        targets.push([i, number]);
-                        number++;
-                    }
-                });
-            }
-        }
-    }
+    let d1, d2;
 
     switch(displayDirection){
         case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
+            for( let i = 0; i < sourceElments.length; i++ ){
+                for( let j = 0; j < sourceElments.length; i++ ){
+                    if( i !== j ){
+                        d1 = sourceElments[i].getBoundingClientRect();
+                        d2 = sourceElments[j].getBoundingClientRect();
+
+                        if(!(d1.right < d2.left || d1.left > d2.right)){
+                            targets.push([i, number]);
+                            number++;
+                        }
+                    }
+                }
+            }
             for( let i = 0; i < targets.length; i++ ){
                 targets[i][0].style.top = targets[i][0].style.top + ((fixedLength * targets[i][1]) / 2) + 'px';
             }
             break;
         case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
+            for( let i = 0; i < sourceElments.length; i++ ){
+                for( let j = 0; j < sourceElments.length; i++ ){
+                    if( i !== j ){
+                        d1 = sourceElments[i].getBoundingClientRect();
+                        d2 = sourceElments[j].getBoundingClientRect();
+
+                        if(!(d1.top > d2.bottom || d1.bottom < d2.top)){
+                            targets.push([i, number]);
+                            number++;
+                        }
+                    }
+                }
+            }
             for( let i = 0; i < targets.length; i++ ){
-                targets[i][0].style.top = targets[i][0].style.top + ((fixedLength * targets[i][1]) / 2) + 'px';
+                targets[i][0].style.left = targets[i][0].style.left + ((fixedLength * targets[i][1]) / 2) + 'px';
             }
             break;
         default:
