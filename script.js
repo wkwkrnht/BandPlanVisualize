@@ -91,7 +91,7 @@ function createBandTable(section = '' ){
                 const temp = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
                 console.log(temp);
                 return temp;
-            })().valu;
+            })().value;
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
