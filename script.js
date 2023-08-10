@@ -8,7 +8,7 @@ function detectDisplayDirection(){
     }
 }
 
-function getCookieSpecify () {
+/*function getCookieSpecify () {
   return fetch('sample.json')
     .then(response => {
       return response.json();
@@ -24,7 +24,7 @@ function getCookieSpecify () {
 (async()=>{
   const cookie = await getCookieSpecify();
   console.log("2 cookie is " + cookie);
-})();
+})();*/
 
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV( dir = '' ){
@@ -92,8 +92,10 @@ function createBox(parent = '', name = '', up = 0, down = 0){
 function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
-            const data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
-            console.log(data);
+            async() => {
+                const data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
+                console.log(data);
+            }
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
