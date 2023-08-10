@@ -8,13 +8,18 @@
     --fixed-length:60px;
 }
 
+header,
+.box{
+    color:var(--white);
+}
+
 body{
     margin:0;
 }
 
 header{
     background-color:var(--black);
-    color:var(--white);
+
     height:var(--header-height);
     margin:0 0 var(--base-vertical-rhythm);
     padding:2em;
@@ -23,7 +28,6 @@ header{
 }
 
 .box{
-    border:4px solid;
     box-sizing:border-box;
     margin:0;
     position:absolute;
@@ -31,25 +35,21 @@ header{
 }
 
 #3GPP .box{
-    border-color:var(--black);
+    background-color:var(--black);
 }
 
 #JP .box{
-    border-color:var(--red);
+    background-color:var(--red);
 }
 
-/*@media (min-aspect-ratio: 1/1) {
-    .box{
-        height:var(--fixed-length);
-        left:attr(data-down px);
-        width:attr(data-width px);
+@media (min-aspect-ratio: 1/1) {
+    #3GPP .box{
+        top:calc((100vh - var(--header-height)) / 3);
     }
 }
 
 @media (max-aspect-ratio: 1/1) {
-    .box{
-        height:attr(data-width px);
-        top:calc(attr(data-down px) + var(--header-height));
-        width:var(--fixed-length);
+    #3GPP .box{
+        left:calc(100vw / 3);
     }
-}*/
+}
