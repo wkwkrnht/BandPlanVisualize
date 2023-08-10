@@ -11,7 +11,7 @@ function detectDisplayDirection(){
 function getDataSet( dir = '' ){
     p1 = getCSV(dir);
     Promise.all([p1]).then(() => {
-        return dist;
+        return p1.csv;
     });
 }
 
@@ -29,7 +29,7 @@ function getCSV( dir = '' ){
     .then(
         function(text){
             const csv = convertCSVtoArray(text);
-            resolve(csv);
+            this.resolve(csv);
         }
     )
     .catch(
@@ -75,7 +75,7 @@ function createBox(parent = '', name = '', up = 0, down = 0){
 function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
-            const data = getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
+            const data = getDataSet('/BandPlanVisualize/3GPPBandPlan.csv');
             console.log(data);
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
