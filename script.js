@@ -70,7 +70,6 @@ function createBox(parent = '', name = '', up = 0, down = 0){
     let box = document.createElement('div');
     parent.appendChild(box);
 
-    box.setAttribute('class', 'band');
     box.setAttribute('class', 'box');
     box.setAttribute('data-down', down);
     box.setAttribute('data-width', width);
@@ -122,17 +121,19 @@ async function createBandTable(section = '' ){
 }
 
 function setBoxSizeByCSS(){
-    const targets = document.getElementsByClassName('band');
+    const targets = document.getElementsByClassName('box');
 
     targets.forEach((item, i) => {
-        item.style.width = item.getAttribute('data-width');
-
         switch(displayDirection){
             case 'landscape':
                 item.style.left = item.getAttribute('data-down');
+                item.style.width = item.getAttribute('data-width');
+                item.style.height = '20%';
                 break;
             case 'portrait':
                 item.style.top = item.getAttribute('data-down');
+                item.style.height = item.getAttribute('data-width');
+                item.style.width = '20%';
                 break;
             default:
                 break;
