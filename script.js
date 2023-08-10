@@ -65,8 +65,6 @@ function convertCSVtoArray( text = '' ){ // 読み込んだCSVデータが文字
 }
 
 function searchColumunByName( array = [], key = ''){
-    console.log(array);
-
     return array[0].indexOf(key);
 }
 
@@ -93,9 +91,9 @@ function createBandTable(section = '' ){
             })();
 
             console.log(data);
-            console.log(data.value);
-            console.log(data.result);
-            console.log(data.response);
+            console.log(data[0]);
+            console.log(data[PromiseResult]);
+            console.log(data[3]);
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
