@@ -8,6 +8,13 @@ function detectDisplayDirection(){
     }
 }
 
+function getDataSet( dir = '' ){
+    p1 = getCSV(dir);
+    Promise.all([p1]).then(() => {
+        return dist;
+    });
+}
+
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV( dir = '' ){
     fetch(dir)
@@ -16,23 +23,18 @@ function getCSV( dir = '' ){
             if (!response.ok) {  //error
                 return Promise.reject(new Error('error'));
             }
-
             return response.text();                         // ok string utf-8
         }
     )
     .then(
         function(text){
-            const dist = convertCSVtoArray(text);
+            const csv = convertCSVtoArray(text);
+            resolve(csv);
         }
     )
     .catch(
         function(err){
             console.error('fetch error', err);  //  error処理
-            const dist = [];
-        }
-    ).finally(
-        function(dist){
-            return dist;
         }
     );
 }
