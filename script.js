@@ -27,7 +27,7 @@ function detectDisplayDirection(){
 })();*/
 
 //CSVファイルを読み込む関数getCSV()の定義
-function getCSV( dir = '' ){
+async function getCSV( dir = '' ){
     return await fetch(dir)
     .then(
         response => {
