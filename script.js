@@ -1,6 +1,6 @@
-let displayDirection = '';
+let displayDirection = ''; // Variable for note which direction on the display is wider.
 
-function detectDisplayDirection(){
+function detectDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
     if(window.innerWidth > window.innerHeight){
         displayDirection = 'landscape';
     }else{
@@ -8,27 +8,8 @@ function detectDisplayDirection(){
     }
 }
 
-/*function getCookieSpecify () {
-  return fetch('sample.json')
-    .then(response => {
-      return response.json();
-    })
-      .then(data => {
-        console.log("1 cookie is " + data['cookie']);
-        return data['cookie'];
-      })
-        .catch(error => {
-          console.log(error);
-        })
-}
-(async()=>{
-  const cookie = await getCookieSpecify();
-  console.log("2 cookie is " + cookie);
-})();*/
-
-//CSVファイルを読み込む関数getCSV()の定義
-async function getCSV( dir = '' ){
-    return await fetch(dir)
+async function getCSV( dir = '' ){ // Get a CSV file and parse into array.
+    return await fetch(dir) // Get a CSV file.
     .then(
         response => {
             return response.text();
@@ -36,50 +17,49 @@ async function getCSV( dir = '' ){
     )
     .then(
         text => {
-            return convertCSVtoArray(text);
+            return convertCSVtoArray(text); // Parse into array.
         }
     )
     .catch(
         err => {
-            console.log(err);
+            console.log(err); // Error handling.
         }
     );
 }
 
-// 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
-function convertCSVtoArray( text = '' ){ // 読み込んだCSVデータが文字列として渡される
-    let result = []; // 最終的な二次元配列を入れるための配列
-    const tmp = text.split('\n'); // 改行を区切り文字として行を要素とした配列を生成
+function convertCSVtoArray( text = '' ){ // Parse a CSV file input as strings into array.
+    let result = []; // The array to save the result.
+    const tmp = text.split('\n'); // Newline is marked as indicator, to split by row.
 
-    // 各行ごとにカンマで区切った文字列を要素とした二次元配列を生成
-    for( let i = 0; i < tmp.length; i++ ){
+    for( let i = 0; i < tmp.length; i++ ){ // Kanma is marked as indicator, to split by columun.
         result[i] = tmp[i].split(',');
     }
 
     return result;
 }
 
-function searchColumunByName( array = [], key = ''){
+function searchColumunByName( array = [], key = ''){ // From 0 row, searching number of columuns by name.
     return array[0].indexOf(key);
 }
 
-function createBox(parent = '', name = '', up = 0, down = 0){
-    const width = up - down;
+function createBox(parent = '', name = '', up = 0, down = 0){ // Create a box of a air band.
+    const width = up - down; // This is width set in style.
 
-    parent = document.getElementById(parent);
-    let box = document.createElement('div');
+    parent = document.getElementById(parent); // Search a area to insert a box.
+    let box = document.createElement('div'); // Create a element of a box.
     parent.appendChild(box);
 
     box.setAttribute('class', 'box');
-    box.setAttribute('data-down', down);
-    box.setAttribute('data-width', width);
+    box.setAttribute('data-down', down); // Set a value to note start-point of a air band.
+    box.setAttribute('data-width', width); // Set a value to note width of a air band.
     box.innerText = name;
 }
 
-async function createBandTable(section = '' ){
-    switch(section){
+async function createBandTable( section = '' ){ // Create Boxes to each air bands from a dataset.
+    switch(section){ // Detect dataset from input.
         case '3GPP':
-            const data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv'),
+            const data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv'), // Loading dataset.
+            // Searching number of columun of each elements
             ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
             dlUpColumun = searchColumunByName(data, 'DLup'),
@@ -91,7 +71,7 @@ async function createBandTable(section = '' ){
                 let mode = data[i][modeColumun];
                 let name = data[i][nameColumun];
 
-                switch(mode){
+                switch(mode){ // Detect a air band contains UL and DL by mode indicator.
                     case 'FDD':
                         const nameU = name + '↑';
                         createBox(section, nameU, data[i][ulUpColumun], data[i][ulDownColumun]);
@@ -111,7 +91,7 @@ async function createBandTable(section = '' ){
                         name = name + '↓';
                         createBox(section, name, data[i][dlUpColumun], data[i][dlDownColumun]);
                         break;
-                    default:
+                    default: // Error handling which is missing mode.
                         console.log('Mode has not set.');
                         break;
                 }
@@ -124,22 +104,23 @@ async function createBandTable(section = '' ){
     }
 }
 
-function setBoxSizeByCSS(){
-    const targets = document.getElementsByClassName('box');
+function setBoxSizeByCSS(){ // Set styles for each air band boxes.
+    const fixedLength = '60px'; // Constructor of box size.
+    const targets = document.getElementsByClassName('box'); // List of air band boxes
 
     switch(displayDirection){
-        case 'landscape':
+        case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
             for( i = 1; i < targets.length; i++ ){
                 targets[i].style.left = targets[i].dataset.down + 'px';
                 targets[i].style.width = targets[i].dataset.width + 'px';
-                targets[i].style.height = '20%';
+                targets[i].style.height = fixedLength;
             }
             break;
-        case 'portrait':
+        case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
             for( i = 1; i < targets.length; i++ ){
                 targets[i].style.top = targets[i].dataset.down + 'px';
                 targets[i].style.height = targets[i].dataset.width + 'px';
-                targets[i].style.width = '20%';
+                targets[i].style.width = fixedLength;
             }
             break;
         default:
@@ -148,7 +129,7 @@ function setBoxSizeByCSS(){
 
 }
 
-async function main(){
+async function main(){ // Main function.
     detectDisplayDirection();
 
     await createBandTable('3GPP');
@@ -157,4 +138,4 @@ async function main(){
     setBoxSizeByCSS();
 }
 
-document.onload = main();
+document.onload = main(); // Fire main() after loaded whole of the HTML document.
