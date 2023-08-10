@@ -29,14 +29,18 @@ function getCSV( dir = '' ){
     .then(
         function(text){
             const csv = convertCSVtoArray(text);
-            this.resolve(csv);
+            //this.resolve(csv);
+            return csv;
         }
     )
     .catch(
         function(err){
             console.error('fetch error', err);  //  error処理
+            const csv = [];
         }
     );
+
+    return csv;
 }
 
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
@@ -75,7 +79,7 @@ function createBox(parent = '', name = '', up = 0, down = 0){
 function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
-            const data = getDataSet('/BandPlanVisualize/3GPPBandPlan.csv');
+            const data = getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
             console.log(data);
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
