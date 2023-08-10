@@ -143,13 +143,12 @@ async function tuneingBoxColision(){
     const sources = document.getElementsByClassName('box'); // List of air band boxes
     let targets = [];
     let number = 1;
-    let d1, d2 = sources[0].getBoundingClientRect();
 
     for( let i = 0; i < sources.length; i++ ){
         for( let j = 0; j < sources.length; i++ ){
             if( i !== j ){
-                d1 = await sources[i].getBoundingClientRect();
-                d2 = await sources[j].getBoundingClientRect();
+                let d1 = await sources[i].getBoundingClientRect();
+                let d2 = await sources[j].getBoundingClientRect();
 
                 Promise.all([d1, d2]).then(() => {
                     if(!(d1.top > d2.bottom || d1.right < d2.left || d1.bottom < d2.top || d1.left > d2.right)){
