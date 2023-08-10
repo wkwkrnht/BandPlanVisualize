@@ -91,7 +91,7 @@ function createBandTable(section = '' ){
             })();
 
             console.log(data);
-            console.log(data.toStirng());
+            console.log(JSON.parse(JSON.stringify(data)));
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
