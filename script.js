@@ -31,6 +31,7 @@ async function getCSV( dir = '' ){
     let temp;
     (async(temp, dir) => {
         temp = await (await fetch(dir)).blob();
+        console.log(temp);
     })();
     temp = temp.text();
     temp = convertCSVtoArray(temp);
@@ -96,7 +97,6 @@ function createBandTable(section = '' ){
             const data = getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
 
             console.log(data);
-            //console.log(data.text());
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
