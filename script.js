@@ -51,8 +51,9 @@ async function getCSV( dir = '' ){
 
 function readCSV( dir = '' ){
     let temp = getCSV(dir);
+    console.log(temp);
     temp = convertCSVtoArray(temp);
-    dist = convertCSVtoArray(dist);
+    console.log(temp);
     return temp;
 }
 
