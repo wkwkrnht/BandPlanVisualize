@@ -93,16 +93,20 @@ async function createBandTable(section = '' ){
 
                 switch(mode){
                     case 'FDD':
-                        name = name + '↑';
-                        createBox(section, name, data[i][ulUpColumun], data[i][ulDownColumun]);
-                        name = name + '↓';
-                        createBox(section, name, data[i][dlUpColumun], data[i][dlDownColumun]);
+                        const nameu = name + '↑';
+                        createBox(section, nameU, data[i][ulUpColumun], data[i][ulDownColumun]);
+                        const named = name + '↓';
+                        createBox(section, nameD, data[i][dlUpColumun], data[i][dlDownColumun]);
                         break;
                     case 'SUL':
                         name = name + '↑';
                         createBox(section, name, data[i][ulUpColumun], data[i][ulDownColumun]);
                         break;
                     case 'TDD':
+                        name = name + '↑';
+                        name = name + '↓';
+                        createBox(section, name, data[i][dlUpColumun], data[i][dlDownColumun]);
+                        break;
                     case 'SDL':
                         name = name + '↓';
                         createBox(section, name, data[i][dlUpColumun], data[i][dlDownColumun]);
@@ -126,15 +130,15 @@ function setBoxSizeByCSS(){
     switch(displayDirection){
         case 'landscape':
             for( i = 1; i < targets.length; i++ ){
-                targets[i].style.left = targets[i].getAttribute('data-down');
-                targets[i].style.width = targets[i].getAttribute('data-width');
+                targets[i].style.left = targets[i].dataset.down;
+                targets[i].style.width = targets[i].dataset.width;
                 targets[i].style.height = '20%';
             }
             break;
         case 'portrait':
             for( i = 1; i < targets.length; i++ ){
-                targets[i].style.top = targets[i].getAttribute('data-down');
-                targets[i].style.height = targets[i].getAttribute('data-width');
+                targets[i].style.top = targets[i].dataset.down;
+                targets[i].style.height = targets[i].dataset.width;
                 targets[i].style.width = '20%';
             }
             break;
