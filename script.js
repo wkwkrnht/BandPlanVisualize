@@ -8,13 +8,6 @@ function detectDisplayDirection(){
     }
 }
 
-function getDataSet( dir = '' ){
-    p1 = getCSV(dir);
-    Promise.all([p1]).then(() => {
-        return p1.csv;
-    });
-}
-
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV( dir = '' ){
     let csv = [];
@@ -32,7 +25,7 @@ function getCSV( dir = '' ){
         function(text){
             csv = convertCSVtoArray(text);
             //this.resolve(csv);
-            return csv;
+            //return csv;
         }
     )
     .catch(
@@ -45,7 +38,7 @@ function getCSV( dir = '' ){
 }
 
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
-function convertCSVtoArray( str ){ // 読み込んだCSVデータが文字列として渡される
+function convertCSVtoArray( text = '' ){ // 読み込んだCSVデータが文字列として渡される
     let result = []; // 最終的な二次元配列を入れるための配列
     const tmp = str.split('\n'); // 改行を区切り文字として行を要素とした配列を生成
 
