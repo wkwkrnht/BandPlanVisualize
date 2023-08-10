@@ -27,8 +27,8 @@ function detectDisplayDirection(){
 })();*/
 
 //CSVファイルを読み込む関数getCSV()の定義
-function getCSV( dir = '' ){
-    return fetch(dir)
+async function getCSV( dir = '' ){
+    return await fetch(dir)
     .then(
         response => {
             return response.text();
@@ -80,9 +80,8 @@ function createBox(parent = '', name = '', up = 0, down = 0){
 async function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
-            let data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
-
-            const ulUpColumun = searchColumunByName(data, 'ULup'),
+            const data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv'),
+            ulUpColumun = searchColumunByName(data, 'ULup'),
             ulDownColumun = searchColumunByName(data, 'ULdown'),
             dlUpColumun = searchColumunByName(data, 'DLup'),
             dlDownColumun = searchColumunByName(data, 'DLdown'),
@@ -122,7 +121,25 @@ async function createBandTable(section = '' ){
     }
 }
 
-function setBoxSizeByCSS(){}
+function setBoxSizeByCSS(){
+    const targets = element.getElementsByClassName('band');
+
+    targets.forEach((item, i) => {
+        item.style.width = item.getAttribute('data-width');
+
+        switch(displayDirection){
+            case 'landscape':
+                item.style.left = item.getAttribute('data-down');
+                break;
+            case 'portrait':
+                item.style.top = item.getAttribute('data-down');
+                break;
+            default:
+                break;
+        }
+    });
+
+}
 
 function main(){
     detectDisplayDirection();
