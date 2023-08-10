@@ -152,7 +152,6 @@ async function tuneingBoxColision(){
                         let d1 = await sourceElments[i].getBoundingClientRect();
                         let d2 = await sourceElments[j].getBoundingClientRect();
                         let di = await !(d1.right < d2.left || d1.left > d2.right);
-                        console.log(di);
 
                         if(di){
                             targets.push([i, number]);
@@ -190,13 +189,13 @@ async function tuneingBoxColision(){
 }
 
 async function main(){ // Main function.
-    detectDisplayDirection();
+    await detectDisplayDirection();
 
     await createBandTable('3GPP');
     await createBandTable('JP');
 
-    setBasicBoxStyleAtCSS();
-    tuneingBoxColision();
+    await setBasicBoxStyleAtCSS();
+    await tuneingBoxColision();
 }
 
 document.onload = main(); // Fire main() after loaded whole of the HTML document.
