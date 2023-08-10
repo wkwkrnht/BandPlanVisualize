@@ -129,12 +129,21 @@ function setBasicBoxStyleAtCSS(){ // Set size and position for each air band box
             break;
     }
 }
-
+/*{
+    "x": 1920,
+    "y": 458.1499938964844,
+    "width": 60,
+    "height": 60,
+    "top": 458.1499938964844,
+    "right": 1980,
+    "bottom": 518.1499938964844,
+    "left": 1920
+}*/
 async function tuneingBoxColision(){
     const sources = document.getElementsByClassName('box'); // List of air band boxes
     let targets = [];
     let number = 1;
-    let d1, d2;
+    let d1, d2 = sources[0].getBoundingClientRect();
 
     for( let i = 0; i < sources.length; i++ ){
         for( let j = 0; j < sources.length; i++ ){
@@ -142,12 +151,7 @@ async function tuneingBoxColision(){
                 d1 = await sources[i].getBoundingClientRect();
                 d2 = await sources[j].getBoundingClientRect();
 
-                console.log(d1);
-                console.log(d2);
-
                 Promise.all([d1, d2]).then(() => {
-                    console.log(d1);
-                    console.log(d2);
                     if(!(d1.top > d2.bottom || d1.right < d2.left || d1.bottom < d2.top || d1.left > d2.right)){
                         targets.push([i, number]);
                         number++;
