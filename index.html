@@ -10,6 +10,10 @@
                 --black:#333;
                 --white:#fff;
                 --red:red;
+
+                --base-vertical-rhythm:2vh;
+                --header-height:10vh;
+                --fixed-length:60px;
             }
 
             body{
@@ -19,8 +23,8 @@
             header{
                 background-color:var(--black);
                 color:var(--white);
-                height:10%;
-                margin:0 0 5%;
+                height:var(--header-height);
+                margin:0 0 var(--base-vertical-rhythm);
                 padding:2em;
                 text-align:center;
                 width:100%;
@@ -30,6 +34,7 @@
                 border:4px solid;
                 box-sizing:border-box;
                 margin:0;
+                position:absolute;
                 padding:0;
             }
 
@@ -39,6 +44,22 @@
 
             #JP .box{
                 border-color:var(--red);
+            }
+
+            @media (min-aspect-ratio: 1/1) {
+                .box{
+                    height:var(--fixed-length);
+                    left:attr(data-down px);
+                    width:attr(data-width px);
+                }
+            }
+
+            @media (max-aspect-ratio: 1/1) {
+                .box{
+                    height:attr(data-width px);
+                    top:calc(attr(data-down px) + var(--header-height));
+                    width:var(--fixed-length);
+                }
             }
         </style>
     </head>

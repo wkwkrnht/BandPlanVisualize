@@ -154,7 +154,7 @@ async function main(){
     await createBandTable('3GPP');
     await createBandTable('JP');
 
-    setBoxSizeByCSS();
+    //setBoxSizeByCSS();
 }
 
 document.onload = main();
