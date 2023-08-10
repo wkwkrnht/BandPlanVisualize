@@ -87,7 +87,7 @@ async function createBandTable(section = '' ){
             nameColumun = searchColumunByName(data, 'Name'),
             modeColumun = searchColumunByName(data, 'Mode');
 
-            for( i = 1; i < data.length; i++){
+            for( i = 1; i < data.length; i++ ){
                 let mode = data[i][modeColumun];
                 let name = data[i][nameColumun];
 
@@ -123,29 +123,32 @@ async function createBandTable(section = '' ){
 function setBoxSizeByCSS(){
     const targets = document.getElementsByClassName('box');
 
-    targets.forEach((item, i) => {
-        switch(displayDirection){
-            case 'landscape':
-                item.style.left = item.getAttribute('data-down');
-                item.style.width = item.getAttribute('data-width');
-                item.style.height = '20%';
-                break;
-            case 'portrait':
-                item.style.top = item.getAttribute('data-down');
-                item.style.height = item.getAttribute('data-width');
-                item.style.width = '20%';
-                break;
-            default:
-                break;
-        }
-    });
+    switch(displayDirection){
+        case 'landscape':
+            for( i = 1; i < targets.length; i++ ){
+                targets[i].style.left = targets[i].getAttribute('data-down');
+                targets[i].style.width = targets[i].getAttribute('data-width');
+                targets[i].style.height = '20%';
+            }
+            break;
+        case 'portrait':
+            for( i = 1; i < targets.length; i++ ){
+                targets[i].style.top = targets[i].getAttribute('data-down');
+                targets[i].style.height = targets[i].getAttribute('data-width');
+                targets[i].style.width = '20%';
+            }
+            break;
+        default:
+            break;
+    }
 
 }
 
-function main(){
+async function main(){
     detectDisplayDirection();
 
-    createBandTable('3GPP');
+    await createBandTable('3GPP');
+    await createBandTable('JP');
 
     setBoxSizeByCSS();
 }
