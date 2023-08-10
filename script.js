@@ -8,11 +8,29 @@ function detectDisplayDirection(){
     }
 }
 
+function getCookieSpecify () {
+  return fetch('sample.json')
+    .then(response => {
+      return response.json();
+    })
+      .then(data => {
+        console.log("1 cookie is " + data['cookie']);
+        return data['cookie'];
+      })
+        .catch(error => {
+          console.log(error);
+        })
+}
+(async()=>{
+  const cookie = await getCookieSpecify();
+  console.log("2 cookie is " + cookie);
+})();
+
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV( dir = '' ){
-    let csv = [];
+    //let csv = [];
 
-    fetch(dir)
+    return fetch(dir)
     .then(
         function(response){  //response
             if (!response.ok) {  //error
@@ -23,9 +41,9 @@ function getCSV( dir = '' ){
     )
     .then(
         function(text){
-            csv = convertCSVtoArray(text);
-            console.log(csv);
-            //return csv;
+            const csv = convertCSVtoArray(text);
+            //console.log(csv);
+            return csv;
         }
     )
     .catch(
@@ -33,9 +51,9 @@ function getCSV( dir = '' ){
             console.error('fetch error', err);  //  error処理
         }
     );
-    console.log(csv);
+    //console.log(csv);
 
-    return csv;
+    //return csv;
 }
 
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
@@ -74,7 +92,7 @@ function createBox(parent = '', name = '', up = 0, down = 0){
 function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
-            const data = getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
+            const data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
             console.log(data);
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
