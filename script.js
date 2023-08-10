@@ -87,9 +87,10 @@ function createBox(parent = '', name = '', up = 0, down = 0){
 function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
-            (async() => {
-                const data = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
-                console.log(data);
+            const data = (async() => {
+                const temp = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
+                console.log(temp);
+                return temp;
             })();
 
             const ulUpColumun = searchColumunByName(data, 'ULup'),
