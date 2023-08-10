@@ -93,9 +93,9 @@ async function createBandTable(section = '' ){
 
                 switch(mode){
                     case 'FDD':
-                        const nameu = name + '↑';
+                        const nameU = name + '↑';
                         createBox(section, nameU, data[i][ulUpColumun], data[i][ulDownColumun]);
-                        const named = name + '↓';
+                        const nameD = name + '↓';
                         createBox(section, nameD, data[i][dlUpColumun], data[i][dlDownColumun]);
                         break;
                     case 'SUL':
