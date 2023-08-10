@@ -130,7 +130,7 @@ function setBasicBoxStyleAtCSS(){ // Set size and position for each air band box
     }
 }
 
-function tuneingBoxColision(){
+async function tuneingBoxColision(){
     const sources = document.getElementsByClassName('box'); // List of air band boxes
     let targets = [];
     let number = 1;
@@ -139,8 +139,8 @@ function tuneingBoxColision(){
     for( let i = 0; i < sources.length; i++ ){
         for( let j = 0; j < sources.length; i++ ){
             if( i !== j ){
-                d1 = sources[i].getBoundingClientRect();
-                d2 = sources[j].getBoundingClientRect();
+                d1 = await sources[i].getBoundingClientRect();
+                d2 = await sources[j].getBoundingClientRect();
 
                 if(!(d1.top > d2.bottom || d1.right < d2.left || d1.bottom < d2.top || d1.left > d2.right)){
                     targets.push([i, number]);
