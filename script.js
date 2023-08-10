@@ -34,6 +34,7 @@ function getCSV( dir = '' ){
         console.log(temp);
     })();
     temp = temp.text();
+    console.log(temp);
     temp = convertCSVtoArray(temp);
     return temp;
     /*await fetch(dir)
