@@ -88,6 +88,8 @@ async function createBandTable(section = '' ){
             nameColumun = searchColumunByName(data, 'Name'),
             modeColumun = searchColumunByName(data, 'Mode');
 
+            console.log(data);
+
             for( i = 1; i < data; i++){
                 let mode = data[i][modeColumun];
                 let name = data[i][nameColumun];
@@ -122,7 +124,7 @@ async function createBandTable(section = '' ){
 }
 
 function setBoxSizeByCSS(){
-    const targets = element.getElementsByClassName('band');
+    const targets = document.getElementsByClassName('band');
 
     targets.forEach((item, i) => {
         item.style.width = item.getAttribute('data-width');
