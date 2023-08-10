@@ -28,8 +28,15 @@ function detectDisplayDirection(){
 
 //CSVファイルを読み込む関数getCSV()の定義
 async function getCSV( dir = '' ){
-    return (await fetch(dir)).blob();
-    /*.then(
+    let temp;
+    (async(temp, dir) => {
+        temp = await (await fetch(dir)).blob();
+    })();
+    temp = temp.text();
+    temp = convertCSVtoArray(temp);
+    return temp;
+    /*await fetch(dir)
+    .then(
         response => {
             return response.text();
         }
@@ -80,12 +87,13 @@ function createBox(parent = '', name = '', up = 0, down = 0){
 function createBandTable(section = '' ){
     switch(section){
         case '3GPP':
-            const data = (async() => {
+            /*const data = (async() => {
                 let temp = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
                 temp = temp.text();
                 temp = convertCSVtoArray(temp);
                 return temp;
-            })();
+            })();*/
+            const data = getCSV('/BandPlanVisualize/3GPPBandPlan.csv');
 
             console.log(data);
             //console.log(data.text());
