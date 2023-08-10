@@ -143,15 +143,14 @@ function tuneingBoxColision(){
     const sourceElments = document.getElementsByClassName('box'); // List of air band boxes
     let targets = [];
     let number = 1;
-    let d1, d2;
 
     switch(displayDirection){
         case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
             for( let i = 0; i < sourceElments.length; i++ ){
                 for( let j = 0; j < sourceElments.length; i++ ){
                     if( i !== j ){
-                        d1 = sourceElments[i].getBoundingClientRect();
-                        d2 = sourceElments[j].getBoundingClientRect();
+                        let d1 = sourceElments[i].getBoundingClientRect();
+                        let d2 = sourceElments[j].getBoundingClientRect();
 
                         if(!(d1.right < d2.left || d1.left > d2.right)){
                             targets.push([i, number]);
@@ -168,8 +167,8 @@ function tuneingBoxColision(){
             for( let i = 0; i < sourceElments.length; i++ ){
                 for( let j = 0; j < sourceElments.length; i++ ){
                     if( i !== j ){
-                        d1 = sourceElments[i].getBoundingClientRect();
-                        d2 = sourceElments[j].getBoundingClientRect();
+                        let d1 = sourceElments[i].getBoundingClientRect();
+                        let d2 = sourceElments[j].getBoundingClientRect();
 
                         if(!(d1.top > d2.bottom || d1.bottom < d2.top)){
                             targets.push([i, number]);
