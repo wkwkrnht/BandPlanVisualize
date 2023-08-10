@@ -32,23 +32,18 @@ function getCSV( dir = '' ){
 
     return fetch(dir)
     .then(
-        function(response){  //response
-            if (!response.ok) {  //error
-                return Promise.reject(new Error('error'));
-            }
-            return response.text();                         // ok string utf-8
+        response => {
+            return response.text();
         }
     )
     .then(
-        function(text){
-            const csv = convertCSVtoArray(text);
-            //console.log(csv);
-            return csv;
+        text => {
+            return convertCSVtoArray(text);
         }
     )
     .catch(
-        function(err){
-            console.error('fetch error', err);  //  error処理
+        err => {
+            console.log(err);
         }
     );
     //console.log(csv);
