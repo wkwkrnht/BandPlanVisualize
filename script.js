@@ -64,7 +64,7 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
     box.innerText = name;
 }
 
-function refreshTableAreaSize(up = 0){ // Expand value to note actual this page size.
+async function refreshTableAreaSize(up = 0){ // Expand value to note actual this page size.
     if(up > tableAreaSize){
         console.log('before');
         console.log(tableAreaSize);
@@ -121,37 +121,40 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
         if(mode !== 'SUL'){
             const nameD = name + '↓';
             createBox('3GPP', nameD, data1[i][dlUpColumun], data1[i][dlDownColumun]);
-            refreshTableAreaSize(data1[i][dlUpColumun]);
+
+            await refreshTableAreaSize(data1[i][dlUpColumun]);
         }
+
         if((mode === 'SUL') || (mode === 'FDD')){
             const nameU = name + '↑';
             createBox('3GPP', nameU, data1[i][ulUpColumun], data1[i][ulDownColumun]);
-            refreshTableAreaSize(data1[i][ulUpColumun]);
+
+            await refreshTableAreaSize(data1[i][ulUpColumun]);
         }
     }
 
     for( let j = 1; j < data2.length; j++ ){ // Create air band boxes from JP dataset.
         createBox('JP', data2[j][jpPurposeColumun], data2[j][jpUpColumun], data2[j][jpDownColumun]);
 
-        refreshTableAreaSize(data2[j][jpUpColumun]);
+        await refreshTableAreaSize(data2[j][jpUpColumun]);
     }
 
     for( let k = 1; k < data3.length; k++ ){ // Create air band boxes from ISM dataset.
         createBox('ISM', data3[k][ismNameColumun], data3[k][ismUpColumun], data3[k][ismDownColumun]);
 
-        refreshTableAreaSize(data3[k][ismUpColumun]);
+        await refreshTableAreaSize(data3[k][ismUpColumun]);
     }
 
     for( let l = 1; l < data4.length; l++ ){ // Create air band boxes from ETSI dataset.
         createBox('ETSI', data4[l][etsiNameColumun], data4[l][etsiUpColumun], data4[l][etsiDownColumun]);
 
-        refreshTableAreaSize(data4[l][etsiUpColumun]);
+        await refreshTableAreaSize(data4[l][etsiUpColumun]);
     }
 
     for( let m = 1; m < data5.length; m++ ){ // Create air band boxes from JP dataset.
         createBox('WiFi', data5[m][wifiNameColumun], data5[m][wifiUpColumun], data5[m][wifiDownColumun]);
 
-        refreshTableAreaSize(data5[m][wifiUpColumun]);
+        await refreshTableAreaSize(data5[m][wifiUpColumun]);
     }
 }
 
