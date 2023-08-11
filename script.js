@@ -116,6 +116,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 targets[i].style.height = fixedLength;
                 targets[i].style.width = targets[i].dataset.width + 'px';
             }
+
             for( let j = 0; j < targets.length; j++ ){
                 let number = 0;
 
@@ -130,13 +131,10 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                     }
                 }
 
-                console.log(targets[j].innerText);
-                console.log(number);
-
-                if(number > 0){
-                    targets[j].style.top = 'calc((90vh / 3) + ' + ((fixedLength * number) / 2) + ')';
-                }else{
+                if(number === 0){
                     targets[j].style.top = 'calc(90vh / 3)';
+                }else{
+                    targets[j].style.top = 'calc((90vh / 3) + ' + ((fixedLength * number) / 2) + ')';
                 }
             }
             break;
