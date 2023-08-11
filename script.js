@@ -227,6 +227,8 @@ function createRuler(){
     switch(displayDirection){ // Measure How long this table finally.
         case 'landscape':
             tableAreaSize = tableDOM.width;
+            console.log(tableAreaSize);
+            console.log(windowWidth);
             break;
         case 'portrait':
             tableAreaSize = tableDOM.height;
