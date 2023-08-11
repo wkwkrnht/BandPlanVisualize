@@ -1,6 +1,7 @@
 const windowWidth = document.documentElement.clientWidth; // Constructor of the window width.
 const windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
 const fixedLength = 60; // Constructor of fixed part of box size.
+const headerHeight = 0.1 * windowHeight;
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 let tableAreaSize = 0; // Value to note actual this page size.
 
@@ -195,7 +196,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
             break;
         case 'portrait':
             for( let i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
-                targets[i].style.top = targets[i].dataset.down + 'px';
+                targets[i].style.top = headerHeight + targets[i].dataset.down + 'px';
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLength + 'px';
             }
@@ -251,7 +252,7 @@ function createRuler(){
             case 'portrait':
                 box.style.height = '1000px';
                 box.style.width = fixedLength + 'px';
-                box.style.top = freq + 'px';
+                box.style.top = headerHeight + freq + 'px';
                 box.style.left = '0';
                 break;
             default:
