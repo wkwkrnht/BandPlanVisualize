@@ -51,6 +51,11 @@ function searchColumunByName( array = [], key = ''){ // From 0 row, searching nu
 }
 
 function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box of a air band.
+    if(up > tableAreaSize){ // Expand value to note actual this page size.
+        tableAreaSize = up;
+        console.log(tableAreaSize);
+    }
+
     const width = up - down; // This is width set in style.
 
     let parent = document.getElementById('main'); // Search a area to insert a box.
@@ -62,11 +67,6 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
     box.setAttribute('data-down', down); // Set a value to note start-point of a air band.
     box.setAttribute('data-width', width); // Set a value to note width of a air band.
     box.innerText = name;
-
-    if(up > tableAreaSize){ // Expand value to note actual this page size.
-        tableAreaSize = up;
-        console.log(tableAreaSize);
-    }
 }
 
 async function createBandTable( section = '' ){ // Create Boxes to each air bands from a dataset.
