@@ -121,6 +121,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
 
             for( let j = 0; j < targets.length; j++ ){
                 let number = 0;
+                let topValue = '30vh';
 
                 for( let k = 0; k < targets.length; k++ ){
                     if( j !== k ){
@@ -133,10 +134,8 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                     }
                 }
 
-                if(number === 0){
-                    let topValue = '30vh';
-                }else{
-                    let topValue = ((windowHeight * 0.3) + (fixedLength * number / 2));
+                if(number !== 0){
+                    topValue = ((windowHeight * 0.3) + (fixedLength * number / 2));
                     topValue = topValue.toString() + 'px';
                 }
 
