@@ -48,7 +48,7 @@ function searchColumunByName( array = [], key = ''){ // From 0 row, searching nu
 function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box of a air band.
     const width = up - down; // This is width set in style.
 
-    parent = document.getElementById('main'); // Search a area to insert a box.
+    let parent = document.getElementById('main'); // Search a area to insert a box.
     let box = document.createElement('div'); // Create a element of a box.
     parent.appendChild(box);
 
