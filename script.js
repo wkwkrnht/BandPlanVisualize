@@ -220,15 +220,16 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
 }
 
 function createRuler(){
-    let parent = document.getElementById('Ruler'); // Search a area to insert a ruler.
-    const unitOfRuler = 1000;
+    let parent = document.getElementById('Ruler'); // Search a area to insert the ruler.
+    const unitOfRuler = 1000; // Unit size of the ruler.
     const tableDOM = document.getElementById('main').getBoundingClientRect();
-    switch(displayDirection){
+    let tableAreaSize = 0;
+    switch(displayDirection){ // Measure How long this table finally.
         case 'landscape':
-            const tableAreaSize = tableDOM.width;
+            tableAreaSize = tableDOM.width;
             break;
         case 'portrait':
-            const tableAreaSize = tableDOM.height;
+            tableAreaSize = tableDOM.height;
             break;
         default:
             break;
@@ -240,10 +241,10 @@ function createRuler(){
         let box = document.createElement('div'); // Create a element of a box.
         parent.appendChild(box);
 
-        box.classList.add('ruler'); // Class name of air band boxes.
-        box.innerText = freq + '[MHz]';
+        box.classList.add('ruler'); // Class name of ruler.
+        box.innerText = freq + '[MHz]'; // Insert the label of this.
 
-        switch(displayDirection){
+        switch(displayDirection){ // Allocate this box at the point.
             case 'landscape':
                 box.style.left = freq + 'px';
                 break;
