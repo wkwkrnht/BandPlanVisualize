@@ -1,8 +1,10 @@
+const windowWidth = document.documentElement.clientWidth;
+const windowHeight = document.documentElement.clientHeight;
 const fixedLength = '60px'; // Constructor of fixed part of box size.
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 
 function detectDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
-    if(window.innerWidth > window.innerHeight){
+    if(windowWidth > windowHeight){
         displayDirection = 'landscape';
     }else{
         displayDirection = 'portrait';
@@ -134,7 +136,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 if(number === 0){
                     targets[j].style.top = '30vh';
                 }else{
-                    targets[j].style.top = 'calc(30vh + ' + ((fixedLength * number) / 2).toString() + ')';
+                    targets[j].style.top = ((windowHeight * 0.3) + (fixedLength * number / 2)) + 'px';
                 }
             }
             break;
@@ -159,9 +161,9 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 }
 
                 if(number > 0){
-                    targets[j].style.left = 'calc((100vw / 3) + ' + ((fixedLength * number) / 2) + ')';
+                    targets[j].style.left = 'calc(30vw + ' + (fixedLength * number / 2) + ')';
                 }else{
-                    targets[j].style.left = 'calc(100vw / 3)';
+                    targets[j].style.left = '30vw';
                 }
             }
             break;
