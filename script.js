@@ -136,9 +136,11 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
 
                 if(number !== 0){
                     topValue = ((windowHeight * 0.3) + (fixedLength * number / 2));
+                    console.log(windowHeight);
+                    console.log(fixedLength);
+                    console.log(number);
                     console.log(topValue);
                     topValue = topValue.toString() + 'px';
-                    console.log(topValue);
                 }
 
                 targets[j].style.top = topValue;
