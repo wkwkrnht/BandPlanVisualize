@@ -262,9 +262,7 @@ function createRuler(){
 }
 
 function finishCreateElements(){
-    let main = document.getElementById('main');
-
-    main.style.overflow = 'scroll';
+    //
 }
 
 async function main(){ // Main function.
