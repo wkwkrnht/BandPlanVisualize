@@ -11,6 +11,10 @@ function detectDisplayDirection(){ // For set styles on elements, detect which d
     }
 }
 
+function calcAmountOfMove(baseline = 0, unit = , times = 0){
+    return ((baseline * 0.3) + (times * unit * 1.2));
+}
+
 async function getCSV( dir = '' ){ // Get a CSV file and parse into array.
     return await fetch(dir) // Get a CSV file.
     .then(
@@ -143,7 +147,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 }
 
                 if(number !== 0){
-                    topValue = ((windowHeight * 0.3) + (fixedLength * number * 1.2));
+                    topValue = calcAmountOfMove(windowHeight, fixedLength, number);
                     topValue = topValue.toString() + 'px';
                 }
 
@@ -172,7 +176,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 }
 
                 if(number !== 0){
-                    leftValue = ((windowWidth * 0.3) + (fixedLength * number * 1.2));
+                    leftValue = calcAmountOfMove(windowWidth, fixedLength, number);
                     leftValue = leftValue.toString() + 'px';
                 }
 
