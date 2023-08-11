@@ -108,17 +108,17 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
 function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
     const targets = document.getElementsByClassName('box'); // List of air band boxes
     let colides = [];
-    let number = 1;
 
     switch(displayDirection){
         case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
             for( let i = 0; i < targets.length; i++ ){
-                targets[i].style.top = 'calc((100vh - var(--header-height)) / 3)';
                 targets[i].style.left = targets[i].dataset.down + 'px';
                 targets[i].style.height = fixedLength;
                 targets[i].style.width = targets[i].dataset.width + 'px';
             }
             for( let i = 0; i < targets.length; i++ ){
+                let number = 0;
+
                 for( let j = 0; j < targets.length; i++ ){
                     if( i !== j ){
                         let d1 = targets[i].getBoundingClientRect();
@@ -126,24 +126,27 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                         let di = !(d1.right < d2.left || d1.left > d2.right);
 
                         if(di){
-                            colides.push([i, number]);
                             number++;
                         }
                     }
                 }
-            }
-            for( let i = 0; i < colides.length; i++ ){
-                colides[i][0].style.top = colides[i][0].style.top + ((fixedLength * colides[i][1]) / 2) + 'px';
+
+                if(number > 0){
+                    targets[i].style.top = 'calc((90vh / 3) + ' + ((fixedLength * number) / 2) + ')';
+                }else{
+                    targets[i].style.top = 'calc(90vh / 3)';
+                }
             }
             break;
         case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
             for( let i = 0; i < targets.length; i++ ){
                 targets[i].style.top = targets[i].dataset.down + 'px';
-                targets[i].style.left = 'calc(100vw / 3)';
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLength;
             }
             for( let i = 0; i < targets.length; i++ ){
+                let number = 0;
+
                 for( let j = 0; j < targets.length; i++ ){
                     if( i !== j ){
                         let d1 = targets[i].getBoundingClientRect();
@@ -151,14 +154,16 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                         let di = !(d1.top > d2.bottom || d1.bottom < d2.top);
 
                         if(di){
-                            colides.push([i, number]);
                             number++;
                         }
                     }
                 }
-            }
-            for( let i = 0; i < colides.length; i++ ){
-                colides[i][0].style.left = colides[i][0].style.left + ((fixedLength * colides[i][1]) / 2) + 'px';
+
+                if(number > 0){
+                    targets[i].style.left = 'calc((100vw / 3) + ' + ((fixedLength * number) / 2) + ')';
+                }else{
+                    targets[i].style.left = 'calc(100vw / 3)';
+                }
             }
             break;
         default:
