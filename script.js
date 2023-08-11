@@ -105,7 +105,7 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
     }
 }
 
-function setBasicBoxStyleAtCSS(){ // Set size and position for each air band boxes.
+function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
     const targets = document.getElementsByClassName('box'); // List of air band boxes
     let colides = [];
     let number = 1;
