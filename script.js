@@ -64,8 +64,8 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
     box.innerText = name;
 }
 
-function refreshTableAreaSize(up = 0){
-    if(up > tableAreaSize){ // Expand value to note actual this page size.
+function refreshTableAreaSize(up = 0){ // Expand value to note actual this page size.
+    if(up > tableAreaSize){
         console.log('before');
         console.log(tableAreaSize);
         tableAreaSize = up;
@@ -118,33 +118,15 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
         let mode = data1[i][modeColumun];
         let name = data1[i][nameColumun];
 
-        switch(mode){ // Detect a air band contains UL and DL by mode indicator.
-            case 'FDD':
-                const nameU = name + '↑';
-                createBox('3GPP', nameU, data1[i][ulUpColumun], data1[i][ulDownColumun]);
-                const nameD = name + '↓';
-                createBox('3GPP', nameD, data1[i][dlUpColumun], data1[i][dlDownColumun]);
-                refreshTableAreaSize(data1[i][ulUpColumun]);
-                refreshTableAreaSize(data1[i][dlUpColumun]);
-                break;
-            case 'SUL':
-                name = name + '↑';
-                createBox('3GPP', name, data1[i][ulUpColumun], data1[i][ulDownColumun]);
-                refreshTableAreaSize(data1[i][ulUpColumun]);
-                break;
-            case 'TDD':
-                name = name + '↑' + '↓';
-                createBox('3GPP', name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
-                refreshTableAreaSize(data1[i][dlUpColumun]);
-                break;
-            case 'SDL':
-                name = name + '↓';
-                createBox('3GPP', name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
-                refreshTableAreaSize(data1[i][dlUpColumun]);
-                break;
-            default: // Error handling which is missing mode.
-                console.log('Mode has not set.');
-                break;
+        if(mode !== 'SUL'){
+            const nameD = name + '↓';
+            createBox('3GPP', nameD, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+            refreshTableAreaSize(data1[i][dlUpColumun]);
+        }
+        if((mode === 'SUL') || (mode === 'FDD')){
+            const nameU = name + '↑';
+            createBox('3GPP', nameU, data1[i][ulUpColumun], data1[i][ulDownColumun]);
+            refreshTableAreaSize(data1[i][ulUpColumun]);
         }
     }
 
