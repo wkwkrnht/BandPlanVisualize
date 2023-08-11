@@ -85,21 +85,21 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
         switch(mode){ // Detect a air band contains UL and DL by mode indicator.
             case 'FDD':
                 const nameU = name + '↑';
-                createBox(section, nameU, data1[i][ulUpColumun], data1[i][ulDownColumun]);
+                createBox('3GPP', nameU, data1[i][ulUpColumun], data1[i][ulDownColumun]);
                 const nameD = name + '↓';
-                createBox(section, nameD, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                createBox('3GPP', nameD, data1[i][dlUpColumun], data1[i][dlDownColumun]);
                 break;
             case 'SUL':
                 name = name + '↑';
-                createBox(section, name, data1[i][ulUpColumun], data1[i][ulDownColumun]);
+                createBox('3GPP', name, data1[i][ulUpColumun], data1[i][ulDownColumun]);
                 break;
             case 'TDD':
                 name = name + '↑' + '↓';
-                createBox(section, name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                createBox('3GPP', name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
                 break;
             case 'SDL':
                 name = name + '↓';
-                createBox(section, name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                createBox('3GPP', name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
                 break;
             default: // Error handling which is missing mode.
                 console.log('Mode has not set.');
@@ -111,7 +111,7 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
         let mode = data2[j][modeColumun];
         let name = data2[j][purposeColumun];
 
-        createBox(section, name, data2[j][upColumun], data2[j][downColumun]);
+        createBox('JP', name, data2[j][upColumun], data2[j][downColumun]);
     }
 }
 
@@ -187,8 +187,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
 async function main(){ // Main function.
     detectDisplayDirection();
 
-    await createBandTable('3GPP');
-    await createBandTable('JP');
+    await createBandTable();
 
     setBoxStyleAtCSS();
 }
