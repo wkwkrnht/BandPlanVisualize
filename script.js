@@ -107,6 +107,8 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
 
 function setBasicBoxStyleAtCSS(){ // Set size and position for each air band boxes.
     const targets = document.getElementsByClassName('box'); // List of air band boxes
+    let colides = [];
+    let number = 1;
 
     switch(displayDirection){
         case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
@@ -116,36 +118,6 @@ function setBasicBoxStyleAtCSS(){ // Set size and position for each air band box
                 targets[i].style.height = fixedLength;
                 targets[i].style.width = targets[i].dataset.width + 'px';
             }
-            break;
-        case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
-            for( let i = 0; i < targets.length; i++ ){
-                targets[i].style.top = targets[i].dataset.down + 'px';
-                targets[i].style.left = 'calc(100vw / 3)';
-                targets[i].style.height = targets[i].dataset.width + 'px';
-                targets[i].style.width = fixedLength;
-            }
-            break;
-        default:
-            break;
-    }
-}
-/*{
-    "x": 1920,
-    "y": 458.1499938964844,
-    "width": 60,
-    "height": 60,
-    "top": 458.1499938964844,
-    "right": 1980,
-    "bottom": 518.1499938964844,
-    "left": 1920
-}*/
-async function tuneingBoxColision(){
-    const sourceElments = document.getElementsByClassName('box'); // List of air band boxes
-    let targets = [];
-    let number = 1;
-
-    switch(displayDirection){
-        case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
             for( let i = 0; i < sourceElments.length; i++ ){
                 for( let j = 0; j < sourceElments.length; i++ ){
                     if( i !== j ){
@@ -165,6 +137,12 @@ async function tuneingBoxColision(){
             }
             break;
         case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
+            for( let i = 0; i < targets.length; i++ ){
+                targets[i].style.top = targets[i].dataset.down + 'px';
+                targets[i].style.left = 'calc(100vw / 3)';
+                targets[i].style.height = targets[i].dataset.width + 'px';
+                targets[i].style.width = fixedLength;
+            }
             for( let i = 0; i < sourceElments.length; i++ ){
                 for( let j = 0; j < sourceElments.length; i++ ){
                     if( i !== j ){
@@ -173,14 +151,14 @@ async function tuneingBoxColision(){
                         let di = await !(d1.top > d2.bottom || d1.bottom < d2.top);
 
                         if(di){
-                            targets.push([i, number]);
+                            colides.push([i, number]);
                             number++;
                         }
                     }
                 }
             }
-            for( let i = 0; i < targets.length; i++ ){
-                targets[i][0].style.left = targets[i][0].style.left + ((fixedLength * targets[i][1]) / 2) + 'px';
+            for( let i = 0; i < colides.length; i++ ){
+                colides[i][0].style.left = colides[i][0].style.left + ((fixedLength * colides[i][1]) / 2) + 'px';
             }
             break;
         default:
@@ -189,13 +167,12 @@ async function tuneingBoxColision(){
 }
 
 async function main(){ // Main function.
-    await detectDisplayDirection();
+    detectDisplayDirection();
 
     await createBandTable('3GPP');
     await createBandTable('JP');
 
-    await setBasicBoxStyleAtCSS();
-    await tuneingBoxColision();
+    setBoxStyleAtCSS();
 }
 
 document.onload = main(); // Fire main() after loaded whole of the HTML document.
