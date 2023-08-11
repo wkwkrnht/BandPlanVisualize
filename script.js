@@ -127,18 +127,14 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                         let d1 = targets[j].getBoundingClientRect();
                         let d2 = targets[k].getBoundingClientRect();
 
-                        if((d1.right > d2.left && d1.left < d2.right) || (d1.right > d2.left && d1.left < d2.left) || (d1.right > d2.right && d1.left < d2.right)){
+                        if((d1.right > d2.left && d1.left < d2.left) || (d1.right > d2.right && d1.left < d2.right)){
                             number++;
                         }
                     }
                 }
 
                 if(number !== 0){
-                    topValue = ((windowHeight * 0.3) + (fixedLength * number / 2));
-                    console.log(windowHeight);
-                    console.log(fixedLength);
-                    console.log(number);
-                    console.log(topValue);
+                    topValue = ((windowHeight * 0.3) + (fixedLength * number));
                     topValue = topValue.toString() + 'px';
                 }
 
@@ -153,23 +149,25 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
             }
             for( let j = 0; j < targets.length; j++ ){
                 let number = 0;
+                let leftValue = '30vw';
 
                 for( let k = 0; k < targets.length; k++ ){
                     if( j !== k ){
                         let d1 = targets[j].getBoundingClientRect();
                         let d2 = targets[k].getBoundingClientRect();
 
-                        if(d1.top < d2.bottom || d1.bottom > d2.top){
+                        if((d1.top > d2.top && d1.bottom < d2.top) || (d1.top > d2.bottom && d1.bottom < d2.bottom)){
                             number++;
                         }
                     }
                 }
 
-                if(number > 0){
-                    targets[j].style.left = 'calc(30vw + ' + (fixedLength * number / 2) + ')';
-                }else{
-                    targets[j].style.left = '30vw';
+                if(number !== 0){
+                    leftValue = ((windowWidth * 0.3) + (fixedLength * number));
+                    leftValue = leftValue.toString() + 'px';
                 }
+
+                targets[j].style.left = leftValue;
             }
             break;
         default:
