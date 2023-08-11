@@ -25,6 +25,7 @@ body{
     margin:0;
     overflow-x:scroll;
     overflow-y:scroll;
+    padding:0;
 }
 
 header{
@@ -62,42 +63,9 @@ header{
     background-color:var(--right-blue);
 }
 
-#Ruler{
-    bottom:0;
-    left:0;
-    margin:0;
-    padding:0;
-    position:absolute;
-}
-
 .ruler{
-    display:inline-block;
     margin:0;
     padding:0;
     position:absolute;
     text-align:right;
-}
-
-@media (min-aspect-ratio: 1/1){
-    #Ruler{
-        height:var(--fixed-length);
-        width:100vw;
-    }
-
-    .ruler{
-        height:var(--fixed-length);
-        width:1000px;
-    }
-}
-
-@media (max-aspect-ratio: 1/1){
-    #Ruler{
-        height:100vh;
-        width:var(--fixed-length);
-    }
-
-    .ruler{
-        height:1000px;
-        width:var(--fixed-length);
-    }
 }
