@@ -121,9 +121,9 @@ function setBasicBoxStyleAtCSS(){ // Set size and position for each air band box
             for( let i = 0; i < sourceElments.length; i++ ){
                 for( let j = 0; j < sourceElments.length; i++ ){
                     if( i !== j ){
-                        let d1 = await sourceElments[i].getBoundingClientRect();
-                        let d2 = await sourceElments[j].getBoundingClientRect();
-                        let di = await !(d1.right < d2.left || d1.left > d2.right);
+                        let d1 = sourceElments[i].getBoundingClientRect();
+                        let d2 = sourceElments[j].getBoundingClientRect();
+                        let di = !(d1.right < d2.left || d1.left > d2.right);
 
                         if(di){
                             targets.push([i, number]);
@@ -146,9 +146,9 @@ function setBasicBoxStyleAtCSS(){ // Set size and position for each air band box
             for( let i = 0; i < sourceElments.length; i++ ){
                 for( let j = 0; j < sourceElments.length; i++ ){
                     if( i !== j ){
-                        let d1 = await sourceElments[i].getBoundingClientRect();
-                        let d2 = await sourceElments[j].getBoundingClientRect();
-                        let di = await !(d1.top > d2.bottom || d1.bottom < d2.top);
+                        let d1 = sourceElments[i].getBoundingClientRect();
+                        let d2 = sourceElments[j].getBoundingClientRect();
+                        let di = !(d1.top > d2.bottom || d1.bottom < d2.top);
 
                         if(di){
                             colides.push([i, number]);
