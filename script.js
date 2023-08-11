@@ -276,7 +276,7 @@ async function main(){ // Main function.
 
     await createRuler();
 
-    finishCreateElements();
+    //finishCreateElements();
 }
 
 document.onload = main(); // Fire main() after loaded whole of the HTML document.

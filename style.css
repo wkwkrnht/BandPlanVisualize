@@ -24,7 +24,6 @@ header,
 body{
     height:100vh;
     margin:0;
-    overflow:hidden;
     padding:0;
     width:100vw;
 }
@@ -32,10 +31,14 @@ body{
 header{
     background-color:var(--black);
     height:var(--header-height);
+    left:0;
     margin:0 0 var(--base-vertical-rhythm);
     padding:2em;
+    position:fixed;
     text-align:center;
+    top:0;
     width:100%;
+    z-index:100;
 }
 
 .box{
