@@ -126,7 +126,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                         let di = !(d1.right < d2.left || d1.left > d2.right);
 
                         if(di){
-                            targets.push([i, number]);
+                            colides.push([i, number]);
                             number++;
                         }
                     }
