@@ -1,7 +1,7 @@
 const windowWidth = document.documentElement.clientWidth; // Constructor of the window width.
 const windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
 const fixedLength = 60; // Constructor of fixed part of box size.
-const headerHeight = 0.1 * windowHeight;
+const headerHeight = 0.12 * windowHeight;
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 let tableAreaSize = 0; // Value to note actual this page size.
 
@@ -261,6 +261,12 @@ function createRuler(){
     }
 }
 
+function finishCreateElements(){
+    let main = document.getElementById('main');
+
+    main.style.overflow = 'scroll';
+}
+
 async function main(){ // Main function.
     await detectDisplayDirection();
 
@@ -269,6 +275,8 @@ async function main(){ // Main function.
     await setBoxStyleAtCSS();
 
     await createRuler();
+
+    finishCreateElements();
 }
 
 document.onload = main(); // Fire main() after loaded whole of the HTML document.

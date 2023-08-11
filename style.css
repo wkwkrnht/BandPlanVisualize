@@ -24,8 +24,7 @@ header,
 body{
     height:100vh;
     margin:0;
-    overflow-x:scroll;
-    overflow-y:scroll;
+    overflow:hidden;
     padding:0;
     width:100vw;
 }
