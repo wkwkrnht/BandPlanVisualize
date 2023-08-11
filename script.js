@@ -85,22 +85,22 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
     // Loading ISM dataset.
     data3 = await getCSV('/BandPlanVisualize/ISMBandPlan.csv'),
     // Searching number of columun of each elements
-    ismDownColumun = searchColumunByName(data3, 'down'),
-    ismUpColumun = searchColumunByName(data3, 'up'),
+    ismDownColumun = searchColumunByName(data3, 'Down'),
+    ismUpColumun = searchColumunByName(data3, 'Up'),
     ismNameColumun = searchColumunByName(data3, 'Name'),
 
     // Loading ETSI dataset.
     data4 = await getCSV('/BandPlanVisualize/ETSIBandPlan.csv'),
     // Searching number of columun of each elements
-    etsiDownColumun = searchColumunByName(data4, 'down'),
-    etsiUpColumun = searchColumunByName(data4, 'up'),
+    etsiDownColumun = searchColumunByName(data4, 'Down'),
+    etsiUpColumun = searchColumunByName(data4, 'Up'),
     etsiNameColumun = searchColumunByName(data4, 'Name'),
 
     // Loading Wi-Fi dataset.
     data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv'),
     // Searching number of columun of each elements
-    wifiDownColumun = searchColumunByName(data5, 'down'),
-    wifiUpColumun = searchColumunByName(data5, 'up'),
+    wifiDownColumun = searchColumunByName(data5, 'Down'),
+    wifiUpColumun = searchColumunByName(data5, 'Up'),
     wifiNameColumun = searchColumunByName(data5, 'Name');
 
     for( let i = 1; i < data1.length; i++ ){ // Create air band boxes from 3GPP dataset.
@@ -220,9 +220,9 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
 }
 
 function createRuler(){
-    let parent = document.getElementById('Ruler'); // Search a area to insert the ruler.
+    let parent = document.getElementById('main'); // Search a area to insert the ruler.
     const unitOfRuler = 1000; // Unit size of the ruler.
-    const tableDOM = document.getElementById('main').getBoundingClientRect();
+    const tableDOM = parent.getBoundingClientRect();
     let tableAreaSize = 0;
     switch(displayDirection){ // Measure How long this table finally.
         case 'landscape':
@@ -246,10 +246,16 @@ function createRuler(){
 
         switch(displayDirection){ // Allocate this box at the point.
             case 'landscape':
+                box.style.height = fixedLength + 'px';
+                box.style.width = '1000px';
                 box.style.left = freq + 'px';
+                box.style.top = '20vh';
                 break;
             case 'portrait':
-                cbox.style.top = freq + 'px';
+                box.style.height = '1000px';
+                box.style.width = fixedLength + 'px';
+                box.style.top = freq + 'px';
+                box.style.left = '0';
                 break;
             default:
                 break;
