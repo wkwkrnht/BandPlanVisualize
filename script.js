@@ -264,13 +264,13 @@ function createRuler(){
 }
 
 async function main(){ // Main function.
-    detectDisplayDirection();
+    await detectDisplayDirection();
 
     await createBandTable();
 
     await setBoxStyleAtCSS();
 
-    createRuler();
+    await createRuler();
 }
 
 document.onload = main(); // Fire main() after loaded whole of the HTML document.

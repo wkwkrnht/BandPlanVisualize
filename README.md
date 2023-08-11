@@ -10,8 +10,11 @@ This is made by 1 HTML file, 1 Vanilla JS script, several CSV datasets. HTML is 
 
 At this segment, we show the list of dataset supporting right now.
 
+* ISM
+* ETSI
+* Wi-Fi
 * 3GPP
-* JP
+* Japan
 
 If you want to be expand this list, send request for this repository, or make dataset and make pull-request for this repository. Anyway, on this process, we write script and add dataset of it. It takes few days.
 
