@@ -130,6 +130,9 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                     }
                 }
 
+                console.log(targets[j].innerText);
+                console.log(number);
+
                 if(number > 0){
                     targets[j].style.top = 'calc((90vh / 3) + ' + ((fixedLength * number) / 2) + ')';
                 }else{
