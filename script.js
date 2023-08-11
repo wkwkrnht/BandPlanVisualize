@@ -225,15 +225,15 @@ function createRuler(){
     const tableDOM = document.getElementById('main').getBoundingClientRect();
     switch(displayDirection){
         case 'landscape':
-            const tableWidth = tableDOM.width;
+            const tableAreaSize = tableDOM.width;
             break;
         case 'portrait':
-            const tableWidth = tableDOM.height;
+            const tableAreaSize = tableDOM.height;
             break;
         default:
             break;
     }
-    const timesToWrite = unitOfRuler / unitOfRuler;
+    const timesToWrite = tableAreaSize / unitOfRuler;
 
     for let i = 0; i < timesToWrite; i++ (){
         let freq = i * unitOfRuler;
