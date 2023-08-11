@@ -236,7 +236,7 @@ function createRuler(){
     }
     const timesToWrite = tableAreaSize / unitOfRuler;
 
-    for let i = 0; i < timesToWrite; i++ (){
+    for( let i = 0; i < timesToWrite; i++ ){
         let freq = i * unitOfRuler;
         let box = document.createElement('div'); // Create a element of a box.
         parent.appendChild(box);
