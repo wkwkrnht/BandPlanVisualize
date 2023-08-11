@@ -52,7 +52,10 @@ function searchColumunByName( array = [], key = ''){ // From 0 row, searching nu
 
 function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box of a air band.
     if(up > tableAreaSize){ // Expand value to note actual this page size.
+        console.log('before');
+        console.log(tableAreaSize);
         tableAreaSize = up;
+        console.log('after');
         console.log(tableAreaSize);
     }
 
