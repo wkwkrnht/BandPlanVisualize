@@ -1,6 +1,6 @@
-const windowWidth = document.documentElement.clientWidth;
-const windowHeight = document.documentElement.clientHeight;
-const fixedLength = '60px'; // Constructor of fixed part of box size.
+const windowWidth = document.documentElement.clientWidth; // Constructor of the window width.
+const windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
+const fixedLength = 60; // Constructor of fixed part of box size.
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 
 function detectDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
@@ -86,8 +86,7 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
                         createBox(section, name, data[i][ulUpColumun], data[i][ulDownColumun]);
                         break;
                     case 'TDD':
-                        name = name + '↑';
-                        name = name + '↓';
+                        name = name + '↑' + '↓';
                         createBox(section, name, data[i][dlUpColumun], data[i][dlDownColumun]);
                         break;
                     case 'SDL':
@@ -115,7 +114,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
         case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
             for( let i = 0; i < targets.length; i++ ){
                 targets[i].style.left = targets[i].dataset.down + 'px';
-                targets[i].style.height = fixedLength;
+                targets[i].style.height = fixedLength + 'px';
                 targets[i].style.width = targets[i].dataset.width + 'px';
             }
 
@@ -150,7 +149,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
             for( let i = 0; i < targets.length; i++ ){
                 targets[i].style.top = targets[i].dataset.down + 'px';
                 targets[i].style.height = targets[i].dataset.width + 'px';
-                targets[i].style.width = fixedLength;
+                targets[i].style.width = fixedLength + 'px';
             }
             for( let j = 0; j < targets.length; j++ ){
                 let number = 0;
