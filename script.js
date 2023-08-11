@@ -11,7 +11,7 @@ function detectDisplayDirection(){ // For set styles on elements, detect which d
     }
 }
 
-function calcAmountOfMove(baseline = 0, unit = , times = 0){ // Calculating the DOM will move how much.
+function calcAmountOfMove(baseline = 0, unit = 0, times = 0){ // Calculating the DOM will move how much.
     return ((baseline * 0.3) + (times * unit * 1.2));
 }
 
