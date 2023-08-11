@@ -137,15 +137,15 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
     }
 
     for( let k = 1; k < data3.length; k++ ){ // Create air band boxes from ISM dataset.
-        createBox('ISM', data3[k][ismPurposeColumun], data3[k][ismUpColumun], data3[k][ismDownColumun]);
+        createBox('ISM', data3[k][ismNameColumun], data3[k][ismUpColumun], data3[k][ismDownColumun]);
     }
 
     for( let l = 1; l < data4.length; l++ ){ // Create air band boxes from ETSI dataset.
-        createBox('ETSI', data4[l][etsiPurposeColumun], data4[l][etsiUpColumun], data4[l][etsiDownColumun]);
+        createBox('ETSI', data4[l][etsiNameColumun], data4[l][etsiUpColumun], data4[l][etsiDownColumun]);
     }
 
     for( let m = 1; m < data5.length; m++ ){ // Create air band boxes from JP dataset.
-        createBox('WiFi', data5[m][wifiPurposeColumun], data5[m][wifiUpColumun], data5[m][wifiDownColumun]);
+        createBox('WiFi', data5[m][wifiNameColumun], data5[m][wifiUpColumun], data5[m][wifiDownColumun]);
     }
 }
 
@@ -219,12 +219,51 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
     }
 }
 
+function createRuler(){
+    let parent = document.getElementById('Ruler'); // Search a area to insert a ruler.
+    const unitOfRuler = 1000;
+    const tableDOM = document.getElementById('main').getBoundingClientRect();
+    switch(displayDirection){
+        case 'landscape':
+            const tableWidth = tableDOM.width;
+            break;
+        case 'portrait':
+            const tableWidth = tableDOM.height;
+            break;
+        default:
+            break;
+    }
+    const timesToWrite = unitOfRuler / unitOfRuler;
+
+    for let i = 0; i < timesToWrite; i++ (){
+        let freq = i * unitOfRuler;
+        let box = document.createElement('div'); // Create a element of a box.
+        parent.appendChild(box);
+
+        box.classList.add('ruler'); // Class name of air band boxes.
+        box.innerText = freq + '[MHz]';
+
+        switch(displayDirection){
+            case 'landscape':
+                box.style.left = freq + 'px';
+                break;
+            case 'portrait':
+                cbox.style.top = freq + 'px';
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 async function main(){ // Main function.
     detectDisplayDirection();
 
     await createBandTable();
 
-    setBoxStyleAtCSS();
+    await setBoxStyleAtCSS();
+
+    createRuler();
 }
 
 document.onload = main(); // Fire main() after loaded whole of the HTML document.
