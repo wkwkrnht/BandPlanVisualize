@@ -65,6 +65,7 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
 
     if(up > tableAreaSize){ // Expand value to note actual this page size.
         tableAreaSize = up;
+        console.log(tableAreaSize);
     }
 }
 
