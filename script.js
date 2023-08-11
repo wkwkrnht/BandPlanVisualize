@@ -67,13 +67,10 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
 
 async function refreshTableAreaSize( up = 0 ){ // Expand value to note actual this page size.
     up = parseFloat(up);
-    console.log('before');
-    console.log(tableAreaSize);
+
     if(up > tableAreaSize){
         tableAreaSize = up;
     }
-    console.log('after');
-    console.log(tableAreaSize);
 }
 
 async function createBandTable( section = '' ){ // Create Boxes to each air bands from a dataset.
@@ -212,7 +209,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                         let d1 = targets[j].getBoundingClientRect(); // DOM proparty of the air band.
                         let d2 = targets[k].getBoundingClientRect(); // DOM proparty of others.
 
-                        if((d1.top > d2.top && d1.bottom < d2.top) || (d1.top > d2.bottom && d1.bottom < d2.bottom)){
+                        if((d1.top < d2.top && d1.bottom > d2.top) || (d1.top < d2.bottom && d1.bottom > d2.bottom)){
                             number++;
                         }
                     }
