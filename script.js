@@ -154,8 +154,8 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 targets[j].style.top = topValue;
             }
             break;
-        case 'portrait': .
-            for( let i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top
+        case 'portrait':
+            for( let i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
                 targets[i].style.top = targets[i].dataset.down + 'px';
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLength + 'px';
