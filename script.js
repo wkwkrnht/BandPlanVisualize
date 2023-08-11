@@ -11,7 +11,7 @@ function detectDisplayDirection(){ // For set styles on elements, detect which d
     }
 }
 
-function calcAmountOfMove(baseline = 0, unit = , times = 0){
+function calcAmountOfMove(baseline = 0, unit = , times = 0){ // Calculating the DOM will move how much.
     return ((baseline * 0.3) + (times * unit * 1.2));
 }
 
@@ -19,7 +19,7 @@ async function getCSV( dir = '' ){ // Get a CSV file and parse into array.
     return await fetch(dir) // Get a CSV file.
     .then(
         response => {
-            return response.text();
+            return response.text(); // Parse into strings.
         }
     )
     .then(
@@ -56,8 +56,8 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
     let box = document.createElement('div'); // Create a element of a box.
     parent.appendChild(box);
 
-    box.classList.add('box');
-    box.classList.add('dataset');
+    box.classList.add('box'); // Class name of air band boxes.
+    box.classList.add(dataset); // Class name from data set.
     box.setAttribute('data-down', down); // Set a value to note start-point of a air band.
     box.setAttribute('data-width', width); // Set a value to note width of a air band.
     box.innerText = name;
@@ -82,7 +82,7 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
     upColumun = searchColumunByName(data2, 'up'),
     purposeColumun = searchColumunByName(data2, 'Purpose');
 
-    for( let i = 1; i < data1.length; i++ ){
+    for( let i = 1; i < data1.length; i++ ){ // Create air band boxes from 3GPP dataset.
         let mode = data1[i][modeColumun];
         let name = data1[i][nameColumun];
 
@@ -111,7 +111,7 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
         }
     }
 
-    for( let j = 1; j < data2.length; j++ ){
+    for( let j = 1; j < data2.length; j++ ){ // Create air band boxes from JP dataset.
         let mode = data2[j][modeColumun];
         let name = data2[j][purposeColumun];
 
@@ -124,21 +124,21 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
     let colides = [];
 
     switch(displayDirection){
-        case 'landscape': // If display is as landscape, height is fixed, width is valuable, position is set from left.
-            for( let i = 0; i < targets.length; i++ ){
+        case 'landscape':
+            for( let i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
                 targets[i].style.left = targets[i].dataset.down + 'px';
                 targets[i].style.height = fixedLength + 'px';
                 targets[i].style.width = targets[i].dataset.width + 'px';
             }
 
-            for( let j = 0; j < targets.length; j++ ){
-                let number = 0;
-                let topValue = '30vh';
+            for( let j = 0; j < targets.length; j++ ){ // Adjust air bands by moving on the direction to fix.
+                let number = 0; // Valu of counting of colision
+                let topValue = '30vh'; // Initial value of position at direction to fix.
 
-                for( let k = 0; k < targets.length; k++ ){
+                for( let k = 0; k < targets.length; k++ ){ // Count Colision from sizes of the air band box and others.
                     if( j !== k ){
-                        let d1 = targets[j].getBoundingClientRect();
-                        let d2 = targets[k].getBoundingClientRect();
+                        let d1 = targets[j].getBoundingClientRect(); // DOM proparty of the air band.
+                        let d2 = targets[k].getBoundingClientRect(); // DOM proparty of others.
 
                         if((d1.right > d2.left && d1.left < d2.left) || (d1.right > d2.right && d1.left < d2.right)){
                             number++;
@@ -146,7 +146,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                     }
                 }
 
-                if(number !== 0){
+                if(number !== 0){ // If this is hitting with someone, set the style to adjust.
                     topValue = calcAmountOfMove(windowHeight, fixedLength, number);
                     topValue = topValue.toString() + 'px';
                 }
@@ -154,20 +154,21 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 targets[j].style.top = topValue;
             }
             break;
-        case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
-            for( let i = 0; i < targets.length; i++ ){
+        case 'portrait': .
+            for( let i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top
                 targets[i].style.top = targets[i].dataset.down + 'px';
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLength + 'px';
             }
-            for( let j = 0; j < targets.length; j++ ){
-                let number = 0;
-                let leftValue = '30vw';
 
-                for( let k = 0; k < targets.length; k++ ){
+            for( let j = 0; j < targets.length; j++ ){ // Adjust air bands by moving on the direction to fix.
+                let number = 0; // Count of colision
+                let leftValue = '30vw'; // Initial value of position at fixed direction.
+
+                for( let k = 0; k < targets.length; k++ ){ // Count Colision from sizes of the air band box and others.
                     if( j !== k ){
-                        let d1 = targets[j].getBoundingClientRect();
-                        let d2 = targets[k].getBoundingClientRect();
+                        let d1 = targets[j].getBoundingClientRect(); // DOM proparty of the air band.
+                        let d2 = targets[k].getBoundingClientRect(); // DOM proparty of others.
 
                         if((d1.top > d2.top && d1.bottom < d2.top) || (d1.top > d2.bottom && d1.bottom < d2.bottom)){
                             number++;
@@ -175,7 +176,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                     }
                 }
 
-                if(number !== 0){
+                if(number !== 0){ // If this is hitting with someone, set the style to adjust.
                     leftValue = calcAmountOfMove(windowWidth, fixedLength, number);
                     leftValue = leftValue.toString() + 'px';
                 }
