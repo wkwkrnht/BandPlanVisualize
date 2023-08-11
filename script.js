@@ -118,11 +118,11 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 targets[i].style.height = fixedLength;
                 targets[i].style.width = targets[i].dataset.width + 'px';
             }
-            for( let i = 0; i < sourceElments.length; i++ ){
-                for( let j = 0; j < sourceElments.length; i++ ){
+            for( let i = 0; i < targets.length; i++ ){
+                for( let j = 0; j < targets.length; i++ ){
                     if( i !== j ){
-                        let d1 = sourceElments[i].getBoundingClientRect();
-                        let d2 = sourceElments[j].getBoundingClientRect();
+                        let d1 = targets[i].getBoundingClientRect();
+                        let d2 = targets[j].getBoundingClientRect();
                         let di = !(d1.right < d2.left || d1.left > d2.right);
 
                         if(di){
@@ -143,11 +143,11 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLength;
             }
-            for( let i = 0; i < sourceElments.length; i++ ){
-                for( let j = 0; j < sourceElments.length; i++ ){
+            for( let i = 0; i < targets.length; i++ ){
+                for( let j = 0; j < targets.length; i++ ){
                     if( i !== j ){
-                        let d1 = sourceElments[i].getBoundingClientRect();
-                        let d2 = sourceElments[j].getBoundingClientRect();
+                        let d1 = targets[i].getBoundingClientRect();
+                        let d2 = targets[j].getBoundingClientRect();
                         let di = !(d1.top > d2.bottom || d1.bottom < d2.top);
 
                         if(di){
