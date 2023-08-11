@@ -50,15 +50,7 @@ function searchColumunByName( array = [], key = ''){ // From 0 row, searching nu
     return array[0].indexOf(key);
 }
 
-async function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box of a air band.
-    if(up > tableAreaSize){ // Expand value to note actual this page size.
-        console.log('before');
-        console.log(tableAreaSize);
-        tableAreaSize = up;
-        console.log('after');
-        console.log(tableAreaSize);
-    }
-
+function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box of a air band.
     const width = up - down; // This is width set in style.
 
     let parent = document.getElementById('main'); // Search a area to insert a box.
@@ -70,6 +62,16 @@ async function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a
     box.setAttribute('data-down', down); // Set a value to note start-point of a air band.
     box.setAttribute('data-width', width); // Set a value to note width of a air band.
     box.innerText = name;
+}
+
+function refreshTableAreaSize(up = 0){
+    if(up > tableAreaSize){ // Expand value to note actual this page size.
+        console.log('before');
+        console.log(tableAreaSize);
+        tableAreaSize = up;
+        console.log('after');
+        console.log(tableAreaSize);
+    }
 }
 
 async function createBandTable( section = '' ){ // Create Boxes to each air bands from a dataset.
@@ -119,21 +121,26 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
         switch(mode){ // Detect a air band contains UL and DL by mode indicator.
             case 'FDD':
                 const nameU = name + '↑';
-                await createBox('3GPP', nameU, data1[i][ulUpColumun], data1[i][ulDownColumun]);
+                createBox('3GPP', nameU, data1[i][ulUpColumun], data1[i][ulDownColumun]);
                 const nameD = name + '↓';
-                await createBox('3GPP', nameD, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                createBox('3GPP', nameD, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                refreshTableAreaSize(data1[i][ulUpColumun]);
+                refreshTableAreaSize(data1[i][dlUpColumun]);
                 break;
             case 'SUL':
                 name = name + '↑';
-                await createBox('3GPP', name, data1[i][ulUpColumun], data1[i][ulDownColumun]);
+                createBox('3GPP', name, data1[i][ulUpColumun], data1[i][ulDownColumun]);
+                refreshTableAreaSize(data1[i][ulUpColumun]);
                 break;
             case 'TDD':
                 name = name + '↑' + '↓';
-                await createBox('3GPP', name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                createBox('3GPP', name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                refreshTableAreaSize(data1[i][dlUpColumun]);
                 break;
             case 'SDL':
                 name = name + '↓';
-                await createBox('3GPP', name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                createBox('3GPP', name, data1[i][dlUpColumun], data1[i][dlDownColumun]);
+                refreshTableAreaSize(data1[i][dlUpColumun]);
                 break;
             default: // Error handling which is missing mode.
                 console.log('Mode has not set.');
@@ -142,19 +149,27 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
     }
 
     for( let j = 1; j < data2.length; j++ ){ // Create air band boxes from JP dataset.
-        await createBox('JP', data2[j][jpPurposeColumun], data2[j][jpUpColumun], data2[j][jpDownColumun]);
+        createBox('JP', data2[j][jpPurposeColumun], data2[j][jpUpColumun], data2[j][jpDownColumun]);
+
+        refreshTableAreaSize(data2[j][jpUpColumun]);
     }
 
     for( let k = 1; k < data3.length; k++ ){ // Create air band boxes from ISM dataset.
-        await createBox('ISM', data3[k][ismNameColumun], data3[k][ismUpColumun], data3[k][ismDownColumun]);
+        createBox('ISM', data3[k][ismNameColumun], data3[k][ismUpColumun], data3[k][ismDownColumun]);
+
+        refreshTableAreaSize(data3[k][ismUpColumun]);
     }
 
     for( let l = 1; l < data4.length; l++ ){ // Create air band boxes from ETSI dataset.
-        await createBox('ETSI', data4[l][etsiNameColumun], data4[l][etsiUpColumun], data4[l][etsiDownColumun]);
+        createBox('ETSI', data4[l][etsiNameColumun], data4[l][etsiUpColumun], data4[l][etsiDownColumun]);
+
+        refreshTableAreaSize(data4[l][etsiUpColumun]);
     }
 
     for( let m = 1; m < data5.length; m++ ){ // Create air band boxes from JP dataset.
-        await createBox('WiFi', data5[m][wifiNameColumun], data5[m][wifiUpColumun], data5[m][wifiDownColumun]);
+        createBox('WiFi', data5[m][wifiNameColumun], data5[m][wifiUpColumun], data5[m][wifiDownColumun]);
+
+        refreshTableAreaSize(data5[m][wifiUpColumun]);
     }
 }
 
