@@ -132,8 +132,8 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                     }
                 }
             }
-            for( let i = 0; i < targets.length; i++ ){
-                targets[i][0].style.top = targets[i][0].style.top + ((fixedLength * targets[i][1]) / 2) + 'px';
+            for( let i = 0; i < colides.length; i++ ){
+                colides[i][0].style.top = colides[i][0].style.top + ((fixedLength * colides[i][1]) / 2) + 'px';
             }
             break;
         case 'portrait': // If display is as portrait, width is fixed, height is valuable, position is set from top.
