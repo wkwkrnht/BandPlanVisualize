@@ -124,7 +124,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                         let d1 = targets[j].getBoundingClientRect();
                         let d2 = targets[k].getBoundingClientRect();
 
-                        if(d1.right > d2.left && d1.left < d2.right){
+                        if((d1.right > d2.left || d1.left < d2.right)){
                             number++;
                         }
                     }
@@ -151,7 +151,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                         let d1 = targets[j].getBoundingClientRect();
                         let d2 = targets[k].getBoundingClientRect();
 
-                        if(d1.top < d2.bottom && d1.bottom > d2.top){
+                        if(d1.top < d2.bottom || d1.bottom > d2.top){
                             number++;
                         }
                     }
