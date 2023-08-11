@@ -1,7 +1,7 @@
 const windowWidth = document.documentElement.clientWidth; // Constructor of the window width.
 const windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
 const fixedLength = 60; // Constructor of fixed part of box size.
-const headerHeight = 0.12 * windowHeight;
+const headerHeight = 0.13 * windowHeight;
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 let tableAreaSize = 0; // Value to note actual this page size.
 
