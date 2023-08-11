@@ -78,9 +78,30 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
     // Loading JP dataset.
     data2 = await getCSV('/BandPlanVisualize/JPBandPlan.csv'),
     // Searching number of columun of each elements
-    downColumun = searchColumunByName(data2, 'down'),
-    upColumun = searchColumunByName(data2, 'up'),
-    purposeColumun = searchColumunByName(data2, 'Purpose');
+    jpDownColumun = searchColumunByName(data2, 'down'),
+    jpUpColumun = searchColumunByName(data2, 'up'),
+    jpPurposeColumun = searchColumunByName(data2, 'Purpose'),
+
+    // Loading ISM dataset.
+    data3 = await getCSV('/BandPlanVisualize/ISMBandPlan.csv'),
+    // Searching number of columun of each elements
+    ismDownColumun = searchColumunByName(data3, 'down'),
+    ismUpColumun = searchColumunByName(data3, 'up'),
+    ismNameColumun = searchColumunByName(data3, 'Name'),
+
+    // Loading ETSI dataset.
+    data4 = await getCSV('/BandPlanVisualize/ETSIBandPlan.csv'),
+    // Searching number of columun of each elements
+    etsiDownColumun = searchColumunByName(data4, 'down'),
+    etsiUpColumun = searchColumunByName(data4, 'up'),
+    etsiNameColumun = searchColumunByName(data4, 'Name'),
+
+    // Loading Wi-Fi dataset.
+    data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv'),
+    // Searching number of columun of each elements
+    wifiDownColumun = searchColumunByName(data5, 'down'),
+    wifiUpColumun = searchColumunByName(data5, 'up'),
+    wifiNameColumun = searchColumunByName(data5, 'Name');
 
     for( let i = 1; i < data1.length; i++ ){ // Create air band boxes from 3GPP dataset.
         let mode = data1[i][modeColumun];
@@ -112,10 +133,19 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
     }
 
     for( let j = 1; j < data2.length; j++ ){ // Create air band boxes from JP dataset.
-        let mode = data2[j][modeColumun];
-        let name = data2[j][purposeColumun];
+        createBox('JP', data2[j][jpPurposeColumun], data2[j][jpUpColumun], data2[j][jpDownColumun]);
+    }
 
-        createBox('JP', name, data2[j][upColumun], data2[j][downColumun]);
+    for( let k = 1; k < data3.length; k++ ){ // Create air band boxes from ISM dataset.
+        createBox('ISM', data3[k][ismPurposeColumun], data3[k][ismUpColumun], data3[k][ismDownColumun]);
+    }
+
+    for( let l = 1; l < data4.length; l++ ){ // Create air band boxes from ETSI dataset.
+        createBox('ETSI', data4[l][etsiPurposeColumun], data4[l][etsiUpColumun], data4[l][etsiDownColumun]);
+    }
+
+    for( let m = 1; m < data5.length; m++ ){ // Create air band boxes from JP dataset.
+        createBox('WiFi', data5[m][wifiPurposeColumun], data5[m][wifiUpColumun], data5[m][wifiDownColumun]);
     }
 }
 

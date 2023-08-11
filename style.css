@@ -1,7 +1,10 @@
 :root{
     --black:#333;
+    --dark-gray:#eee;
+    --right-gray:#bbb;
     --white:#fff;
     --red:red;
+    --right-blue:#03a9f4;
 
     --base-vertical-rhythm:2vh;
     --header-height:10vh;
@@ -20,6 +23,8 @@ header,
 
 body{
     margin:0;
+    overflow-x:scroll;
+    overflow-y:scroll;
 }
 
 header{
@@ -29,11 +34,6 @@ header{
     padding:2em;
     text-align:center;
     width:100%;
-}
-
-main{
-    overflow-x:scroll;
-    overflow-y:scroll;
 }
 
 .box{
@@ -46,6 +46,18 @@ main{
     vertical-align:middle;
 }
 
-.JP .box{
+.JP.box{
     background-color:var(--red);
+}
+
+.ISM.box{
+    background-color:var(--dark-gray);
+}
+
+.ETSI.box{
+    background-color:var(--right-gray);
+}
+
+.WiFi.box{
+    background-color:var(--right-blue);
 }
