@@ -66,6 +66,7 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
 }
 
 async function refreshTableAreaSize( up = 0 ){ // Expand value to note actual this page size.
+    up = parseFloat(up);
     console.log('before');
     console.log(tableAreaSize);
     if(up > tableAreaSize){
