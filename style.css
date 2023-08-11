@@ -6,6 +6,10 @@
     --base-vertical-rhythm:2vh;
     --header-height:10vh;
     --fixed-length:60px;
+
+    font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif;
+    font-feature-settings:'pkna' 1;
+    scroll-behavior:smooth;
 }
 
 header,
@@ -27,8 +31,14 @@ header{
     width:100%;
 }
 
+main{
+    overflow-x:scroll;
+    overflow-y:scroll;
+}
+
 .box{
     box-sizing:border-box;
+    font-weight:bold;
     margin:0;
     position:absolute;
     padding:0;
@@ -38,4 +48,9 @@ header{
 
 #JP .box{
     background-color:var(--red);
+}
+
+footer{
+    height:var(--header-height);
+    overflow-x:scroll;
 }

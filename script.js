@@ -100,6 +100,18 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
             }
             break;
         case 'JP':
+            const data = await getCSV('/BandPlanVisualize/JPBandPlan.csv'), // Loading dataset.
+            // Searching number of columun of each elements
+            downColumun = searchColumunByName(data, 'down'),
+            upColumun = searchColumunByName(data, 'up'),
+            purposeColumun = searchColumunByName(data, 'Purpose');
+
+            for( let i = 1; i < data.length; i++ ){
+                let mode = data[i][modeColumun];
+                let name = data[i][purposeColumun];
+
+                createBox(section, name, data[i][upColumun], data[i][downColumun]);
+            }
             break;
         default:
             break;
@@ -134,7 +146,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 }
 
                 if(number !== 0){
-                    topValue = ((windowHeight * 0.3) + (fixedLength * number));
+                    topValue = ((windowHeight * 0.3) + (fixedLength * number * 1.2));
                     topValue = topValue.toString() + 'px';
                 }
 
@@ -163,7 +175,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
                 }
 
                 if(number !== 0){
-                    leftValue = ((windowWidth * 0.3) + (fixedLength * number));
+                    leftValue = ((windowWidth * 0.3) + (fixedLength * number * 1.2));
                     leftValue = leftValue.toString() + 'px';
                 }
 
