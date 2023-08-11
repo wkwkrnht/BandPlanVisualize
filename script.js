@@ -107,13 +107,11 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
         }
     }
 
-    const
+    for( let j = 1; j < data2.length; j++ ){
+        let mode = data2[j][modeColumun];
+        let name = data2[j][purposeColumun];
 
-    for( let i = 1; i < data2.length; i++ ){
-        let mode = data2[i][modeColumun];
-        let name = data2[i][purposeColumun];
-
-        createBox(section, name, data2[i][upColumun], data2[i][downColumun]);
+        createBox(section, name, data2[j][upColumun], data2[j][downColumun]);
     }
 }
 
