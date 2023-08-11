@@ -2,6 +2,7 @@ const windowWidth = document.documentElement.clientWidth; // Constructor of the 
 const windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
 const fixedLength = 60; // Constructor of fixed part of box size.
 let displayDirection = ''; // Variable for note which direction on the display is wider.
+let tableAreaSize = 0; // Value to note actual this page size.
 
 function detectDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
     if(windowWidth > windowHeight){
@@ -61,6 +62,10 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
     box.setAttribute('data-down', down); // Set a value to note start-point of a air band.
     box.setAttribute('data-width', width); // Set a value to note width of a air band.
     box.innerText = name;
+
+    if(up > tableAreaSize){ // Expand value to note actual this page size.
+        tableAreaSize = up;
+    }
 }
 
 async function createBandTable( section = '' ){ // Create Boxes to each air bands from a dataset.
@@ -222,20 +227,6 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
 function createRuler(){
     let parent = document.getElementById('main'); // Search a area to insert the ruler.
     const unitOfRuler = 1000; // Unit size of the ruler.
-    const tableDOM = parent.getBoundingClientRect();
-    let tableAreaSize = 0;
-    switch(displayDirection){ // Measure How long this table finally.
-        case 'landscape':
-            tableAreaSize = tableDOM.width;
-            console.log(tableAreaSize);
-            console.log(windowWidth);
-            break;
-        case 'portrait':
-            tableAreaSize = tableDOM.height;
-            break;
-        default:
-            break;
-    }
     const timesToWrite = tableAreaSize / unitOfRuler;
 
     for( let i = 0; i < timesToWrite; i++ ){
