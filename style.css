@@ -46,11 +46,9 @@ main{
     vertical-align:middle;
 }
 
-#JP .box{
+.JP .box{
     background-color:var(--red);
 }
 
 footer{
-    height:var(--header-height);
-    overflow-x:scroll;
 }
