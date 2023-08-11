@@ -65,14 +65,14 @@ function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box o
     box.innerText = name;
 }
 
-async function refreshTableAreaSize(up = 0){ // Expand value to note actual this page size.
+async function refreshTableAreaSize( up = 0 ){ // Expand value to note actual this page size.
+    console.log('before');
+    console.log(tableAreaSize);
     if(up > tableAreaSize){
-        console.log('before');
-        console.log(tableAreaSize);
         tableAreaSize = up;
-        console.log('after');
-        console.log(tableAreaSize);
     }
+    console.log('after');
+    console.log(tableAreaSize);
 }
 
 async function createBandTable( section = '' ){ // Create Boxes to each air bands from a dataset.
@@ -196,7 +196,8 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
             break;
         case 'portrait':
             for( let i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
-                targets[i].style.top = (headerHeight + targets[i].dataset.down) + 'px';
+                let topValue = headerHeight + targets[i].dataset.down;
+                targets[i].style.top = topValue + 'px';
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLength + 'px';
             }
@@ -250,9 +251,10 @@ function createRuler(){
                 box.style.top = '20vh';
                 break;
             case 'portrait':
+                freq = headerHeight + freq;
                 box.style.height = '1000px';
                 box.style.width = fixedLength + 'px';
-                box.style.top = (headerHeight + freq) + 'px';
+                box.style.top = freq + 'px';
                 box.style.left = '0';
                 break;
             default:
