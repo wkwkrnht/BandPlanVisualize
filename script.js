@@ -82,12 +82,12 @@ async function createBandElements( section = '', dataset = []){
             ulDownColumun = searchColumunByName(dataset, 'ULdown'),
             dlUpColumun = searchColumunByName(dataset, 'DLup'),
             dlDownColumun = searchColumunByName(dataset, 'DLdown'),
-            nameColumun = searchColumunByName(dataset, 'Name'),
+            cellularNameColumun = searchColumunByName(dataset, 'Name'),
             modeColumun = searchColumunByName(dataset, 'Mode');
 
             for( let i = 1; i < dataset.length; i++ ){ // Create air band boxes from 3GPP dataset.
                 let mode = dataset[i][modeColumun];
-                let name = dataset[i][nameColumun];
+                let name = dataset[i][cellularNameColumun];
 
                 if(mode !== 'SUL'){
                     const nameD = name + '↓';
