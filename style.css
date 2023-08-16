@@ -56,11 +56,11 @@ header{
 }
 
 .ISM.box{
-    background-color:var(--dark-gray);
+    background-color:var(--black);
 }
 
 .ETSI.box{
-    background-color:var(--right-gray);
+    background-color:var(--black);
 }
 
 .WiFi.box{

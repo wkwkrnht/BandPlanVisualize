@@ -1,6 +1,7 @@
 const windowWidth = document.documentElement.clientWidth; // Constructor of the window width.
 const windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
 const fixedLength = 60; // Constructor of fixed part of box size.
+const fixedLengthOfStyle = fixedLength + 'px'; // CSS text for fixed part of box size.
 const headerHeight = 0.13 * windowHeight;
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 let tableAreaSize = 0; // Value to note actual this page size.
@@ -165,7 +166,7 @@ function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
         case 'landscape':
             for( let i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
                 targets[i].style.left = targets[i].dataset.down + 'px';
-                targets[i].style.height = fixedLength + 'px';
+                targets[i].style.height = fixedLengthOfStyle;
                 targets[i].style.width = targets[i].dataset.width + 'px';
             }
 
@@ -232,6 +233,8 @@ function createRuler(){
     let parent = document.getElementById('main'); // Search a area to insert the ruler.
     const unitOfRuler = 1000; // Unit size of the ruler.
     const timesToWrite = tableAreaSize / unitOfRuler;
+    const unitOfRulerStyle = unitOfRuler + 'px'; // CSS text for unit of ruler.
+    const
 
     for( let i = 0; i < timesToWrite; i++ ){
         let freq = i * unitOfRuler;
@@ -243,15 +246,15 @@ function createRuler(){
 
         switch(displayDirection){ // Allocate this box at the point.
             case 'landscape':
-                box.style.height = fixedLength + 'px';
-                box.style.width = '1000px';
+                box.style.height = fixedLengthOfStyle;
+                box.style.width = unitOfRulerStyle;
                 box.style.left = freq + 'px';
                 box.style.top = '20vh';
                 break;
             case 'portrait':
                 freq = headerHeight + freq;
-                box.style.height = '1000px';
-                box.style.width = fixedLength + 'px';
+                box.style.height = unitOfRulerStyle;
+                box.style.width = fixedLengthOfStyle;
                 box.style.top = freq + 'px';
                 box.style.left = '0';
                 break;
