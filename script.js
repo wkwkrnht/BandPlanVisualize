@@ -1,6 +1,7 @@
 const windowWidth = document.documentElement.clientWidth; // Constructor of the window width.
 const windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
 const fixedLength = 60; // Constructor of fixed part of box size.
+const fixedLengthToStyle = fixedLength.toString() + 'px';
 const headerHeight = 0.13 * windowHeight;
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 let tableAreaSize = 0; // Value to note actual this page size.
@@ -73,47 +74,110 @@ async function refreshTableAreaSize( up = 0 ){ // Expand value to note actual th
     }
 }
 
-async function createBandTable( section = '' ){ // Create Boxes to each air bands from a dataset.
+async function createBandElements( section = '', dataset = []){
+    switch(section){ // Allocate this box at the point.
+        case '3GPP':
+            const
+            ulUpColumun = searchColumunByName(dataset, 'ULup'),
+            ulDownColumun = searchColumunByName(dataset, 'ULdown'),
+            dlUpColumun = searchColumunByName(dataset, 'DLup'),
+            dlDownColumun = searchColumunByName(dataset, 'DLdown'),
+            nameColumun = searchColumunByName(dataset, 'Name'),
+            modeColumun = searchColumunByName(dataset, 'Mode');
+
+            for( let i = 1; i < dataset.length; i++ ){ // Create air band boxes from 3GPP dataset.
+                let mode = dataset[i][modeColumun];
+                let name = dataset[i][nameColumun];
+
+                if(mode !== 'SUL'){
+                    const nameD = name + '↓';
+
+                    refreshTableAreaSize(dataset[i][dlUpColumun]);
+
+                    createBox('3GPP', nameD, dataset[i][dlUpColumun], dataset[i][dlDownColumun]);
+                }
+
+                if((mode === 'SUL') || (mode === 'FDD')){
+                    const nameU = name + '↑';
+
+                    refreshTableAreaSize(dataset[i][ulUpColumun]);
+
+                    createBox('3GPP', nameU, dataset[i][ulUpColumun], dataset[i][ulDownColumun]);
+                }
+            }
+            break;
+        case 'JP':
+            const
+            jpDownColumun = searchColumunByName(dataset, 'down'),
+            jpUpColumun = searchColumunByName(dataset, 'up'),
+            jpPurposeColumun = searchColumunByName(dataset, 'Purpose');
+
+            for( let j = 1; j < dataset.length; j++ ){ // Create air band boxes from JP dataset.
+                refreshTableAreaSize(dataset[j][jpUpColumun]);
+
+                createBox('JP', dataset[j][jpPurposeColumun], dataset[j][jpUpColumun], dataset[j][jpDownColumun]);
+            }
+            break;
+        case 'ISM':
+        case 'ETSI':
+        case 'WiFi':
+            const
+            downColumun = searchColumunByName(dataset, 'Down'),
+            upColumun = searchColumunByName(dataset, 'Up'),
+            nameColumun = searchColumunByName(dataset, 'Name');
+
+            for( let k = 1; k < dataset.length; k++ ){ // Create air band boxes from ISM dataset.
+                refreshTableAreaSize(dataset[k][upColumun]);
+
+                createBox(section, dataset[k][nameColumun], dataset[k][upColumun], dataset[k][downColumun]);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+async function createBandTable(){ // Create Boxes to each air bands from a dataset.
     const
     // Loading 3GPP dataset.
     data1 = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv'),
     // Searching number of columun of each elements
-    ulUpColumun = searchColumunByName(data1, 'ULup'),
+    /*ulUpColumun = searchColumunByName(data1, 'ULup'),
     ulDownColumun = searchColumunByName(data1, 'ULdown'),
     dlUpColumun = searchColumunByName(data1, 'DLup'),
     dlDownColumun = searchColumunByName(data1, 'DLdown'),
     nameColumun = searchColumunByName(data1, 'Name'),
-    modeColumun = searchColumunByName(data1, 'Mode'),
+    modeColumun = searchColumunByName(data1, 'Mode'),*/
 
     // Loading JP dataset.
     data2 = await getCSV('/BandPlanVisualize/JPBandPlan.csv'),
     // Searching number of columun of each elements
-    jpDownColumun = searchColumunByName(data2, 'down'),
+    /*jpDownColumun = searchColumunByName(data2, 'down'),
     jpUpColumun = searchColumunByName(data2, 'up'),
-    jpPurposeColumun = searchColumunByName(data2, 'Purpose'),
+    jpPurposeColumun = searchColumunByName(data2, 'Purpose'),*/
 
     // Loading ISM dataset.
     data3 = await getCSV('/BandPlanVisualize/ISMBandPlan.csv'),
     // Searching number of columun of each elements
-    ismDownColumun = searchColumunByName(data3, 'Down'),
+    /*ismDownColumun = searchColumunByName(data3, 'Down'),
     ismUpColumun = searchColumunByName(data3, 'Up'),
-    ismNameColumun = searchColumunByName(data3, 'Name'),
+    ismNameColumun = searchColumunByName(data3, 'Name'),*/
 
     // Loading ETSI dataset.
     data4 = await getCSV('/BandPlanVisualize/ETSIBandPlan.csv'),
     // Searching number of columun of each elements
-    etsiDownColumun = searchColumunByName(data4, 'Down'),
+    /*etsiDownColumun = searchColumunByName(data4, 'Down'),
     etsiUpColumun = searchColumunByName(data4, 'Up'),
-    etsiNameColumun = searchColumunByName(data4, 'Name'),
+    etsiNameColumun = searchColumunByName(data4, 'Name'),*/
 
     // Loading Wi-Fi dataset.
-    data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv'),
+    data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv');//,
     // Searching number of columun of each elements
-    wifiDownColumun = searchColumunByName(data5, 'Down'),
+    /*wifiDownColumun = searchColumunByName(data5, 'Down'),
     wifiUpColumun = searchColumunByName(data5, 'Up'),
-    wifiNameColumun = searchColumunByName(data5, 'Name');
+    wifiNameColumun = searchColumunByName(data5, 'Name');*/
 
-    for( let i = 1; i < data1.length; i++ ){ // Create air band boxes from 3GPP dataset.
+    /*for( let i = 1; i < data1.length; i++ ){ // Create air band boxes from 3GPP dataset.
         let mode = data1[i][modeColumun];
         let name = data1[i][nameColumun];
 
@@ -154,18 +218,23 @@ async function createBandTable( section = '' ){ // Create Boxes to each air band
         createBox('WiFi', data5[m][wifiNameColumun], data5[m][wifiUpColumun], data5[m][wifiDownColumun]);
 
         await refreshTableAreaSize(data5[m][wifiUpColumun]);
-    }
+    }*/
+
+    createBandElements('3GPP', data1);
+    createBandElements('JP', data2);
+    createBandElements('ISM', data3);
+    createBandElements('ETSI', data4);
+    createBandElements('WiFi', data5);
 }
 
 async function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
     const targets = document.getElementsByClassName('box'); // List of air band boxes
-    let colides = [];
 
     switch(displayDirection){
         case 'landscape':
             for( let i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
                 targets[i].style.left = targets[i].dataset.down + 'px';
-                targets[i].style.height = fixedLength + 'px';
+                targets[i].style.height = fixedLengthToStyle;
                 targets[i].style.width = targets[i].dataset.width + 'px';
             }
 
@@ -197,7 +266,7 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
                 let topValue = headerHeight + parseFloat(targets[i].dataset.down);
                 targets[i].style.top = topValue + 'px';
                 targets[i].style.height = targets[i].dataset.width + 'px';
-                targets[i].style.width = fixedLength + 'px';
+                targets[i].style.width = fixedLengthToStyle;
             }
 
             for( let j = 0; j < targets.length; j++ ){ // Adjust air bands by moving on the direction to fix.
@@ -232,7 +301,7 @@ async function createRuler(){
     let parent = document.getElementById('main'); // Search a area to insert the ruler.
     const unitOfRuler = 1000; // Unit size of the ruler.
     const timesToWrite = tableAreaSize / unitOfRuler;
-
+    const unitOfRulerToStyle = unitOfRuler.toString() + 'px';
 
     switch(displayDirection){ // Allocate this box at the point.
         case 'landscape':
@@ -243,8 +312,8 @@ async function createRuler(){
 
                 box.classList.add('ruler'); // Class name of ruler.
                 box.innerText = freq + '[kHz]'; // Insert the label of this.
-                box.style.height = fixedLength + 'px';
-                box.style.width = unitOfRuler + 'px';
+                box.style.height = fixedLengthToStyle;
+                box.style.width = unitOfRulerToStyle;
                 box.style.left = freq + 'px';
                 box.style.top = '20vh';
             }
@@ -258,8 +327,8 @@ async function createRuler(){
                 box.classList.add('ruler'); // Class name of ruler.
                 box.innerText = freq + '[kHz]'; // Insert the label of this.
                 freq = headerHeight + freq;
-                box.style.height = unitOfRuler + 'px';
-                box.style.width = fixedLength + 'px';
+                box.style.height = unitOfRulerToStyle;
+                box.style.width = fixedLengthToStyle;
                 box.style.top = freq + 'px';
                 box.style.left = '0';
             }
