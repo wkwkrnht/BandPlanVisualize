@@ -234,7 +234,6 @@ function createRuler(){
     const unitOfRuler = 1000; // Unit size of the ruler.
     const timesToWrite = tableAreaSize / unitOfRuler;
     const unitOfRulerStyle = unitOfRuler + 'px'; // CSS text for unit of ruler.
-    const
 
     for( let i = 0; i < timesToWrite; i++ ){
         let freq = i * unitOfRuler;
