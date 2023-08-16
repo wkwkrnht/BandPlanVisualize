@@ -343,8 +343,6 @@ function finishCreateElements(){
 }
 
 async function main(){ // Main function.
-    await detectDisplayDirection();
-
     await createBandTable();
 
     setBoxStyleAtCSS();
@@ -354,4 +352,5 @@ async function main(){ // Main function.
     //finishCreateElements();
 }
 
-document.onload = main(); // Fire main() after loaded whole of the HTML document.
+window.addEventListener('resize', detectDisplayDirection()); //
+window.addEventListener('load', main()); // Fire main() after loaded whole of the HTML document.
