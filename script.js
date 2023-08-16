@@ -239,7 +239,7 @@ function createRuler(){
         parent.appendChild(box);
 
         box.classList.add('ruler'); // Class name of ruler.
-        box.innerText = freq + '[MHz]'; // Insert the label of this.
+        box.innerText = freq + '[kHz]'; // Insert the label of this.
 
         switch(displayDirection){ // Allocate this box at the point.
             case 'landscape':
