@@ -253,6 +253,8 @@ async function createRuler(){
                 box.style.width = unitOfRulerToStyle;
                 box.style.left = freq + 'px';
                 box.style.top = '20vh';
+
+                reservedDOM.appendChild(box);  // Save a box at List of DOM.
             }
             break;
         case 'portrait':
