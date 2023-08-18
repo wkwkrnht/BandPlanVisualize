@@ -43,9 +43,11 @@ async function getCSV( dir = '' ){ // Get a CSV file and parse into array.
 
 function convertCSVtoArray( text = '' ){ // Parse a CSV file input as strings into array.
     let result = []; // The array to save the result.
-    const tmp = text.split('\n'); // Newline is marked as indicator, to split by row.
+    const
+    tmp = text.split('\n'), // Newline is marked as indicator, to split by row.
+    length = tmp.length;
 
-    for( let i = 0; i < tmp.length; i++ ){ // Kanma is marked as indicator, to split by columun.
+    for( let i = 0; i < length; i++ ){ // Kanma is marked as indicator, to split by columun.
         result[i] = tmp[i].split(',');
     }
 
@@ -165,74 +167,69 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
     targets = document.getElementsByClassName('box'), // List of air band boxes
     length = targets.length;
 
-    switch(displayDirection){
-        case 'landscape':
-            for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
-                const
-                d1P = targets[i].dataset.down,
-                d1W = targets[i].dataset.width;
-                let
-                number = 0, // Value of counting of colision
-                topValue = '30vh'; // Initial value of position at direction to fix.
+    if( displayDirection === 'landscape' ){
+        for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
+            const
+            d1P = targets[i].dataset.down,
+            d1W = targets[i].dataset.width;
+            let
+            number = 0, // Value of counting of colision
+            topValue = '30vh'; // Initial value of position at direction to fix.
 
-                for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
-                    if( i !== j ){
-                        const
-                        d2P = targets[j].dataset.down, // DOM proparty of others.
-                        d2W = targets[j].dataset.width; // DOM proparty of others.
+            for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
+                if( i !== j ){
+                    const
+                    d2P = targets[j].dataset.down, // DOM proparty of others.
+                    d2W = targets[j].dataset.width; // DOM proparty of others.
 
-                        if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) ){
-                            number++;
-                        }
+                    if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) ){
+                        number++;
                     }
                 }
-
-                if(number !== 0){ // If this is hitting with someone, set the style to adjust the box at fixed direction.
-                    topValue = calcAmountOfMove(windowHeight, fixedLength, number);
-                    topValue = topValue.toString() + 'px';
-                }
-
-                targets[i].style.top = topValue;
-                targets[i].style.left = d1P + 'px';
-                targets[i].style.height = fixedLengthToStyle;
-                targets[i].style.width = d1W + 'px';
             }
-            break;
-        case 'portrait':
-            for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
-                const
-                d1P = targets[i].dataset.down,
-                d1W = targets[i].dataset.width;
-                let
-                topValue = headerHeight + parseFloat(d1P),
-                number = 0, // Count of colision
-                leftValue = '30vw'; // Initial value of position at fixed direction.
 
-                for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
-                    if( i !== j ){
-                        const
-                        d2P = targets[j].dataset.down, // DOM proparty of others.
-                        d2W = targets[j].dataset.width; // DOM proparty of others.
+            if(number !== 0){ // If this is hitting with someone, set the style to adjust the box at fixed direction.
+                topValue = calcAmountOfMove(windowHeight, fixedLength, number);
+                topValue = topValue.toString() + 'px';
+            }
 
-                        if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) ){
-                            number++;
-                        }
+            targets[i].style.top = topValue;
+            targets[i].style.left = d1P + 'px';
+            targets[i].style.height = fixedLengthToStyle;
+            targets[i].style.width = d1W + 'px';
+        }
+    }else if( displayDirection === 'portrait' ){
+        for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
+            const
+            d1P = targets[i].dataset.down,
+            d1W = targets[i].dataset.width;
+            let
+            topValue = headerHeight + parseFloat(d1P),
+            number = 0, // Count of colision
+            leftValue = '30vw'; // Initial value of position at fixed direction.
+
+            for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
+                if( i !== j ){
+                    const
+                    d2P = targets[j].dataset.down, // DOM proparty of others.
+                    d2W = targets[j].dataset.width; // DOM proparty of others.
+
+                    if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) ){
+                        number++;
                     }
                 }
-
-                if(number !== 0){ // If this is hitting with someone, set the style to adjust.
-                    leftValue = calcAmountOfMove(windowWidth, fixedLength, number);
-                    leftValue = leftValue.toString() + 'px';
-                }
-
-                targets[i].style.top = topValue + 'px';
-                targets[i].style.left = leftValue;
-                targets[i].style.height = targets[i].dataset.width + 'px';
-                targets[i].style.width = fixedLengthToStyle;
             }
-            break;
-        default:
-            break;
+
+            if(number !== 0){ // If this is hitting with someone, set the style to adjust.
+                leftValue = calcAmountOfMove(windowWidth, fixedLength, number);
+                leftValue = leftValue.toString() + 'px';
+            }
+
+            targets[i].style.top = topValue + 'px';
+            targets[i].style.left = leftValue;
+            targets[i].style.height = targets[i].dataset.width + 'px';
+            targets[i].style.width = fixedLengthToStyle;
+        }
     }
 }
 
@@ -242,42 +239,37 @@ async function createRuler(){
     timesToWrite = tableAreaSize / unitOfRuler,
     unitOfRulerToStyle = unitOfRuler.toString() + 'px';
 
-    switch(displayDirection){ // Allocate this box at the point.
-        case 'landscape':
-            for( let i = 0; i < timesToWrite; i++ ){
-                let
-                freq = i * unitOfRuler,
-                box = document.createElement('div'); // Create a element of a box.
+    if( displayDirection === 'landscape' ){
+        for( let i = 0; i < timesToWrite; i++ ){
+            let
+            freq = i * unitOfRuler,
+            box = document.createElement('div'); // Create a element of a box.
 
-                box.classList.add('ruler'); // Class name of ruler.
-                box.innerText = freq + '[kHz]'; // Insert the label of this.
-                box.style.height = fixedLengthToStyle;
-                box.style.width = unitOfRulerToStyle;
-                box.style.left = freq + 'px';
-                box.style.top = '20vh';
+            box.classList.add('ruler'); // Class name of ruler.
+            box.innerText = freq + '[kHz]'; // Insert the label of this.
+            box.style.height = fixedLengthToStyle;
+            box.style.width = unitOfRulerToStyle;
+            box.style.left = freq + 'px';
+            box.style.top = '20vh';
 
-                reservedDOM.appendChild(box);  // Save a box at List of DOM.
-            }
-            break;
-        case 'portrait':
-            for( let i = 0; i < timesToWrite; i++ ){
-                let
-                freq = i * unitOfRuler,
-                box = document.createElement('div'); // Create a element of a box.
+            reservedDOM.appendChild(box);  // Save a box at List of DOM.
+        }
+    }else if( displayDirection === 'portrait' ){
+        for( let i = 0; i < timesToWrite; i++ ){
+            let
+            freq = i * unitOfRuler,
+            box = document.createElement('div'); // Create a element of a box.
 
-                box.classList.add('ruler'); // Class name of ruler.
-                box.innerText = freq + '[kHz]'; // Insert the label of this.
-                freq = headerHeight + freq;
-                box.style.height = unitOfRulerToStyle;
-                box.style.width = fixedLengthToStyle;
-                box.style.top = freq + 'px';
-                box.style.left = '0';
+            box.classList.add('ruler'); // Class name of ruler.
+            box.innerText = freq + '[kHz]'; // Insert the label of this.
+            freq = headerHeight + freq;
+            box.style.height = unitOfRulerToStyle;
+            box.style.width = fixedLengthToStyle;
+            box.style.top = freq + 'px';
+            box.style.left = '0';
 
-                reservedDOM.appendChild(box);  // Save a box at List of DOM.
-            }
-            break;
-        default:
-            break;
+            reservedDOM.appendChild(box);  // Save a box at List of DOM.
+        }
     }
 }
 
