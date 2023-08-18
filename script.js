@@ -180,7 +180,7 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
                         const d2P = targets[j].dataset.down; // DOM proparty of others.
                         const d2W = targets[j].dataset.width; // DOM proparty of others.
 
-                        if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) )){
+                        if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) ){
                             number++;
                         }
                     }
@@ -210,7 +210,7 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
                         const d2P = targets[j].dataset.down; // DOM proparty of others.
                         const d2W = targets[j].dataset.width; // DOM proparty of others.
 
-                        if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) )){
+                        if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) ){
                             number++;
                         }
                     }
