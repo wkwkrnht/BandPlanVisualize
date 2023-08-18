@@ -1,11 +1,14 @@
-const windowWidth = document.documentElement.clientWidth; // Constructor of the window width.
-const windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
-const fixedLength = 60; // Constructor of fixed part of box size.
-const fixedLengthToStyle = fixedLength.toString() + 'px';
-const headerHeight = 0.13 * windowHeight;
-let displayDirection = ''; // Variable for note which direction on the display is wider.
-let tableAreaSize = 0; // Value to note actual this page size.
-let reservedDOM = document.createDocumentFragment();
+const
+windowWidth = document.documentElement.clientWidth, // Constructor of the window width.
+windowHeight = document.documentElement.clientHeight, // Constructor of the window height.
+fixedLength = 60, // Constructor of fixed part of box size.
+fixedLengthToStyle = fixedLength.toString() + 'px',
+headerHeight = 0.13 * windowHeight;
+
+let
+displayDirection = '', // Variable for note which direction on the display is wider.
+tableAreaSize = 0, // Value to note actual this page size.
+reservedDOM = document.createDocumentFragment();
 
 function detectDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
     if(windowWidth > windowHeight){
@@ -64,10 +67,6 @@ async function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a
     box.innerText = name;
 
     reservedDOM.appendChild(box);  // Save a box at List of DOM.
-}
-async function insertBoxes(){
-    let parent = document.getElementById('main'); // Search a area to insert a box.
-    parent.appendChild(reservedDOM);
 }
 
 async function refreshTableAreaSize( up = 0 ){ // Expand value to note actual this page size.
@@ -143,7 +142,6 @@ async function createBandTable(){ // Create Boxes to each air bands from a datas
     data4 = await getCSV('/BandPlanVisualize/ETSIBandPlan.csv'), // Loading ETSI dataset.
     data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv'); // Loading Wi-Fi dataset.
 
-
     if( data1 !== undefined ){
         createBandElements('3GPP', data1);
     }
@@ -159,8 +157,6 @@ async function createBandTable(){ // Create Boxes to each air bands from a datas
     if( data5 !== undefined ){
         createBandElements('WiFi', data5);
     }
-
-    insertBoxes();
 }
 
 async function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
@@ -170,15 +166,18 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
     switch(displayDirection){
         case 'landscape':
             for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
-                const d1P = targets[i].dataset.down;
-                const d1W = targets[i].dataset.width;
-                let number = 0; // Value of counting of colision
-                let topValue = '30vh'; // Initial value of position at direction to fix.
+                const
+                d1P = targets[i].dataset.down,
+                d1W = targets[i].dataset.width;
+                let
+                number = 0, // Value of counting of colision
+                topValue = '30vh'; // Initial value of position at direction to fix.
 
                 for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
                     if( i !== j ){
-                        const d2P = targets[j].dataset.down; // DOM proparty of others.
-                        const d2W = targets[j].dataset.width; // DOM proparty of others.
+                        const
+                        d2P = targets[j].dataset.down, // DOM proparty of others.
+                        d2W = targets[j].dataset.width; // DOM proparty of others.
 
                         if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) ){
                             number++;
@@ -199,16 +198,19 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
             break;
         case 'portrait':
             for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
-                const d1P = targets[i].dataset.down;
-                const d1W = targets[i].dataset.width;
-                let topValue = headerHeight + parseFloat(d1P);
-                let number = 0; // Count of colision
-                let leftValue = '30vw'; // Initial value of position at fixed direction.
+                const
+                d1P = targets[i].dataset.down,
+                d1W = targets[i].dataset.width;
+                let
+                topValue = headerHeight + parseFloat(d1P),
+                number = 0, // Count of colision
+                leftValue = '30vw'; // Initial value of position at fixed direction.
 
                 for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
                     if( i !== j ){
-                        const d2P = targets[j].dataset.down; // DOM proparty of others.
-                        const d2W = targets[j].dataset.width; // DOM proparty of others.
+                        const
+                        d2P = targets[j].dataset.down, // DOM proparty of others.
+                        d2W = targets[j].dataset.width; // DOM proparty of others.
 
                         if( ((d1P < d2P) && (d2P < (d1P + d1W)))  || ((d1P < (d2P + d2W)) && ((d2P + d2W) < (d1P + d1W))) ){
                             number++;
@@ -233,17 +235,17 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
 }
 
 async function createRuler(){
-    let parent = document.getElementById('main'); // Search a area to insert the ruler.
-    const unitOfRuler = 1000; // Unit size of the ruler.
-    const timesToWrite = tableAreaSize / unitOfRuler;
-    const unitOfRulerToStyle = unitOfRuler.toString() + 'px';
+    const
+    unitOfRuler = 1000, // Unit size of the ruler.
+    timesToWrite = tableAreaSize / unitOfRuler,
+    unitOfRulerToStyle = unitOfRuler.toString() + 'px';
 
     switch(displayDirection){ // Allocate this box at the point.
         case 'landscape':
             for( let i = 0; i < timesToWrite; i++ ){
-                let freq = i * unitOfRuler;
-                let box = document.createElement('div'); // Create a element of a box.
-                parent.appendChild(box);
+                let
+                freq = i * unitOfRuler,
+                box = document.createElement('div'); // Create a element of a box.
 
                 box.classList.add('ruler'); // Class name of ruler.
                 box.innerText = freq + '[kHz]'; // Insert the label of this.
@@ -255,9 +257,9 @@ async function createRuler(){
             break;
         case 'portrait':
             for( let i = 0; i < timesToWrite; i++ ){
-                let freq = i * unitOfRuler;
-                let box = document.createElement('div'); // Create a element of a box.
-                parent.appendChild(box);
+                let
+                freq = i * unitOfRuler,
+                box = document.createElement('div'); // Create a element of a box.
 
                 box.classList.add('ruler'); // Class name of ruler.
                 box.innerText = freq + '[kHz]'; // Insert the label of this.
@@ -266,6 +268,8 @@ async function createRuler(){
                 box.style.width = fixedLengthToStyle;
                 box.style.top = freq + 'px';
                 box.style.left = '0';
+
+                reservedDOM.appendChild(box);  // Save a box at List of DOM.
             }
             break;
         default:
@@ -278,11 +282,15 @@ function finishCreateElements(){
 }
 
 async function main(){ // Main function.
+    let parent = document.getElementById('main'); // Search a area to insert a box.
+
     await createBandTable();
 
-    setBoxStyleAtCSS();
+    await createRuler();
 
-    createRuler();
+    await parent.appendChild(reservedDOM);
+
+    setBoxStyleAtCSS();
 
     //finishCreateElements();
 }
