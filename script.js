@@ -5,6 +5,7 @@ const fixedLengthToStyle = fixedLength.toString() + 'px';
 const headerHeight = 0.13 * windowHeight;
 let displayDirection = ''; // Variable for note which direction on the display is wider.
 let tableAreaSize = 0; // Value to note actual this page size.
+let reservedDOM = document.createDocumentFragment();
 
 function detectDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
     if(windowWidth > windowHeight){
@@ -55,15 +56,18 @@ function searchColumunByName( array = [], key = ''){ // From 0 row, searching nu
 async function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box of a air band.
     const width = up - down; // This is width set in style.
 
-    let parent = document.getElementById('main'); // Search a area to insert a box.
     let box = document.createElement('div'); // Create a element of a box.
-    parent.appendChild(box);
-
     box.classList.add('box'); // Class name of air band boxes.
     box.classList.add(dataset); // Class name from data set.
     box.setAttribute('data-down', down); // Set a value to note start-point of a air band.
     box.setAttribute('data-width', width); // Set a value to note width of a air band.
     box.innerText = name;
+
+    reservedDOM.appendChild(box);  // Save a box at List of DOM.
+}
+async function insertBoxes(){
+    let parent = document.getElementById('main'); // Search a area to insert a box.
+    parent.appendChild(reservedDOM);
 }
 
 async function refreshTableAreaSize( up = 0 ){ // Expand value to note actual this page size.
@@ -74,157 +78,87 @@ async function refreshTableAreaSize( up = 0 ){ // Expand value to note actual th
     }
 }
 
-async function createBandElements( section = '', dataset = []){
-    switch(section){ // Allocate this box at the point.
-        case '3GPP':
-            const
-            ulUpColumun = searchColumunByName(dataset, 'ULup'),
-            ulDownColumun = searchColumunByName(dataset, 'ULdown'),
-            dlUpColumun = searchColumunByName(dataset, 'DLup'),
-            dlDownColumun = searchColumunByName(dataset, 'DLdown'),
-            cellularNameColumun = searchColumunByName(dataset, 'Name'),
-            modeColumun = searchColumunByName(dataset, 'Mode');
+async function createBandElements( section = '', dataset = []){ // Allocate this box at the point.
+    if( section === '3GPP' ){
+        const
+        ulUpColumun = searchColumunByName(dataset, 'ULup'),
+        ulDownColumun = searchColumunByName(dataset, 'ULdown'),
+        dlUpColumun = searchColumunByName(dataset, 'DLup'),
+        dlDownColumun = searchColumunByName(dataset, 'DLdown'),
+        cellularNameColumun = searchColumunByName(dataset, 'Name'),
+        modeColumun = searchColumunByName(dataset, 'Mode');
 
-            for( let i = 1; i < dataset.length; i++ ){ // Create air band boxes from 3GPP dataset.
-                let mode = dataset[i][modeColumun];
-                let name = dataset[i][cellularNameColumun];
+        for( let i = 1; i < dataset.length; i++ ){ // Create air band boxes from 3GPP dataset.
+            let mode = dataset[i][modeColumun];
+            let name = dataset[i][cellularNameColumun];
 
-                if(mode !== 'SUL'){
-                    const nameD = name + '↓';
+            if(mode !== 'SUL'){
+                const nameD = name + '↓';
 
-                    refreshTableAreaSize(dataset[i][dlUpColumun]);
+                refreshTableAreaSize(dataset[i][dlUpColumun]);
 
-                    createBox('3GPP', nameD, dataset[i][dlUpColumun], dataset[i][dlDownColumun]);
-                }
-
-                if((mode === 'SUL') || (mode === 'FDD')){
-                    const nameU = name + '↑';
-
-                    refreshTableAreaSize(dataset[i][ulUpColumun]);
-
-                    createBox('3GPP', nameU, dataset[i][ulUpColumun], dataset[i][ulDownColumun]);
-                }
+                createBox('3GPP', nameD, dataset[i][dlUpColumun], dataset[i][dlDownColumun]);
             }
-            break;
-        case 'JP':
-            const
-            jpDownColumun = searchColumunByName(dataset, 'down'),
-            jpUpColumun = searchColumunByName(dataset, 'up'),
-            jpPurposeColumun = searchColumunByName(dataset, 'Purpose');
 
-            for( let j = 1; j < dataset.length; j++ ){ // Create air band boxes from JP dataset.
-                refreshTableAreaSize(dataset[j][jpUpColumun]);
+            if((mode === 'SUL') || (mode === 'FDD')){
+                const nameU = name + '↑';
 
-                createBox('JP', dataset[j][jpPurposeColumun], dataset[j][jpUpColumun], dataset[j][jpDownColumun]);
+                refreshTableAreaSize(dataset[i][ulUpColumun]);
+
+                createBox('3GPP', nameU, dataset[i][ulUpColumun], dataset[i][ulDownColumun]);
             }
-            break;
-        case 'ISM':
-        case 'ETSI':
-        case 'WiFi':
-            const
-            downColumun = searchColumunByName(dataset, 'Down'),
-            upColumun = searchColumunByName(dataset, 'Up'),
-            nameColumun = searchColumunByName(dataset, 'Name');
+        }
+    }else if( section === 'JP' ){
+        const
+        jpDownColumun = searchColumunByName(dataset, 'down'),
+        jpUpColumun = searchColumunByName(dataset, 'up'),
+        jpPurposeColumun = searchColumunByName(dataset, 'Purpose');
 
-            for( let k = 1; k < dataset.length; k++ ){ // Create air band boxes from ISM dataset.
-                refreshTableAreaSize(dataset[k][upColumun]);
+        for( let j = 1; j < dataset.length; j++ ){ // Create air band boxes from JP dataset.
+            refreshTableAreaSize(dataset[j][jpUpColumun]);
 
-                createBox(section, dataset[k][nameColumun], dataset[k][upColumun], dataset[k][downColumun]);
-            }
-            break;
-        default:
-            break;
+            createBox('JP', dataset[j][jpPurposeColumun], dataset[j][jpUpColumun], dataset[j][jpDownColumun]);
+        }
+    }else if( section === 'ISM' ||  section === 'ETSI' ||  section === 'WiFi' ){
+        const
+        downColumun = searchColumunByName(dataset, 'Down'),
+        upColumun = searchColumunByName(dataset, 'Up'),
+        nameColumun = searchColumunByName(dataset, 'Name');
+
+        for( let k = 1; k < dataset.length; k++ ){ // Create air band boxes from ISM dataset.
+            refreshTableAreaSize(dataset[k][upColumun]);
+
+            createBox(section, dataset[k][nameColumun], dataset[k][upColumun], dataset[k][downColumun]);
+        }
     }
 }
 
 async function createBandTable(){ // Create Boxes to each air bands from a dataset.
     const
-    // Loading 3GPP dataset.
-    data1 = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv'),
-    // Searching number of columun of each elements
-    /*ulUpColumun = searchColumunByName(data1, 'ULup'),
-    ulDownColumun = searchColumunByName(data1, 'ULdown'),
-    dlUpColumun = searchColumunByName(data1, 'DLup'),
-    dlDownColumun = searchColumunByName(data1, 'DLdown'),
-    nameColumun = searchColumunByName(data1, 'Name'),
-    modeColumun = searchColumunByName(data1, 'Mode'),*/
+    data1 = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv'), // Loading 3GPP dataset.
+    data2 = await getCSV('/BandPlanVisualize/JPBandPlan.csv'), // Loading JP dataset.
+    data3 = await getCSV('/BandPlanVisualize/ISMBandPlan.csv'), // Loading ISM dataset.
+    data4 = await getCSV('/BandPlanVisualize/ETSIBandPlan.csv'), // Loading ETSI dataset.
+    data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv'); // Loading Wi-Fi dataset.
 
-    // Loading JP dataset.
-    data2 = await getCSV('/BandPlanVisualize/JPBandPlan.csv'),
-    // Searching number of columun of each elements
-    /*jpDownColumun = searchColumunByName(data2, 'down'),
-    jpUpColumun = searchColumunByName(data2, 'up'),
-    jpPurposeColumun = searchColumunByName(data2, 'Purpose'),*/
 
-    // Loading ISM dataset.
-    data3 = await getCSV('/BandPlanVisualize/ISMBandPlan.csv'),
-    // Searching number of columun of each elements
-    /*ismDownColumun = searchColumunByName(data3, 'Down'),
-    ismUpColumun = searchColumunByName(data3, 'Up'),
-    ismNameColumun = searchColumunByName(data3, 'Name'),*/
-
-    // Loading ETSI dataset.
-    data4 = await getCSV('/BandPlanVisualize/ETSIBandPlan.csv'),
-    // Searching number of columun of each elements
-    /*etsiDownColumun = searchColumunByName(data4, 'Down'),
-    etsiUpColumun = searchColumunByName(data4, 'Up'),
-    etsiNameColumun = searchColumunByName(data4, 'Name'),*/
-
-    // Loading Wi-Fi dataset.
-    data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv');//,
-    // Searching number of columun of each elements
-    /*wifiDownColumun = searchColumunByName(data5, 'Down'),
-    wifiUpColumun = searchColumunByName(data5, 'Up'),
-    wifiNameColumun = searchColumunByName(data5, 'Name');*/
-
-    /*for( let i = 1; i < data1.length; i++ ){ // Create air band boxes from 3GPP dataset.
-        let mode = data1[i][modeColumun];
-        let name = data1[i][nameColumun];
-
-        if(mode !== 'SUL'){
-            const nameD = name + '↓';
-            createBox('3GPP', nameD, data1[i][dlUpColumun], data1[i][dlDownColumun]);
-
-            await refreshTableAreaSize(data1[i][dlUpColumun]);
-        }
-
-        if((mode === 'SUL') || (mode === 'FDD')){
-            const nameU = name + '↑';
-            createBox('3GPP', nameU, data1[i][ulUpColumun], data1[i][ulDownColumun]);
-
-            await refreshTableAreaSize(data1[i][ulUpColumun]);
-        }
+    if( data1 !== undefined ){
+        createBandElements('3GPP', data1);
+    }
+    if( data2 !== undefined ){
+        createBandElements('JP', data2);
+    }
+    if( data3 !== undefined ){
+        createBandElements('ISM', data3);
+    }
+    if( data4 !== undefined ){
+        createBandElements('ETSI', data4);
+    }
+    if( data5 !== undefined ){
+        createBandElements('WiFi', data5);
     }
 
-    for( let j = 1; j < data2.length; j++ ){ // Create air band boxes from JP dataset.
-        createBox('JP', data2[j][jpPurposeColumun], data2[j][jpUpColumun], data2[j][jpDownColumun]);
-
-        await refreshTableAreaSize(data2[j][jpUpColumun]);
-    }
-
-    for( let k = 1; k < data3.length; k++ ){ // Create air band boxes from ISM dataset.
-        createBox('ISM', data3[k][ismNameColumun], data3[k][ismUpColumun], data3[k][ismDownColumun]);
-
-        await refreshTableAreaSize(data3[k][ismUpColumun]);
-    }
-
-    for( let l = 1; l < data4.length; l++ ){ // Create air band boxes from ETSI dataset.
-        createBox('ETSI', data4[l][etsiNameColumun], data4[l][etsiUpColumun], data4[l][etsiDownColumun]);
-
-        await refreshTableAreaSize(data4[l][etsiUpColumun]);
-    }
-
-    for( let m = 1; m < data5.length; m++ ){ // Create air band boxes from JP dataset.
-        createBox('WiFi', data5[m][wifiNameColumun], data5[m][wifiUpColumun], data5[m][wifiDownColumun]);
-
-        await refreshTableAreaSize(data5[m][wifiUpColumun]);
-    }*/
-
-    createBandElements('3GPP', data1);
-    createBandElements('JP', data2);
-    createBandElements('ISM', data3);
-    createBandElements('ETSI', data4);
-    createBandElements('WiFi', data5);
+    insertBoxes();
 }
 
 async function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
