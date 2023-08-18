@@ -90,8 +90,9 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
         modeColumun = searchColumunByName(dataset, 'Mode');
 
         for( let i = 1; i < length; i++ ){ // Create air band boxes from 3GPP dataset.
-            let mode = dataset[i][modeColumun];
-            let name = dataset[i][cellularNameColumun];
+            let
+            mode = dataset[i][modeColumun],
+            name = dataset[i][cellularNameColumun];
 
             if(mode !== 'SUL'){
                 const nameD = name + '↓';
@@ -115,10 +116,10 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
         jpUpColumun = searchColumunByName(dataset, 'up'),
         jpPurposeColumun = searchColumunByName(dataset, 'Purpose');
 
-        for( let j = 1; j < length; j++ ){ // Create air band boxes from JP dataset.
+        for( let i = 1; i < length; i++ ){ // Create air band boxes from JP dataset.
             refreshTableAreaSize(dataset[j][jpUpColumun]);
 
-            createBox('JP', dataset[j][jpPurposeColumun], dataset[j][jpUpColumun], dataset[j][jpDownColumun]);
+            createBox('JP', dataset[i][jpPurposeColumun], dataset[i][jpUpColumun], dataset[i][jpDownColumun]);
         }
     }else if( section === 'ISM' ||  section === 'ETSI' ||  section === 'WiFi' ){
         const
@@ -126,10 +127,10 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
         upColumun = searchColumunByName(dataset, 'Up'),
         nameColumun = searchColumunByName(dataset, 'Name');
 
-        for( let k = 1; k < length; k++ ){ // Create air band boxes from ISM dataset.
+        for( let i = 1; i < length; i++ ){ // Create air band boxes from ISM dataset.
             refreshTableAreaSize(dataset[k][upColumun]);
 
-            createBox(section, dataset[k][nameColumun], dataset[k][upColumun], dataset[k][downColumun]);
+            createBox(section, dataset[i][nameColumun], dataset[i][upColumun], dataset[i][downColumun]);
         }
     }
 }
@@ -160,8 +161,9 @@ async function createBandTable(){ // Create Boxes to each air bands from a datas
 }
 
 async function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
-    const targets = document.getElementsByClassName('box'); // List of air band boxes
-    const length = targets.length;
+    const
+    targets = document.getElementsByClassName('box'), // List of air band boxes
+    length = targets.length;
 
     switch(displayDirection){
         case 'landscape':
