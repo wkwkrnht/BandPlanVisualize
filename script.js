@@ -206,7 +206,7 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
                 let leftValue = '30vw'; // Initial value of position at fixed direction.
 
                 for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
-                    if( j !== k ){
+                    if( i !== j ){
                         const d2P = targets[j].dataset.down; // DOM proparty of others.
                         const d2W = targets[j].dataset.width; // DOM proparty of others.
 
