@@ -138,12 +138,19 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
 }
 
 async function createBandTable(){ // Create Boxes to each air bands from a dataset.
-    const
+    /*const
     data1 = await getCSV('/BandPlanVisualize/3GPPBandPlan.csv'), // Loading 3GPP dataset.
     data2 = await getCSV('/BandPlanVisualize/JPBandPlan.csv'), // Loading JP dataset.
     data3 = await getCSV('/BandPlanVisualize/ISMBandPlan.csv'), // Loading ISM dataset.
     data4 = await getCSV('/BandPlanVisualize/ETSIBandPlan.csv'), // Loading ETSI dataset.
-    data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv'); // Loading Wi-Fi dataset.
+    data5 = await getCSV('/BandPlanVisualize/Wi-FiBandPlan.csv'); // Loading Wi-Fi dataset.*/
+
+    const
+    data1 = await getCSV('/3GPPBandPlan.csv'), // Loading 3GPP dataset.
+    data2 = await getCSV('/JPBandPlan.csv'), // Loading JP dataset.
+    data3 = await getCSV('/ISMBandPlan.csv'), // Loading ISM dataset.
+    data4 = await getCSV('/ETSIBandPlan.csv'), // Loading ETSI dataset.
+    data5 = await getCSV('/Wi-FiBandPlan.csv'); // Loading Wi-Fi dataset.
 
     if( data1 !== undefined ){
         createBandElements('3GPP', data1);
