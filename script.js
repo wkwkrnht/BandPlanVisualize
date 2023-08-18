@@ -117,7 +117,7 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
         jpPurposeColumun = searchColumunByName(dataset, 'Purpose');
 
         for( let i = 1; i < length; i++ ){ // Create air band boxes from JP dataset.
-            refreshTableAreaSize(dataset[j][jpUpColumun]);
+            refreshTableAreaSize(dataset[i][jpUpColumun]);
 
             createBox('JP', dataset[i][jpPurposeColumun], dataset[i][jpUpColumun], dataset[i][jpDownColumun]);
         }
@@ -128,7 +128,7 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
         nameColumun = searchColumunByName(dataset, 'Name');
 
         for( let i = 1; i < length; i++ ){ // Create air band boxes from ISM dataset.
-            refreshTableAreaSize(dataset[k][upColumun]);
+            refreshTableAreaSize(dataset[i][upColumun]);
 
             createBox(section, dataset[i][nameColumun], dataset[i][upColumun], dataset[i][downColumun]);
         }
@@ -192,7 +192,7 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
                     topValue = topValue.toString() + 'px';
                 }
 
-                targets[j].style.top = topValue;
+                targets[i].style.top = topValue;
                 targets[i].style.left = d1P + 'px';
                 targets[i].style.height = fixedLengthToStyle;
                 targets[i].style.width = d1W + 'px';
@@ -226,7 +226,7 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
                 }
 
                 targets[i].style.top = topValue + 'px';
-                targets[j].style.left = leftValue;
+                targets[i].style.left = leftValue;
                 targets[i].style.height = targets[i].dataset.width + 'px';
                 targets[i].style.width = fixedLengthToStyle;
             }
