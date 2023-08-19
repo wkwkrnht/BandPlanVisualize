@@ -257,11 +257,13 @@ async function createRuler(){
 
             box.classList.add('ruler'); // Class name of ruler.
             box.innerText = freq + '[kHz]'; // Insert the label of this.
-            box.style.height = fixedLengthToStyle;
+            /*box.style.height = fixedLengthToStyle;
             box.style.width = unitOfRulerToStyle;
             box.style.left = freq + 'px';
-            box.style.top = '20vh';
+            box.style.top = '20vh';*/
 
+            style = 'height: ${ fixedLengthToStyle } ;left: ${ freq } px;top:20vh;width: ${ unitOfRulerToStyle} ';
+            box.setAttribute('style', style);
             reservedDOM.appendChild(box);  // Save a box at List of DOM.
         }
     }else if( displayDirection === 'portrait' ){
