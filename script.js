@@ -181,7 +181,8 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
             d1W = targets[i].dataset.width;
             let
             number = 0, // Value of counting of colision
-            topValue = '30vh'; // Initial value of position at direction to fix.
+            topValue = '30vh', // Initial value of position at direction to fix.
+            style = '';
 
             for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
                 if( i !== j ){
@@ -200,10 +201,12 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
                 topValue = topValue.toString() + 'px';
             }
 
-            targets[i].style.top = topValue;
+            style = 'height: ${ fixedLengthToStyle } ;left: ${ d1P } px;top: ${ topValue } ;width: ${ d1W } px;';
+            /*targets[i].style.top = topValue;
             targets[i].style.left = d1P + 'px';
             targets[i].style.height = fixedLengthToStyle;
-            targets[i].style.width = d1W + 'px';
+            targets[i].style.width = d1W + 'px';*/
+            targets[i].setAttribute('style', style);
         }
     }else if( displayDirection === 'portrait' ){
         for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
