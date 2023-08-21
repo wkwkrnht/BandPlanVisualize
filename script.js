@@ -1,6 +1,7 @@
 const
-windowWidth = document.documentElement.clientWidth, // Constructor of the window width.
-windowHeight = document.documentElement.clientHeight, // Constructor of the window height.
+d = document,
+windowWidth = d.documentElement.clientWidth, // Constructor of the window width.
+windowHeight = d.documentElement.clientHeight, // Constructor of the window height.
 fixedLength = 60, // Constructor of fixed part of box size.
 fixedLengthToStyle = fixedLength.toString() + 'px',
 headerHeight = 0.13 * windowHeight;
@@ -8,7 +9,7 @@ headerHeight = 0.13 * windowHeight;
 let
 displayDirection = '', // Variable for note which direction on the display is wider.
 tableAreaSize = 0, // Value to note actual this page size.
-reservedDOM = document.createDocumentFragment();
+reservedDOM = d.createDocumentFragment();
 
 function detectDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
     if(windowWidth > windowHeight){
@@ -61,7 +62,7 @@ function searchColumunByName( array = [], key = ''){ // From 0 row, searching nu
 async function createBox(dataset = '', name = '', up = 0, down = 0){ // Create a box of a air band.
     const width = up - down; // This is width set in style.
 
-    let box = document.createElement('div'); // Create a element of a box.
+    let box = d.createElement('div'); // Create a element of a box.
     box.classList.add('box'); // Class name of air band boxes.
     box.classList.add(dataset); // Class name from data set.
     box.setAttribute('data-down', down); // Set a value to note start-point of a air band.
@@ -171,7 +172,7 @@ async function createBandTable(){ // Create Boxes to each air bands from a datas
 
 async function setBoxStyleAtCSS(){ // Set size and position for each air band boxes.
     const
-    targets = document.getElementsByClassName('box'), // List of air band boxes
+    targets = d.getElementsByClassName('box'), // List of air band boxes
     length = targets.length;
 
     if( displayDirection === 'landscape' ){
@@ -202,10 +203,6 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
             }
 
             style = 'height: ${ fixedLengthToStyle } ;left: ${ d1P } px;top: ${ topValue } ;width: ${ d1W } px;';
-            /*targets[i].style.top = topValue;
-            targets[i].style.left = d1P + 'px';
-            targets[i].style.height = fixedLengthToStyle;
-            targets[i].style.width = d1W + 'px';*/
             targets[i].setAttribute('style', style);
         }
     }else if( displayDirection === 'portrait' ){
@@ -235,10 +232,8 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
                 leftValue = leftValue.toString() + 'px';
             }
 
-            targets[i].style.top = topValue + 'px';
-            targets[i].style.left = leftValue;
-            targets[i].style.height = targets[i].dataset.width + 'px';
-            targets[i].style.width = fixedLengthToStyle;
+            style = 'height: ${ d1W } px;left: ${ leftValue } ;top: ${ topValue } px;width: ${ fixedLengthToStyle } ;';
+            targets[i].setAttribute('style', style);
         }
     }
 }
@@ -253,16 +248,12 @@ async function createRuler(){
         for( let i = 0; i < timesToWrite; i++ ){
             let
             freq = i * unitOfRuler,
-            box = document.createElement('div'); // Create a element of a box.
+            box = d.createElement('div'); // Create a element of a box.
 
             box.classList.add('ruler'); // Class name of ruler.
             box.innerText = freq + '[kHz]'; // Insert the label of this.
-            /*box.style.height = fixedLengthToStyle;
-            box.style.width = unitOfRulerToStyle;
-            box.style.left = freq + 'px';
-            box.style.top = '20vh';*/
 
-            style = 'height: ${ fixedLengthToStyle } ;left: ${ freq } px;top:20vh;width: ${ unitOfRulerToStyle} ';
+            style = 'height: ${ fixedLengthToStyle } ;left: ${ freq } px;top:20vh;width: ${ unitOfRulerToStyle } ';
             box.setAttribute('style', style);
             reservedDOM.appendChild(box);  // Save a box at List of DOM.
         }
@@ -270,16 +261,14 @@ async function createRuler(){
         for( let i = 0; i < timesToWrite; i++ ){
             let
             freq = i * unitOfRuler,
-            box = document.createElement('div'); // Create a element of a box.
+            box = d.createElement('div'); // Create a element of a box.
 
             box.classList.add('ruler'); // Class name of ruler.
             box.innerText = freq + '[kHz]'; // Insert the label of this.
             freq = headerHeight + freq;
-            box.style.height = unitOfRulerToStyle;
-            box.style.width = fixedLengthToStyle;
-            box.style.top = freq + 'px';
-            box.style.left = '0';
 
+            style = 'height: ${ unitOfRulerToStyle } ;left:0;top: ${ freq } px;width: ${ fixedLengthToStyle } ';
+            box.setAttribute('style', style);
             reservedDOM.appendChild(box);  // Save a box at List of DOM.
         }
     }
@@ -290,7 +279,7 @@ function finishCreateElements(){
 }
 
 async function main(){ // Main function.
-    let parent = document.getElementById('main'); // Search a area to insert a box.
+    let parent = d.getElementById('main'); // Search a area to insert a box.
 
     await createBandTable();
 
