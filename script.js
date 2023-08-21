@@ -308,11 +308,11 @@ async function main(){ // Main function.
 
     await createBandTable();
 
+    await setBoxStyleAtCSS();
+
     await createRuler();
 
     parent.appendChild(reservedDOM);
-
-    setBoxStyleAtCSS();
 
     //finishCreateElements();
 }
