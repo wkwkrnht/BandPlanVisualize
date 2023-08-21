@@ -310,7 +310,7 @@ async function main(){ // Main function.
 
     await createRuler();
 
-    await parent.appendChild(reservedDOM);
+    parent.appendChild(reservedDOM);
 
     setBoxStyleAtCSS();
 
