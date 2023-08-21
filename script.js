@@ -43,13 +43,17 @@ async function getCSV( dir = '' ){ // Get a CSV file and parse into array.
 }
 
 function convertCSVtoArray( text = '' ){ // Parse a CSV file input as strings into array.
-    let result = []; // The array to save the result.
+    let
+    i = 0,
+    result = []; // The array to save the result.
     const
     tmp = text.split('\n'), // Newline is marked as indicator, to split by row.
     length = tmp.length;
 
-    for( let i = 0; i < length; i++ ){ // Kanma is marked as indicator, to split by columun.
+    while( i < length ){ // Kanma is marked as indicator, to split by columun.
         result[i] = tmp[i].split(',');
+
+        i++;
     }
 
     return result;
@@ -82,6 +86,7 @@ async function refreshTableAreaSize( up = 0 ){ // Expand value to note actual th
 
 async function createBandElements( section = '', dataset = []){ // Allocate this box at the point.
     const length = dataset.length;
+    let i = 1;
 
     if( section === '3GPP' ){
         const
@@ -92,8 +97,8 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
         cellularNameColumun = searchColumunByName(dataset, 'Name'),
         modeColumun = searchColumunByName(dataset, 'Mode');
 
-        for( let i = 1; i < length; i++ ){ // Create air band boxes from 3GPP dataset.
-            let
+        while( i < length ){ // Create air band boxes from 3GPP dataset.
+            const
             mode = dataset[i][modeColumun],
             name = dataset[i][cellularNameColumun];
 
@@ -112,6 +117,8 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
 
                 createBox('3GPP', nameU, dataset[i][ulUpColumun], dataset[i][ulDownColumun]);
             }
+
+            i++;
         }
     }else if( section === 'JP' ){
         const
@@ -119,10 +126,12 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
         jpUpColumun = searchColumunByName(dataset, 'up'),
         jpPurposeColumun = searchColumunByName(dataset, 'Purpose');
 
-        for( let i = 1; i < length; i++ ){ // Create air band boxes from JP dataset.
+        while( i < length ){ // Create air band boxes from JP dataset.
             refreshTableAreaSize(dataset[i][jpUpColumun]);
 
             createBox('JP', dataset[i][jpPurposeColumun], dataset[i][jpUpColumun], dataset[i][jpDownColumun]);
+
+            i++;
         }
     }else if( section === 'ISM' ||  section === 'ETSI' ||  section === 'WiFi' ){
         const
@@ -130,10 +139,12 @@ async function createBandElements( section = '', dataset = []){ // Allocate this
         upColumun = searchColumunByName(dataset, 'Up'),
         nameColumun = searchColumunByName(dataset, 'Name');
 
-        for( let i = 1; i < length; i++ ){ // Create air band boxes from ISM dataset.
+        while( i < length ){ // Create air band boxes from datasets.
             refreshTableAreaSize(dataset[i][upColumun]);
 
             createBox(section, dataset[i][nameColumun], dataset[i][upColumun], dataset[i][downColumun]);
+
+            i++;
         }
     }
 }
@@ -174,9 +185,12 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
     const
     targets = d.getElementsByClassName('box'), // List of air band boxes
     length = targets.length;
+    let
+    i = 0,
+    j = 0;
 
     if( displayDirection === 'landscape' ){
-        for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
+        while( i < length ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
             const
             d1P = targets[i].dataset.down,
             d1W = targets[i].dataset.width;
@@ -185,7 +199,7 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
             topValue = '30vh', // Initial value of position at direction to fix.
             style = '';
 
-            for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
+            for( j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
                 if( i !== j ){
                     const
                     d2P = targets[j].dataset.down, // DOM proparty of others.
@@ -204,9 +218,11 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
 
             style = 'height: ${ fixedLengthToStyle } ;left: ${ d1P } px;top: ${ topValue } ;width: ${ d1W } px;';
             targets[i].setAttribute('style', style);
+
+            i++;
         }
     }else if( displayDirection === 'portrait' ){
-        for( let i = 0; i < length; i++ ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
+        while( i < length ){ // Set basic values of air bands style. If display is as portrait, width is fixed, height is valuable, position is set from top.
             const
             d1P = targets[i].dataset.down,
             d1W = targets[i].dataset.width;
@@ -215,7 +231,7 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
             number = 0, // Count of colision
             leftValue = '30vw'; // Initial value of position at fixed direction.
 
-            for( let j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
+            for( j = 0; j < length; j++ ){ // Count Colision from sizes of the air band box and others.
                 if( i !== j ){
                     const
                     d2P = targets[j].dataset.down, // DOM proparty of others.
@@ -234,6 +250,8 @@ async function setBoxStyleAtCSS(){ // Set size and position for each air band bo
 
             style = 'height: ${ d1W } px;left: ${ leftValue } ;top: ${ topValue } px;width: ${ fixedLengthToStyle } ;';
             targets[i].setAttribute('style', style);
+
+            i++;
         }
     }
 }
@@ -243,9 +261,10 @@ async function createRuler(){
     unitOfRuler = 1000, // Unit size of the ruler.
     timesToWrite = tableAreaSize / unitOfRuler,
     unitOfRulerToStyle = unitOfRuler.toString() + 'px';
+    let i = 0;
 
     if( displayDirection === 'landscape' ){
-        for( let i = 0; i < timesToWrite; i++ ){
+        while( i < timesToWrite ){
             let
             freq = i * unitOfRuler,
             box = d.createElement('div'); // Create a element of a box.
@@ -256,9 +275,11 @@ async function createRuler(){
             style = 'height: ${ fixedLengthToStyle } ;left: ${ freq } px;top:20vh;width: ${ unitOfRulerToStyle } ';
             box.setAttribute('style', style);
             reservedDOM.appendChild(box);  // Save a box at List of DOM.
+
+            i++;
         }
     }else if( displayDirection === 'portrait' ){
-        for( let i = 0; i < timesToWrite; i++ ){
+        while( i < timesToWrite ){
             let
             freq = i * unitOfRuler,
             box = d.createElement('div'); // Create a element of a box.
@@ -270,6 +291,8 @@ async function createRuler(){
             style = 'height: ${ unitOfRulerToStyle } ;left:0;top: ${ freq } px;width: ${ fixedLengthToStyle } ';
             box.setAttribute('style', style);
             reservedDOM.appendChild(box);  // Save a box at List of DOM.
+
+            i++;
         }
     }
 }
