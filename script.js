@@ -281,6 +281,8 @@ function finishCreateElements(){
 async function main(){ // Main function.
     let parent = d.getElementById('main'); // Search a area to insert a box.
 
+    await detectDisplayDirection();
+
     await createBandTable();
 
     await createRuler();
