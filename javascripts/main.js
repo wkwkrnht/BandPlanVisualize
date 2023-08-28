@@ -206,7 +206,7 @@ function main(){ // Main function.
     e3 = document.getElementById('move-up'),
     e4 = document.getElementById('move-down'),
     e5 = document.getElementById('fillter-menu');
-    let e6 = document.querySelectorAll('input[dbName]'); //name 属性が categories の input 要素（ラジオボタン）の集まり（静的な NodeList）を取得
+    let e6 = document.querySelectorAll('input[checked]'); //name 属性が categories の input 要素（ラジオボタン）の集まり（静的な NodeList）を取得
 
     e1.addEventListener('click', {symbol: '+', handleEvent: updateUnitInt});
     e1.addEventListener('touchstart', {symbol: '+', handleEvent: updateUnitInt});
