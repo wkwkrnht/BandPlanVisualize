@@ -67,7 +67,7 @@ configure :build do
     # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
     # Generate relative paths to the repo when deploying to GitHub Pages
-    config[:http_prefix] = '/middleman-webpack-demo'
+    config[:http_prefix] = '/BandPlanVisualize'
     config[:css_dir] = ""
     config[:js_dir] = ""
 
