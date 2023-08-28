@@ -18,11 +18,16 @@ main#main
             div class='box cellular' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑
-        - if row['Mode'] == 'TDD' || row['Mode'] == 'SDL' || row['Mode'] == 'FDD'
+        - if row['Mode'] == 'FDD' || row['Mode'] == 'SDL'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
             div class='box cellular' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↓
+        - if row['Mode'] == 'TDD'
+            - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
+            div class='box cellular' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+                span
+                    | #{ row[0] } ↑↓
     - CSV.foreach('./data/Wi-FiBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
         div class='box WiFi' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
