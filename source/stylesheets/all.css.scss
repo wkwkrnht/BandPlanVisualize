@@ -1,0 +1,227 @@
+//setup
+@charset 'utf-8';
+
+$black:#333;
+$dark-gray:#eee;
+$right-gray:#bbb;
+$white:#fff;
+$red:red;
+$right-blue:#3ff9dc;
+$blue:#03a9f4;
+$yellow:#eae3b4;
+
+$base-vertical-rhythm:1vh;
+$header-height:8vh;
+$fixed-length:50px;
+$box-font-size:14px;
+$box-stroke-size:3px;
+$ui-size:4vh;
+$unit-indicator-size:6em;
+$unit-indicator-position:2rem;
+
+@keyframes pulse{
+    from{
+        opacity:1;
+        transform:scale(1);
+    }
+    to{
+        opacity:.25;
+        transform:scale(.75);
+    }
+}
+
+:root{
+    font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif;
+    font-feature-settings:'pkna' 1;
+    scroll-behavior:smooth;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+body,
+header,
+.box,
+.ruler{
+    margin:0;
+    padding:0;
+}
+
+header{
+    background-color:$black;
+    color:$white;
+    height:$header-height;
+    left:0;
+    margin-bottom:$base-vertical-rhythm;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:100;
+
+    & > *{
+        margin:0 auto;
+        padding:0;
+    }
+
+    &:first-child{
+        padding-top:1em;
+    }
+
+    &:last-child{
+        padding-bottom:1em;
+    }
+}
+
+h1{
+    font-size:1.5rem;
+}
+
+.box,
+.ruler{
+    height:$fixed-length;
+    position:absolute;
+}
+
+.box{
+    box-sizing:border-box;
+    font-size:1px;
+
+    & > span{
+        color:$white;
+        font-size:$box-font-size;
+        font-weight:bold;
+        text-align:center;
+        text-shadow:
+        $box-stroke-size $box-stroke-size $box-stroke-size $black,
+        calc(-1 * #{$box-stroke-size}) calc(-1 * #{$box-stroke-size}) $box-stroke-size $black,
+        calc(-1 * #{$box-stroke-size}) $box-stroke-size $box-stroke-size $black,
+        $box-stroke-size calc(-1 * #{$box-stroke-size}) $box-stroke-size $black,
+        $box-stroke-size 0 $box-stroke-size $black,
+        calc(-1 * #{$box-stroke-size})  0 $box-stroke-size $black,
+        0 $box-stroke-size $box-stroke-size $black,
+        0 calc(-1 * #{$box-stroke-size}) $box-stroke-size $black;
+    }
+
+    &.JP{
+        background-color:$red;
+    }
+    &.cellular,
+    &.DECT{
+        background-color:$right-blue;
+    }
+    &.WiFi,
+    &.BT,
+    &.ISDBT,
+    &.BS{
+        background-color:$blue;
+    }
+    &.ETSI,
+    &.ISM{
+        background-color:$black;
+    }
+}
+
+.ruler{
+    background-color:rgba(255, 255, 255, .2);
+    text-align:left;
+    top:calc(#{$header-height} + #{$base-vertical-rhythm} + 1em);
+    width:1000px;
+
+    & > span{
+        font-size:$box-font-size;
+        text-align:left;
+    }
+}
+
+#unit,
+#loading,
+.ui{
+    box-shadow:0 0 3vmin rgba(0,0,0,.1);
+    color:$black;
+    font-weight:bold;
+    position:fixed;
+    text-align:center;
+    z-index:100;
+}
+
+#unit,
+#loading{
+    background-color:rgba(255, 255, 255, .4);
+    bottom:$unit-indicator-position;
+    left:$unit-indicator-position;
+    height:calc(#{$unit-indicator-size} / 2);
+    width:$unit-indicator-size;
+}
+
+.ui{
+    background-color:rgba(255, 255, 255, .4);
+    bottom:$unit-indicator-position;
+    display:grid;
+    font-size:calc(#{$ui-size} * 0.9);
+    grid-template-areas:
+        "scalerDown scalerUp"
+        "moveDown moveUp";
+    height:calc(#{$ui-size} * 2);
+    right:$unit-indicator-position;
+    width:calc(#{$ui-size} * 2);
+
+    & > button{
+        border:1px solid $right-gray;
+    }
+}
+
+#scaler-up{
+    cursor:zoom-in;
+    grid-area:scalerUp;
+}
+#scaler-down{
+    cursor:zoom-out;
+    grid-area:scalerDown;
+}
+#move-up{
+    cursor:all-scroll;
+    grid-area:moveUp;
+}
+#move-down{
+    cursor:all-scroll;
+    grid-area:moveDown;
+}
+
+#loading{
+    display:none;
+    z-index:1000;
+}
+.pulse-container{
+    align-items:center;
+    display:flex;
+    justify-content:space-between;
+}
+.pulse-bubble{
+    background-color:$right-blue;
+    border-radius:50%;
+    height:20px;
+    width:20px;
+}
+.pulse-bubble-1{
+    animation:pulse .4s ease 0s infinite alternate;
+}
+.pulse-bubble-2{
+    animation:pulse .4s ease .2s infinite alternate;
+}
+.pulse-bubble-3{
+    animation:pulse .4s ease .4s infinite alternate;
+}
+
+/*@media (min-aspect-ratio: 1/1) {
+    //
+}*/
+
+@media (max-aspect-ratio: 1/1) {
+    #main{
+        transform:rotate(90deg);
+    }
+
+    .box,.ruler{
+        margin-top:calc(-2.3 * (#{$header-height} + #{$base-vertical-rhythm}));
+    }
+}

@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        / Set dynamic and default meta
+        - title = 'Air Band Visualizer'
+        - description = 'This site visuallize air bands defined by GOV or ORG.'
+
+        title =title
+        meta charset='utf-8'
+        meta name='viewport' content='width=device-width'
+        meta name='description' content=description
+        /= favicon_tag 'favicon.png'
+        = stylesheet_link_tag 'all'
+        = javascript_include_tag 'main', defer: true
+    body
+        header
+            h1 =title
+            p &copy;2023 wkwkrnht
+        = yield
