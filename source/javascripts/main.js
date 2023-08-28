@@ -141,7 +141,9 @@ function updateVisibilltyFillterMenu(){
 function fillterDBs(){
     let
     targetName = event.target.dataset.dbName,
-    targets = document.getElementsByClassName(targetName);
+    targets = document.getElementsByClassName(targetName.toString());
+
+    console.log(targetName);
 
     loading.style.display = 'block';
 
