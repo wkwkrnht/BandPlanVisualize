@@ -47,11 +47,12 @@ function updateUnitIndicator(){
             prefixStr = 'n';
             break;
         default:
-            prefixStr = 'k';
+            prefix = Math.log10(prefix);
+            prefixStr = '10<sup>' + prefix + '</sup>';
             break;
     }
 
-    target.innerText = '[' + prefixStr + 'Hz]';
+    target.innerHTML = '[' + prefixStr + 'Hz]';
 }
 
 function updateBoxSize(){
@@ -73,7 +74,7 @@ function updateBoxSize(){
 
 function updateUnitInt(symbol){
     const
-    amount = 1000,
+    amount = 10,
     max = 1000000000,
     min = 0.000000001;
 
