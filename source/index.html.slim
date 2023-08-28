@@ -2,118 +2,118 @@ main#main
     - tableAreaSize = 0
     - CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box JP' data-down=row['down'] data-up=row['up'] style="left:#{ row['down'] }em;width:#{ (row['up'].to_i - row['down'].to_i).to_s }em;"
+        div class='box JP' data-visibillity='y' data-down=row['down'] data-up=row['up'] style="left:#{ row['down'] }em;width:#{ (row['up'].to_i - row['down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box ISM' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
+        div class='box ISM' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box ETSI' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
+        div class='box ETSI' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/IEEE802154BandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box IEEE802154' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
+        div class='box IEEE802154' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/3GPPBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max( tableAreaSize, row['ULup'].to_i )
-            div class='box cellular' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
+            div class='box cellular' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SDL'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box cellular' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box cellular' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↓
         - if row['Mode'] == 'TDD'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box cellular' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box cellular' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
     - CSV.foreach('./data/Wi-FiBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box WiFi' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
+        div class='box WiFi' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/BTBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box BT' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
+        div class='box BT' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/DECTBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box DECT' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
+        div class='box DECT' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/ISDBTBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box ISDBT' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
+        div class='box ISDBT' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/BSBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box BS' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
+        div class='box BS' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
             span =row[0]
     - CSV.foreach('./data/NTTBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max( tableAreaSize, row['ULup'].to_i )
-            div class='box NTT' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
+            div class='box NTT' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SDL'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box NTT' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box NTT' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↓
         - if row['Mode'] == 'TDD'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box NTT' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box NTT' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
     - CSV.foreach('./data/KDDIBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max( tableAreaSize, row['ULup'].to_i )
-            div class='box KDDI' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
+            div class='box KDDI' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SDL'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box KDDI' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box KDDI' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↓
         - if row['Mode'] == 'TDD'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box KDDI' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box KDDI' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
     - CSV.foreach('./data/SBBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max( tableAreaSize, row['ULup'].to_i )
-            div class='box SB' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
+            div class='box SB' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SDL'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box SB' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box SB' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↓
         - if row['Mode'] == 'TDD'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box SB' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box SB' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
     - CSV.foreach('./data/RMBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max( tableAreaSize, row['ULup'].to_i )
-            div class='box RM' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
+            div class='box RM' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SDL'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box RM' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box RM' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↓
         - if row['Mode'] == 'TDD'
             - tableAreaSize = update_max( tableAreaSize, row['DLup'].to_i )
-            div class='box RM' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
+            div class='box RM' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
     ==write_ruler(tableAreaSize)
@@ -121,6 +121,7 @@ aside#unit data-unitPrefix='1000'
 nav.ui
     button#scaler-up type='button' +
     button#scaler-down type='button' -
+    button#fillter-menu type='button' Fillter
     button#move-up type='button' →
     button#move-down type='button' ←
 div id='loading' class='spinner-box'
@@ -128,3 +129,46 @@ div id='loading' class='spinner-box'
         div class='pulse-bubble pulse-bubble-1'
         div class='pulse-bubble pulse-bubble-2'
         div class='pulse-bubble pulse-bubble-3'
+nav#fillter-popup data-visibillity='n'
+    label
+        input type='checkbox' checked='' data-dbName='JP'
+        | JP
+    label
+        input type='checkbox' checked='' data-dbName='IEEE802154'
+        | IEEE802.15.4
+    label
+        input type='checkbox' checked='' data-dbName='ISM'
+        | ISM
+    label
+        input type='checkbox' checked='' data-dbName='ETSI'
+        | ETSI
+    label
+        input type='checkbox' checked='' data-dbName='WiFi'
+        | Wi-Fi
+    label
+        input type='checkbox' checked='' data-dbName='BT'
+        | Bluetooth
+    label
+        input type='checkbox' checked='' data-dbName='DECT'
+        | DECT
+    label
+        input type='checkbox' checked='' data-dbName='cellular'
+        | 3GPP
+    label
+        input type='checkbox' checked='' data-dbName='NTT'
+        | NTT docomo
+    label
+        input type='checkbox' checked='' data-dbName='KDDI'
+        | KDDI, UQ, Okinawa cellular
+    label
+        input type='checkbox' checked='' data-dbName='SB'
+        | SoftBank, WCP
+    label
+        input type='checkbox' checked='' data-dbName='RM'
+        | Rakuten Mobile
+    label
+        input type='checkbox' checked='' data-dbName='ISDBT'
+        | ISDB-T
+    label
+        input type='checkbox' checked='' data-dbName='BS'
+        | BS

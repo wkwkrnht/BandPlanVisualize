@@ -103,6 +103,13 @@ h1{
         0 calc(-1 * #{$box-stroke-size}) $box-stroke-size $black;
     }
 
+    &[data-visibillity='y']{
+        display:block;
+    }
+    &[data-visibillity='n']{
+        display:none;
+    }
+
     &.JP{
         background-color:$red;
     }
@@ -168,6 +175,7 @@ h1{
     font-size:calc(#{$ui-size} * 0.9);
     grid-template-areas:
         "scalerDown scalerUp"
+        "fillter fillter"
         "moveDown moveUp";
     height:calc(#{$ui-size} * 2);
     right:$unit-indicator-position;
@@ -178,6 +186,9 @@ h1{
     }
 }
 
+#fillter-menu{
+    grid-area:fillter;
+}
 #scaler-up{
     cursor:zoom-in;
     grid-area:scalerUp;
@@ -193,6 +204,21 @@ h1{
 #move-down{
     cursor:all-scroll;
     grid-area:moveDown;
+}
+
+#fillter-popup{
+    background-color:rgba(255, 255, 255, .4);
+    bottom:$unit-indicator-position;
+    right:calc(#{$unit-indicator-position} + (#{$ui-size} * 2) + #{$unit-indicator-position});
+    position:fixed;
+    z-index:1000;
+
+    &[data-visibillity='y']{
+        display:block;
+    }
+    &[data-visibillity='n']{
+        display:none;
+    }
 }
 
 #loading{
