@@ -142,13 +142,19 @@ function fillterDBs(){
     const targetName = event.target.dataset.dbName;
     let targets = document.getElementsByClassName(targetName);
 
+    loading.style.display = 'block';
+
     for( var i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
         if(targets[i].dataset.visibillity == 'n'){
             targets[i].dataset.visibillity = 'y';
+            targets[i].style.display = 'block';
         }else if(targets[i].dataset.visibillity == 'y'){
             targets[i].dataset.visibillity = 'n';
+            targets[i].style.display = 'none';
         }
     }
+
+    loading.style.display = 'none';
 }
 
 function calcAmountOfMove(baseline, unit, times){ // Calculating the DOM will move how much.
@@ -214,7 +220,7 @@ function main(){ // Main function.
     e5.addEventListener('touchstart', updateVisibilltyFillterMenu);
 
     //ループで各ラジオボタンにイベントリスナを設定
-    for(let input_category of e6){
+    for(let input_category of input_categories){
         //change イベントリスナを各ラジオボタンに登録
         input_category.addEventListener('change', fillterDBs);
     }
