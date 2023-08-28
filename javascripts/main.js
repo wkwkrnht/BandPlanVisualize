@@ -126,6 +126,31 @@ function moveMainPart(symbol){
     }
 }
 
+function updateVisibilltyFillterMenu(){
+    let
+    target = document.getElementById('fillter-popup'),
+    state = target.dataset.visibillity;
+
+    if(state == 'n'){
+        target.dataset.visibillity = 'y';
+    }else if(state == 'y'){
+        target.dataset.visibillity = 'n';
+    }
+}
+
+function fillterDBs(){
+    const targetName = event.target.dataset.dbName;
+    let targets = document.getElementsByClassName(targetName);
+
+    for( var i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
+        if(targets[i].dataset.visibillity == 'n'){
+            targets[i].dataset.visibillity = 'y';
+        }else if(targets[i].dataset.visibillity == 'y'){
+            targets[i].dataset.visibillity = 'n';
+        }
+    }
+}
+
 function calcAmountOfMove(baseline, unit, times){ // Calculating the DOM will move how much.
     return ((baseline * 0.11) + (times * unit * 1.2));
 }
@@ -173,7 +198,10 @@ function main(){ // Main function.
     e1 = document.getElementById('scaler-up'),
     e2 = document.getElementById('scaler-down'),
     e3 = document.getElementById('move-up'),
-    e4 = document.getElementById('move-down');
+    e4 = document.getElementById('move-down'),
+    e5 = document.getElementById('fillter-menu'),
+    input_categories = document.querySelectorAll("input[name=categories]"), //name 属性が categories の input 要素（ラジオボタン）の集まり（静的な NodeList）を取得
+    targets = document.querySelectorAll(".target"); //全ての .target の要素（target クラスを指定された div 要素）を取得
 
     e1.addEventListener('click', {symbol: '+', handleEvent: updateUnitInt});
     e1.addEventListener('touchstart', {symbol: '+', handleEvent: updateUnitInt});
@@ -183,6 +211,14 @@ function main(){ // Main function.
     e3.addEventListener('touchstart', {symbol: '+', handleEvent: moveMainPart});
     e4.addEventListener('click', {symbol: '-', handleEvent: moveMainPart});
     e4.addEventListener('touchstart', {symbol: '-', handleEvent: moveMainPart});
+    e5.addEventListener('click', updateVisibilltyFillterMenu());
+    e5.addEventListener('touchstart', updateVisibilltyFillterMenu());
+
+    //ループで各ラジオボタンにイベントリスナを設定
+    for(let input_category of input_categories){
+        //change イベントリスナを各ラジオボタンに登録
+        input_category.addEventListener('change', fillterDBs());
+    }
 }
 
 window.addEventListener('resize', updateDisplayDirection()); //
