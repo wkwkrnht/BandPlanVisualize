@@ -66,6 +66,11 @@ configure :build do
     # Build-specific configuration
     # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
+    # Generate relative paths to the repo when deploying to GitHub Pages
+    config[:http_prefix] = '/middleman-webpack-demo'
+    config[:css_dir] = ""
+    config[:js_dir] = ""
+
     # Minify css on build
     activate :minify_css
 
