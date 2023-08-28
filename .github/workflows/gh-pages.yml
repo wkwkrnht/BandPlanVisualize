@@ -9,9 +9,10 @@ jobs:
     name: Build & Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Build & Deploy to GitHub Pages
-        with:
-          REMOTE_BRANCH: gh-pages
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: yurikoval/middleman-gh-pages-action@master
+        - uses: actions/checkout@v1
+        - name: Build & Deploy to GitHub Pages
+            with:
+                REMOTE_BRANCH: gh-pages
+                ruby-version: '2.7'
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            uses: yurikoval/middleman-gh-pages-action@master
