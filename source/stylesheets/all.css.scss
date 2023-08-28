@@ -117,8 +117,15 @@ h1{
         background-color:$blue;
     }
     &.ETSI,
+    &.IEEE802154,
     &.ISM{
         background-color:$black;
+    }
+    &.NTT,
+    &.KDDI,
+    &.SB,
+    &.RM{
+        background-color:$blue;
     }
 }
 
