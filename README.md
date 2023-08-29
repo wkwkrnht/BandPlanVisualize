@@ -1,6 +1,6 @@
 # BandPlanVisualize
 
-[Generated from this repo]([https://www.tomrutgers.nl/](https://wkwkrnht.github.io/BandPlanVisualize/))
+[Generated from this repo](https://www.tomrutgers.nl/](https://wkwkrnht.github.io/BandPlanVisualize/)
 
 This repository for the website visualizing lists of air bands. You can access to the view made from this repository. At this document, air bands means band defined to telecommunication, or frequency ranges allocated by some government.
 
