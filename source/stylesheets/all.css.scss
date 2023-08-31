@@ -86,7 +86,7 @@ h1{
 
 .box,
 .ruler{
-    contain:size layout;
+    //contain:size layout;
     content-visibility:auto;
     height:$fixed-length;
     position:absolute;
@@ -163,7 +163,7 @@ h1{
 #fillter-popup,
 .ui{
     background-color:rgba(255, 255, 255, .4);
-    contain:size layout paint;
+    //contain:size layout paint;
 }
 #unit,
 #loading,

@@ -43,8 +43,9 @@ helpers do
         end
     end
 
-    def write_box(dataset, name, down, up)
-        return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up + '" data-down="' + down + '" style="left:' + down + 'em;width:' + (up.to_i - down.to_i).to_s + 'em;"><span>' + name + '</span></div>'
+    def write_box(dataset, name, down, up)]
+        width = up.to_i - down.to_i
+        return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up + '" data-down="' + down.to_s + '" style="left:' + down.to_s + 'em;width:' + width.to_s + 'em;"><span>' + name + '</span></div>'
     end
 
     def write_ruler( area_size = 0 )
