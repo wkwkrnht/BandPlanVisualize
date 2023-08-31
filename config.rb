@@ -26,6 +26,8 @@ page "/partials/*", layout: false
 # pretty urls
 activate :directory_indexes
 
+activate :social_image
+
 helpers do
     # Helpers
     # Methods defined in the helpers block are available in templates

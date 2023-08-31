@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'middleman'
+gem 'middleman-social_image'
 
 gem 'webrick'
 gem 'slim'
