@@ -22,7 +22,7 @@ function updateUnitIndicator(){
     let
     target = document.getElementById('unit'),
     prefix = parseFloat(target.dataset.unitprefix),
-    prefixStr = 'k';
+    prefixStr = '';
 
     switch(prefix){
         case 1:
@@ -111,16 +111,18 @@ function moveMainPart(symbol){
 
     if(this.symbol !== undefined){
         symbol = this.symbol;
+    }else if(event.target !== undefined){
+        symbol = event.target.innerText;
     }
 
-    if(displayDirection == 'landscape' && symbol == '+'){
+    if(symbol == '→'){
         window.scrollBy(unit, 0);
-    }else if(displayDirection == 'landscape' && symbol == '-'){
+    }else if(symbol == '←'){
         unit = -1 * unit;
         window.scrollBy(unit, 0);
-    }else if(displayDirection == 'portrait' && symbol == '+'){
+    }else if(symbol == '↑'){
         window.scrollBy(0, unit);
-    }else if(displayDirection == 'portrait' && symbol == '-'){
+    }else if(symbol == '↓'){
         unit = -1 * unit;
         window.scrollBy(0, unit);
     }
@@ -135,8 +137,7 @@ function updateVisibillity(target){
 }
 
 function updateVisibilltyFillterMenu(){
-    let
-    target = document.getElementById('fillter-popup');
+    let target = document.getElementById('fillter-popup');
 
     updateVisibillity(target);
 }
@@ -200,23 +201,29 @@ function main(){ // Main function.
     const
     e1 = document.getElementById('scaler-up'),
     e2 = document.getElementById('scaler-down'),
-    e3 = document.getElementById('move-up'),
-    e4 = document.getElementById('move-down'),
-    e5 = document.getElementById('fillter-menu');
-    let e6 = document.querySelectorAll('input[checked]'); //name 属性が categories の input 要素（ラジオボタン）の集まり（静的な NodeList）を取得
+    e3 = document.getElementById('move-left'),
+    e4 = document.getElementById('move-right'),
+    e5 = document.getElementById('move-up'),
+    e6 = document.getElementById('move-down'),
+    e7 = document.getElementById('fillter-menu');
+    let e8 = document.querySelectorAll('input[checked]'); //name 属性が categories の input 要素（ラジオボタン）の集まり（静的な NodeList）を取得
 
     e1.addEventListener('click', {symbol: '+', handleEvent: updateUnitInt});
     e1.addEventListener('touchstart', {symbol: '+', handleEvent: updateUnitInt});
     e2.addEventListener('click', {symbol: '-', handleEvent: updateUnitInt});
     e2.addEventListener('touchstart', {symbol: '-', handleEvent: updateUnitInt});
-    e3.addEventListener('click', {symbol: '+', handleEvent: moveMainPart});
-    e3.addEventListener('touchstart', {symbol: '+', handleEvent: moveMainPart});
-    e4.addEventListener('click', {symbol: '-', handleEvent: moveMainPart});
-    e4.addEventListener('touchstart', {symbol: '-', handleEvent: moveMainPart});
-    e5.addEventListener('click', updateVisibilltyFillterMenu);
-    e5.addEventListener('touchstart', updateVisibilltyFillterMenu);
+    e3.addEventListener('click', moveMainPart);
+    e3.addEventListener('touchstart', moveMainPart);
+    e4.addEventListener('click', moveMainPart);
+    e4.addEventListener('touchstart', moveMainPart);
+    e5.addEventListener('click', moveMainPart);
+    e5.addEventListener('touchstart', moveMainPart);
+    e6.addEventListener('click', moveMainPart);
+    e6.addEventListener('touchstart', moveMainPart);
+    e7.addEventListener('click', updateVisibilltyFillterMenu);
+    e7.addEventListener('touchstart', updateVisibilltyFillterMenu);
 
-    for( var i = 0; i < e6.length; i++ ){ //ループで各ラジオボタンにイベントリスナを設定
+    for( var i = 0; i < e8.length; i++ ){ //ループで各ラジオボタンにイベントリスナを設定
         e6[i].addEventListener('change', fillterDBs); //change イベントリスナを各ラジオボタンに登録
     }
 
