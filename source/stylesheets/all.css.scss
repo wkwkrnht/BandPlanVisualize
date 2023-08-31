@@ -12,10 +12,12 @@ $yellow:#eae3b4;
 
 $base-vertical-rhythm:1vh;
 $header-height:6vh;
-$fixed-length:50px;
+
+$fixed-length:40px;
 $box-font-size:14px;
 $box-stroke-size:3px;
-$ui-size:4vh;
+
+$ui-size:3vh;
 $unit-indicator-size:6em;
 $unit-indicator-position:2rem;
 
@@ -78,6 +80,8 @@ h1{
 
 .box,
 .ruler{
+    contain:size layout paint;
+    content-visibility:auto;
     height:$fixed-length;
     position:absolute;
 }
@@ -140,7 +144,7 @@ h1{
     background-color:rgba(255, 255, 255, .2);
     text-align:left;
     top:calc(#{$header-height} + #{$base-vertical-rhythm} + 1em);
-    width:100px;
+    width:500px;
 
     & > span{
         font-size:$box-font-size;
@@ -150,9 +154,16 @@ h1{
 
 #unit,
 #loading,
+#fillter-popup,
+.ui{
+    background-color:rgba(255, 255, 255, .4);
+}
+#unit,
+#loading,
 .ui{
     box-shadow:0 0 3vmin rgba(0,0,0,.1);
     color:$black;
+    contain:size layout paint;
     font-weight:bold;
     position:fixed;
     text-align:center;
@@ -161,7 +172,6 @@ h1{
 
 #unit,
 #loading{
-    background-color:rgba(255, 255, 255, .4);
     bottom:$unit-indicator-position;
     left:$unit-indicator-position;
     height:calc(#{$unit-indicator-size} / 2);
@@ -169,17 +179,15 @@ h1{
 }
 
 .ui{
-    background-color:rgba(255, 255, 255, .4);
     bottom:$unit-indicator-position;
     display:grid;
     font-size:calc(#{$ui-size} * 0.9);
     grid-template-areas:
-        "scalerDown scalerUp"
-        "fillter fillter"
-        "moveDown moveUp";
-    height:calc(#{$ui-size} * 3);
+        "scalerDown fillter fillter scalerUp"
+        "moveLeft moveDown moveUp moveRight";
+    height:calc(#{$ui-size} * 2);
     right:$unit-indicator-position;
-    width:calc(#{$ui-size} * 2);
+    width:calc(#{$ui-size} * 4);
 
     & > button{
         border:1px solid $right-gray;
@@ -197,6 +205,14 @@ h1{
     cursor:zoom-out;
     grid-area:scalerDown;
 }
+#move-left{
+    cursor:all-scroll;
+    grid-area:moveLeft;
+}
+#move-right{
+    cursor:all-scroll;
+    grid-area:moveRight;
+}
 #move-up{
     cursor:all-scroll;
     grid-area:moveUp;
@@ -207,10 +223,11 @@ h1{
 }
 
 #fillter-popup{
-    background-color:rgba(255, 255, 255, .4);
     bottom:$unit-indicator-position;
+    height:calc(96vh - (#{$unit-indicator-position} + (#{$ui-size} * 2)));
     right:calc(#{$unit-indicator-position} + (#{$ui-size} * 2) + #{$unit-indicator-position});
     position:fixed;
+    width:96vw;
     z-index:1000;
 
     &[data-visibillity='y']{

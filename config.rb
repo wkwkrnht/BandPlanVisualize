@@ -45,7 +45,7 @@ helpers do
 
     def write_ruler( area_size = 0 )
         freq = 0
-        unit = 100
+        unit = 500
         times = area_size.div(unit)
         html = ''
 
