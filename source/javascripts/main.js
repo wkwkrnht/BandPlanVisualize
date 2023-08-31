@@ -126,16 +126,19 @@ function moveMainPart(symbol){
     }
 }
 
-function updateVisibilltyFillterMenu(){
-    let
-    target = document.getElementById('fillter-popup'),
-    state = target.dataset.visibillity;
-
-    if(state == 'n'){
+function updateVisibillity(target){
+    if(target.dataset.visibillity == 'n'){
         target.dataset.visibillity = 'y';
-    }else if(state == 'y'){
+    }else if(target.dataset.visibillity == 'y'){
         target.dataset.visibillity = 'n';
     }
+}
+
+function updateVisibilltyFillterMenu(){
+    let
+    target = document.getElementById('fillter-popup');
+
+    updateVisibillity(target);
 }
 
 function fillterDBs(){
@@ -146,13 +149,7 @@ function fillterDBs(){
     loading.style.display = 'block';
 
     for( var i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
-        if(targets[i].dataset.visibillity == 'n'){
-            targets[i].dataset.visibillity = 'y';
-            targets[i].style.display = 'block';
-        }else if(targets[i].dataset.visibillity == 'y'){
-            targets[i].dataset.visibillity = 'n';
-            targets[i].style.display = 'none';
-        }
+        updateVisibillity(targets[i]);
     }
 
     loading.style.display = 'none';
