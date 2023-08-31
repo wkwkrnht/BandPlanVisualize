@@ -25,7 +25,7 @@ page "/partials/*", layout: false
 
 # pretty urls
 activate :directory_indexes
-
+activate :minify_html
 activate :social_image
 
 helpers do
