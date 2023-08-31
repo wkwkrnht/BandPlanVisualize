@@ -26,7 +26,12 @@ page "/partials/*", layout: false
 # pretty urls
 activate :directory_indexes
 activate :minify_html
-activate :social_image
+activate :social_image do |social_image|
+    social_image.window_size = '1200,600' # The size of the screenshot
+    social_image.selector = 'body > *' # Used to test that the social image url has loaded properly. The more specific this is, the better the chance of catching errors.
+    social_image.always_generate = true # Always regenerate images. Takes a long time, but ensures any changes are reflected.
+    social_image.base_url = 'https://wkwkrnht.github.io/BandPlanVisualize/' # When building the site, fetch against this URL.
+end
 
 helpers do
     # Helpers
