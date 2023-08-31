@@ -62,7 +62,7 @@ main#main
         ==write_box('JP', row[0], row['down'], row['up'])
     - CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        ==write_box('ISM', row[0], row['down'], row['up'])
+        ==write_box('ISM', row[0], row['Down'], row['Up'])
     - CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
         div class='box ETSI' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"
