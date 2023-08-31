@@ -1,6 +1,7 @@
-//setup
+// setup
 @charset 'utf-8';
 
+// Colors.
 $black:#333;
 $dark-gray:#eee;
 $right-gray:#bbb;
@@ -10,18 +11,23 @@ $right-blue:#3ff9dc;
 $blue:#03a9f4;
 $yellow:#eae3b4;
 
+// Size values utilized.
 $base-vertical-rhythm:1vh;
+
+// Size values of the header.
 $header-height:6vh;
 
+// Size values of boxes.
 $fixed-length:40px;
 $box-font-size:14px;
 $box-stroke-size:3px;
 
+// Size values of intaractive elements.
 $ui-size:3vh;
 $unit-indicator-size:6em;
 $unit-indicator-position:2rem;
 
-@keyframes pulse{
+@keyframes pulse{ // Definision of loading animation
     from{
         opacity:1;
         transform:scale(1);
@@ -80,7 +86,7 @@ h1{
 
 .box,
 .ruler{
-    contain:size layout paint;
+    contain:size layout;
     content-visibility:auto;
     height:$fixed-length;
     position:absolute;
@@ -157,13 +163,13 @@ h1{
 #fillter-popup,
 .ui{
     background-color:rgba(255, 255, 255, .4);
+    contain:size layout paint;
 }
 #unit,
 #loading,
 .ui{
     box-shadow:0 0 3vmin rgba(0,0,0,.1);
     color:$black;
-    contain:size layout paint;
     font-weight:bold;
     position:fixed;
     text-align:center;
