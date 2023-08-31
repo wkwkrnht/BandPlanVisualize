@@ -59,8 +59,7 @@ main#main
     - tableAreaSize = 0
     - CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
-        div class='box JP' data-visibillity='y' data-down=row['down'] data-up=row['up'] style="left:#{ row['down'] }em;width:#{ (row['up'].to_i - row['down'].to_i).to_s }em;"
-            span =row[0]
+        ==write_box('JP', row[0], row['down'], row['up'])
     - CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max( tableAreaSize, row['Up'].to_i )
         div class='box ISM' data-visibillity='y' data-down=row['Down'] data-up=row['Up'] style="left:#{ row['Down'] }em;width:#{ (row['Up'].to_i - row['Down'].to_i).to_s }em;"

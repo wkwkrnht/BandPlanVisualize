@@ -43,6 +43,10 @@ helpers do
         end
     end
 
+    def write_box(dataset, name, down, up)
+        return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up + '" data-down="' + down + '" style="left:' + down + 'em;width:' + (up.to_i - down.to_i).to_s + 'em;"><span>' + name + '</span></div>'
+    end
+
     def write_ruler( area_size = 0 )
         freq = 0
         unit = 500
