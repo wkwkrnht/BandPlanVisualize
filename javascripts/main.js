@@ -1,11 +1,10 @@
 var
-windowWidth = document.documentElement.clientWidth, // Constructor of the window width.
-windowHeight = document.documentElement.clientHeight, // Constructor of the window height.
+windowWidth = document.documentElement.clientWidth, // Constant of the window width.
+windowHeight = document.documentElement.clientHeight, // Constant of the window height.
 displayDirection = '', // Variable for note which direction on the display is wider.
 unitWidth = 100,
-headerHeight = 0.13 * windowHeight;
-
-const loading = document.getElementById('loading');
+headerHeight = 0.06 * windowHeight, // Constant to note height of th view.
+loading = document.getElementById('loading'); // Constant of the elemnt to explain loading status.
 
 function updateDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
     windowWidth = document.documentElement.clientWidth, // Constructor of the window width.
@@ -18,13 +17,13 @@ function updateDisplayDirection(){ // For set styles on elements, detect which d
     }
 }
 
-function updateUnitIndicator(){
+function updateUnitIndicator(){ // Update unit-prefix of the indicator on the view.
     let
     target = document.getElementById('unit'),
     prefix = parseFloat(target.dataset.unitprefix),
     prefixStr = '';
 
-    switch(prefix){
+    switch(prefix){ // From value of prefix, detect specific points, and transfering in the format of SI unit.
         case 1:
             prefixStr = '';
             break;
@@ -55,15 +54,15 @@ function updateUnitIndicator(){
     target.innerHTML = '[' + prefixStr + 'Hz]';
 }
 
-function updateBoxSize(){
+function updateBoxSize(){ // Update a size of each box by unit scaling.
+    loading.style.display = 'block';
+
     const initial = 1000; // This is defined by unit of elemnts from DBs.
     let
     target = document.getElementById('unit'),
     targets = document.getElementsByClassName('box'),
-    prefix = parseFloat(target.dataset.unitprefix),
-    fontSize = (1 / (prefix / initial));
-
-    loading.style.display = 'block';
+    prefix = parseFloat(target.dataset.unitprefix), // Pull value of unit-prefix of box for now.
+    fontSize = (1 / (prefix / initial)); // Transfer to value at the stylesheet.
 
     for( var i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
         targets[i].style.fontSize = fontSize + 'px';
@@ -72,11 +71,11 @@ function updateBoxSize(){
     loading.style.display = 'none';
 }
 
-function updateUnitInt(symbol){
+function updateUnitInt(symbol){ // Update unit-prefix by input.
     const
-    amount = 10,
-    max = 1000000000,
-    min = 0.000000001;
+    amount = 10, // How times will be changed.
+    max = 1000000000, // The maximum limit of unit-prefix.
+    min = 0.000000001; // The minimum limit of unit-prefix.
 
     let
     target = document.getElementById('unit'),
@@ -103,7 +102,7 @@ function updateUnitInt(symbol){
     updateBoxSize();
 }
 
-function moveMainPart(symbol){
+function moveMainPart(symbol){ // Scroll for the direction done by input.
     let
     target = document.getElementById('unit'),
     unit = parseFloat(target.dataset.unitprefix);
@@ -128,7 +127,7 @@ function moveMainPart(symbol){
     }
 }
 
-function updateVisibillity(target){
+function updateVisibillity(target){ // Utillity to change a state of visibillity.
     if(target.dataset.visibillity == 'n'){
         target.dataset.visibillity = 'y';
     }else if(target.dataset.visibillity == 'y'){
@@ -136,13 +135,13 @@ function updateVisibillity(target){
     }
 }
 
-function updateVisibilltyFillterMenu(){
+function updateVisibilltyFillterMenu(){ // Toggle to show the menu to control which DB appeared.
     let target = document.getElementById('fillter-popup');
 
     updateVisibillity(target);
 }
 
-function fillterDBs(){
+function fillterDBs(){ // Toggle to control which DB appeared.
     let
     targetName = event.target.dataset.dbname,
     targets = document.getElementsByClassName(targetName);
@@ -156,7 +155,7 @@ function fillterDBs(){
     loading.style.display = 'none';
 }
 
-function calcAmountOfMove(baseline, unit, times){ // Calculating the DOM will move how much.
+function calcAmountOfMove(baseline, unit, times){ // Calculate the DOM will move how much.
     return ((baseline * 0.11) + (times * unit * 1.2));
 }
 
@@ -223,12 +222,12 @@ function main(){ // Main function.
     e7.addEventListener('click', updateVisibilltyFillterMenu);
     e7.addEventListener('touchstart', updateVisibilltyFillterMenu);
 
-    for( var i = 0; i < e8.length; i++ ){ //ループで各ラジオボタンにイベントリスナを設定
-        e6[i].addEventListener('change', fillterDBs); //change イベントリスナを各ラジオボタンに登録
+    for( var i = 0; i < e8.length; i++ ){ // A loop to set event lisner on each elments to toggle DB visible state.
+        e8[i].addEventListener('change', fillterDBs);
     }
 
     loading.style.display = 'none';
 }
 
-window.addEventListener('resize', updateDisplayDirection()); //
+window.addEventListener('resize', updateDisplayDirection());
 window.addEventListener('load', main()); // Fire main() after loaded whole of the HTML document.
