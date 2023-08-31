@@ -31,7 +31,7 @@ helpers do
     # Methods defined in the helpers block are available in templates
     # https://middlemanapp.com/basics/helper-methods/
 
-    def update_max( target = 0, chaser = 0 )
+    def update_max(target = 0, chaser = 0)
         if chaser > target
             return chaser
         elsif target > chaser
@@ -43,12 +43,12 @@ helpers do
         end
     end
 
-    def write_box(dataset, name, down, up)]
+    def write_box(dataset, name, down, up)
         width = up.to_i - down.to_i
         return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up + '" data-down="' + down.to_s + '" style="left:' + down.to_s + 'em;width:' + width.to_s + 'em;"><span>' + name + '</span></div>'
     end
 
-    def write_ruler( area_size = 0 )
+    def write_ruler(area_size = 0)
         freq = 0
         unit = 500
         times = area_size.div(unit)
