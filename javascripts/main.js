@@ -114,23 +114,30 @@ function moveMainPart(symbol){ // Scroll for the direction done by input.
         symbol = event.target.innerText;
     }
 
-    if(symbol == '→'){
-        window.scrollBy(unit, 0);
-    }else if(symbol == '←'){
-        unit = -1 * unit;
-        window.scrollBy(unit, 0);
-    }else if(symbol == '↑'){
-        window.scrollBy(0, unit);
-    }else if(symbol == '↓'){
-        unit = -1 * unit;
-        window.scrollBy(0, unit);
+    switch(symbol){
+        case '→':
+            window.scrollBy(unit, 0);
+            break;
+        case '←':
+            unit = -1 * unit;
+            window.scrollBy(unit, 0);
+            break;
+        case '↑':
+            window.scrollBy(0, unit);
+            break;
+        case '↓':
+            unit = -1 * unit;
+            window.scrollBy(0, unit);
+            break;
+        default:
+            break;
     }
 }
 
 function updateVisibillity(target){ // Utillity to change a state of visibillity.
-    if(target.dataset.visibillity == 'n'){
+    if(target.dataset.visibillity === 'n'){
         target.dataset.visibillity = 'y';
-    }else if(target.dataset.visibillity == 'y'){
+    }else if(target.dataset.visibillity === 'y'){
         target.dataset.visibillity = 'n';
     }
 }
@@ -160,8 +167,7 @@ function calcAmountOfMove(baseline, unit, times){ // Calculate the DOM will move
 }
 
 function adjustBoxLocation(){ // Set size and position for each air band boxes.
-    let
-    targets = document.getElementsByClassName('box'); // List of air band boxes
+    let targets = document.getElementsByClassName('box'); // List of air band boxes
 
     loading.style.display = 'block';
 
@@ -176,7 +182,7 @@ function adjustBoxLocation(){ // Set size and position for each air band boxes.
             d2D = targets[j].dataset.down, // DOM proparty of others.
             d2U = targets[j].dataset.up; // DOM proparty of others.
 
-            if( ((d1D < d2D) && (d2D < d1U))  || ((d1D < d2U) && (d2U < d1U)) ){
+            if( ((d2D < d1D) && (d1D < d2U))  || ((d2D < d1U) && (d1U < d2U)) ){
                 number++;
             }
         }
