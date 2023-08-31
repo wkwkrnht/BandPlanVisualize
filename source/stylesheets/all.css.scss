@@ -140,7 +140,7 @@ h1{
     background-color:rgba(255, 255, 255, .2);
     text-align:left;
     top:calc(#{$header-height} + #{$base-vertical-rhythm} + 1em);
-    width:1000px;
+    width:100px;
 
     & > span{
         font-size:$box-font-size;
