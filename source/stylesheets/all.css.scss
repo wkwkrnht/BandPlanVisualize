@@ -12,10 +12,10 @@ $blue:#03a9f4;
 $yellow:#eae3b4;
 
 // Size values utilized.
-$base-vertical-rhythm:1dvh;
+$base-vertical-rhythm:1vh;
 
 // Size values of the header.
-$header-height:6dvh;
+$header-height:6vh;
 
 // Size values of boxes.
 $fixed-length:40px;
@@ -23,8 +23,8 @@ $box-font-size:14px;
 $box-stroke-size:3px;
 
 // Size values of intaractive elements.
-$ui-size:3dvh;
-$unit-indicator-size:6em;
+$ui-size:3vh;
+$unit-indicator-size:5em;
 $unit-indicator-position:2rem;
 
 @keyframes pulse{ // Definision of loading animation
@@ -87,7 +87,6 @@ h1{
 .box,
 .ruler{
     contain:size layout;
-    content-visibility:auto;
     height:$fixed-length;
     position:absolute;
 }
@@ -230,10 +229,10 @@ h1{
 
 #fillter-popup{
     bottom:$unit-indicator-position;
-    height:calc(96dvh - (#{$unit-indicator-position} + (#{$ui-size} * 2)));
+    height:calc(96vh - (#{$unit-indicator-position} + (#{$ui-size} * 2)));
     right:calc(#{$unit-indicator-position} + (#{$ui-size} * 2) + #{$unit-indicator-position});
     position:fixed;
-    width:96dvw;
+    width:96vw;
     z-index:1000;
 
     &[data-visibillity='y']{
