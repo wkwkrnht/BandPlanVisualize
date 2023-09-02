@@ -1,7 +1,7 @@
 ---
 social_image: true
 ---
-div id='loading' class='spinner-box'
+/div id='loading' class='spinner-box'
     div class="pulse-container"
         div class='pulse-bubble pulse-bubble-1'
         div class='pulse-bubble pulse-bubble-2'
@@ -15,7 +15,7 @@ nav.ui
     button#move-up type='button' ↑
     button#move-down type='button' ↓
 aside#unit data-unitPrefix='1000'
-nav#fillter-popup data-visibillity='n'
+/nav#fillter-popup data-visibillity='n'
     label
         input type='checkbox' checked='' data-dbName='JP'
         | JP
@@ -63,16 +63,16 @@ main#main
     - CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('JP', row[0], row['down'], row['up'])
-    - CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('ISM', row[0], row['Down'], row['Up'])
-    - CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('ETSI', row[0], row['Down'], row['Up'])
-    - CSV.foreach('./data/IEEE802154BandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/IEEE802154BandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('IEEE802154', row[0], row['Down'], row['Up'])
-    - CSV.foreach('./data/3GPPBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/3GPPBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
             div class='box cellular' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
@@ -88,22 +88,22 @@ main#main
             div class='box cellular' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
-    - CSV.foreach('./data/Wi-FiBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/Wi-FiBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('WiFi', row[0], row['Down'], row['Up'])
-    - CSV.foreach('./data/BTBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/BTBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('BT', row[0], row['Down'], row['Up'])
-    - CSV.foreach('./data/DECTBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/DECTBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('DECT', row[0], row['Down'], row['Up'])
-    - CSV.foreach('./data/ISDBTBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/ISDBTBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('ISDBT', row[0], row['Down'], row['Up'])
-    - CSV.foreach('./data/BSBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/BSBandPlan.csv', headers: true) do |row|
         - tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
         ==write_box('BS', row[0], row['Down'], row['Up'])
-    - CSV.foreach('./data/NTTBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/NTTBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
             div class='box NTT' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
@@ -119,7 +119,7 @@ main#main
             div class='box NTT' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
-    - CSV.foreach('./data/KDDIBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/KDDIBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
             div class='box KDDI' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
@@ -135,7 +135,7 @@ main#main
             div class='box KDDI' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
-    - CSV.foreach('./data/SBBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/SBBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
             div class='box SB' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
@@ -151,7 +151,7 @@ main#main
             div class='box SB' data-visibillity='y' data-down=row['DLdown'] data-up=row['DLup'] style="left:#{ row['DLdown'] }em;width:#{ (row['DLup'].to_i - row['DLdown'].to_i).to_s }em;"
                 span
                     | #{ row[0] } ↑↓
-    - CSV.foreach('./data/RMBandPlan.csv', headers: true) do |row|
+    /- CSV.foreach('./data/RMBandPlan.csv', headers: true) do |row|
         - if row['Mode'] == 'FDD' || row['Mode'] == 'SUL'
             - tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
             div class='box RM' data-visibillity='y' data-down=row['ULdown'] data-up=row['ULup'] style="left:#{ row['ULdown'] }em;width:#{ (row['ULup'].to_i - row['ULdown'].to_i).to_s }em;"
