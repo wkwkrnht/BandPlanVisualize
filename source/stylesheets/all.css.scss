@@ -232,7 +232,6 @@ h1{
     height:calc(96vh - (#{$unit-indicator-position} + (#{$ui-size} * 2)));
     right:calc(#{$unit-indicator-position} + (#{$ui-size} * 2) + #{$unit-indicator-position});
     position:fixed;
-    text-align:center;
     width:96vw;
     z-index:1000;
 
@@ -245,6 +244,7 @@ h1{
 
     & > label{
         display:block;
+        font-size:1.3rem;
     }
 }
 
