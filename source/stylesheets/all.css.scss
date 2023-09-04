@@ -228,11 +228,12 @@ h1{
 }
 
 #fillter-popup{
-    bottom:$unit-indicator-position;
+    //bottom:$unit-indicator-position;
     height:calc(96vh - (#{$unit-indicator-position} + (#{$ui-size} * 2)));
-    right:calc(#{$unit-indicator-position} + (#{$ui-size} * 2) + #{$unit-indicator-position});
-    position:fixed;
-    width:96vw;
+    margin:auto;
+    //position:fixed;
+    //right:calc(#{$unit-indicator-position} + (#{$ui-size} * 2) + #{$unit-indicator-position});
+    width:calc(96vw - (#{$ui-size} * 4));
     z-index:1000;
 
     &[data-visibillity='y']{
@@ -245,6 +246,7 @@ h1{
     & > label{
         display:block;
         font-size:1.3rem;
+        font-weight:bold;
     }
 }
 
@@ -283,6 +285,6 @@ h1{
     }
 
     .box,.ruler{
-        margin-top:calc(-2.8 * (#{$header-height} + #{$base-vertical-rhythm}));
+        margin-top:calc(-3 * (#{$header-height} + #{$base-vertical-rhythm}));
     }
 }
