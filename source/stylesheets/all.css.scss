@@ -39,7 +39,7 @@ $unit-indicator-position:2rem;
 }
 
 :root{
-    font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif;
+    font-family:'UD デジタル 教科書体 N-R',Meiryo,sans-serif;
     font-feature-settings:'pkna' 1;
     scroll-behavior:smooth;
     text-overflow:ellipsis;
@@ -60,7 +60,6 @@ header{
     height:$header-height;
     left:0;
     margin-bottom:$base-vertical-rhythm;
-    position:fixed;
     text-align:center;
     top:0;
     width:100%;
@@ -101,15 +100,8 @@ h1{
         font-size:$box-font-size;
         font-weight:bold;
         text-align:center;
-        text-shadow:
-        $box-stroke-size $box-stroke-size $box-stroke-size $black,
-        calc(-1 * #{$box-stroke-size}) calc(-1 * #{$box-stroke-size}) $box-stroke-size $black,
-        calc(-1 * #{$box-stroke-size}) $box-stroke-size $box-stroke-size $black,
-        $box-stroke-size calc(-1 * #{$box-stroke-size}) $box-stroke-size $black,
-        $box-stroke-size 0 $box-stroke-size $black,
-        calc(-1 * #{$box-stroke-size})  0 $box-stroke-size $black,
-        0 $box-stroke-size $box-stroke-size $black,
-        0 calc(-1 * #{$box-stroke-size}) $box-stroke-size $black;
+        -webkit-text-stroke:$box-stroke-size $black;
+        text-stroke:$box-stroke-size $black;
     }
 
     &[data-visibillity='y']{
@@ -146,7 +138,7 @@ h1{
 }
 
 .ruler{
-    background-color:rgba(255, 255, 255, .2);
+    background-color:$white;
     text-align:left;
     top:calc(#{$header-height} + #{$base-vertical-rhythm} + 1em);
     width:500px;
@@ -161,13 +153,12 @@ h1{
 #loading,
 #fillter-popup,
 .ui{
-    background-color:rgba(255, 255, 255, .4);
+    background-color:$white;
     contain:size layout paint;
 }
 #unit,
 #loading,
 .ui{
-    box-shadow:0 0 3vmin rgba(0,0,0,.1);
     color:$black;
     font-weight:bold;
     position:fixed;
@@ -232,7 +223,6 @@ h1{
     height:calc(96vh - (#{$unit-indicator-position} + (#{$ui-size} * 2)));
     margin:auto;
     position:fixed;
-    //right:calc(#{$unit-indicator-position} + (#{$ui-size} * 2) + #{$unit-indicator-position});
     width:calc(96vw - (#{$ui-size} * 4));
     z-index:1000;
 

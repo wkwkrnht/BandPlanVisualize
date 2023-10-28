@@ -11,6 +11,7 @@ html
         meta charset='utf-8'
         meta name='viewport' content='width=device-width'
         meta name='description' content=description
+        /= favicon_tag image
 
         meta property='og:title' content=title
         meta property='og:description' content=description
@@ -18,16 +19,7 @@ html
         meta property='og:url' content=(url + current_page.url)
         meta property='og:type' content='website'
 
-        meta name='twitter:card' content='summary_large_image'
-        meta name='twitter:title' content=title
-        meta name='twitter:description' content=description
-        meta name='twitter:image' content=(url + image_path(image))
-        /= favicon_tag 'favicon.png'
-
         = stylesheet_link_tag 'all'
         = javascript_include_tag 'main', defer: true
     body
-        header
-            h1 =title
-            p &copy;2023 wkwkrnht
         = yield
