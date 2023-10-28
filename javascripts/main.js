@@ -214,19 +214,19 @@ function main(){ // Main function.
     let e8 = document.querySelectorAll('input[checked]'); //name 属性が categories の input 要素（ラジオボタン）の集まり（静的な NodeList）を取得
 
     e1.addEventListener('click', {symbol: '+', handleEvent: updateUnitInt});
-    e1.addEventListener('touchstart', {symbol: '+', handleEvent: updateUnitInt});
+    e1.addEventListener('touchstart', {symbol: '+', handleEvent: updateUnitInt}, {passive: true});
     e2.addEventListener('click', {symbol: '-', handleEvent: updateUnitInt});
-    e2.addEventListener('touchstart', {symbol: '-', handleEvent: updateUnitInt});
+    e2.addEventListener('touchstart', {symbol: '-', handleEvent: updateUnitInt}, {passive: true});
     e3.addEventListener('click', moveMainPart);
-    e3.addEventListener('touchstart', moveMainPart);
+    e3.addEventListener('touchstart', moveMainPart, {passive: true});
     e4.addEventListener('click', moveMainPart);
-    e4.addEventListener('touchstart', moveMainPart);
+    e4.addEventListener('touchstart', moveMainPart, {passive: true});
     e5.addEventListener('click', moveMainPart);
-    e5.addEventListener('touchstart', moveMainPart);
+    e5.addEventListener('touchstart', moveMainPart, {passive: true});
     e6.addEventListener('click', moveMainPart);
-    e6.addEventListener('touchstart', moveMainPart);
+    e6.addEventListener('touchstart', moveMainPart, {passive: true});
     e7.addEventListener('click', updateVisibilltyFillterMenu);
-    e7.addEventListener('touchstart', updateVisibilltyFillterMenu);
+    e7.addEventListener('touchstart', updateVisibilltyFillterMenu, {passive: true});
 
     for( var i = 0; i < e8.length; i++ ){ // A loop to set event lisner on each elments to toggle DB visible state.
         e8[i].addEventListener('change', fillterDBs);
