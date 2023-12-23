@@ -163,7 +163,7 @@ function fillterDBs(){ // Toggle to control which DB appeared.
 }
 
 function calcAmountOfMove(baseline, unit, times){ // Calculate the DOM will move how much.
-    return ((baseline * 0.11) + (times * unit * 1.2));
+    return ((baseline * 0.025) + (times * unit * 1.2));
 }
 
 function adjustBoxLocation(){ // Set size and position for each air band boxes.
