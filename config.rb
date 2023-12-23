@@ -61,38 +61,47 @@ helpers do
         CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('JP', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('ISM', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('ETSI', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/IEEE802154BandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('IEEE802154', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/BTBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('BT', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/DECTBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('DECT', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/ISDBTBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('ISDBT', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/BSBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('BS', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/Wi-FiBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             html += write_box('WiFi', row[0], row['down'], row['up'])
+        end
 
         CSV.foreach('./data/NTTBandPlan.csv', headers: true) do |row|
             dataset = 'NTT'
@@ -123,6 +132,7 @@ helpers do
 
                 html += write_box(dataset, name, row['DLdown'], row['DLup'])
             end
+        end
 
         CSV.foreach('./data/KDDIBandPlan.csv', headers: true) do |row|
             dataset = 'KDDI'
@@ -153,6 +163,7 @@ helpers do
 
                 html += write_box(dataset, name, row['DLdown'], row['DLup'])
             end
+        end
 
         CSV.foreach('./data/SBBandPlan.csv', headers: true) do |row|
             dataset = 'SB'
@@ -183,6 +194,7 @@ helpers do
 
                 html += write_box(dataset, name, row['DLdown'], row['DLup'])
             end
+        end
 
         CSV.foreach('./data/RMBandPlan.csv', headers: true) do |row|
             dataset = 'RM'
@@ -213,6 +225,7 @@ helpers do
 
                 html += write_box(dataset, name, row['DLdown'], row['DLup'])
             end
+        end
 
         CSV.foreach('./data/3GPPBandPlan.csv', headers: true) do |row|
             dataset = '3GPP'
@@ -243,6 +256,7 @@ helpers do
 
                 html += write_box(dataset, name, row['DLdown'], row['DLup'])
             end
+        end
 
         html += write_ruler(tableAreaSize)
 
