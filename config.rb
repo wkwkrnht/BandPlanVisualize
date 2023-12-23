@@ -239,7 +239,7 @@ helpers do
             end
         end
 
-        array.sort{|a, b| a[3].to_i <=> b[3].to_i }
+        array.sort_by{| x | x[3].to_i }
 
         html += write_ruler(array.last[3].to_i)
         array.each do |item|
