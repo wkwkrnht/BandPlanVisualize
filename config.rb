@@ -56,16 +56,21 @@ helpers do
 
     def write_elements()
         tableAreaSize = 0
+        i = 0
         html = ''
+        array = []
 
         CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
+            array[i] = ['JP', row[0], row['down'], row['up']]
+            i += 1
             html += write_box('JP', row[0], row['down'], row['up'])
         end
 
         CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
             tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
-            html += write_box('ISM', row[0], row['down'], row['up'])
+            array[i] = ['ISM', row[0], row['down'], row['up']]
+            i += 1
         end
 
         CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
