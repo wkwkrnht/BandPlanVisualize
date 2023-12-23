@@ -55,7 +55,6 @@ helpers do
     end
 
     def write_elements()
-        tableAreaSize = 0
         i = 0
         html = ''
         array = []
@@ -241,11 +240,11 @@ helpers do
         end
 
         array.sort{|a, b| a[3].to_i <=> b[3].to_i }
+
+        html += write_ruler(array[i][3])
         array.each do |item|
             html += write_box(item[0], item[1], item[2], item[3])
         end
-
-        html += write_ruler(item[i][3])
 
         return html
     end

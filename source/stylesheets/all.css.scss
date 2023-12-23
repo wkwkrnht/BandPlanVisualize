@@ -87,6 +87,7 @@ h1{
 .ruler{
     contain:size layout;
     height:$fixed-length;
+    margin-top:$base-vertical-rhythm;
     position:absolute;
 }
 
@@ -141,7 +142,6 @@ h1{
 .ruler{
     background-color:$white;
     text-align:left;
-    top:calc(#{$header-height} + #{$base-vertical-rhythm} + 1em);
     width:500px;
 
     & > span{
@@ -273,9 +273,5 @@ h1{
 @media (max-aspect-ratio: 1/1) {
     #main{
         transform:rotate(90deg);
-    }
-
-    .box,.ruler{
-        margin-top:calc(-3 * (#{$header-height} + #{$base-vertical-rhythm}));
     }
 }
