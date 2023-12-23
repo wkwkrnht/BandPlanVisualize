@@ -61,62 +61,48 @@ helpers do
         array = []
 
         CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['up'].to_i)
             array[i] = ['JP', row[0], row['down'], row['up']]
             i += 1
         end
 
         CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             array[i] = ['ISM', row[0], row['Down'], row['Up']]
             i += 1
         end
 
         CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             array[i] = ['ETSI', row[0], row['Down'], row['Up']]
             i += 1
         end
 
         CSV.foreach('./data/IEEE802154BandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             array[i] = ['IEEE802154', row[0], row['Down'], row['Up']]
             i += 1
         end
 
         CSV.foreach('./data/BTBandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             array[i] = ['BT', row[0], row['Down'], row['Up']]
             i += 1
         end
 
         CSV.foreach('./data/DECTBandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             array[i] = ['DECT', row[0], row['Down'], row['Up']]
             i += 1
         end
 
         CSV.foreach('./data/ISDBTBandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             array[i] = ['ISDBT', row[0], row['Down'], row['Up']]
             i += 1
         end
 
         CSV.foreach('./data/BSBandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             array[i] = ['BS', row[0], row['Down'], row['Up']]
             i += 1
         end
 
         CSV.foreach('./data/Wi-FiBandPlan.csv', headers: true) do |row|
-            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)
             array[i] = ['WiFi', row[0], row['Down'], row['Up']]
             i += 1
-        end
-
-        array.sort{|a, b| a[3].to_i <=> b[3].to_i }
-        array.each do |item|
-            html += write_box(item[0], item[1], item[2], item[3])
         end
 
         CSV.foreach('./data/NTTBandPlan.csv', headers: true) do |row|
@@ -125,28 +111,24 @@ helpers do
 
             case mode
             when 'FDD'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-
-                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
-                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                i += 1
+                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                i += 1
             when 'TDD'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↑↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             when 'SUL'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
                 name = row[0] + '↑'
-
-                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                i += 1
             when 'SDL'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             end
         end
 
@@ -156,28 +138,24 @@ helpers do
 
             case mode
             when 'FDD'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-
-                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
-                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                i += 1
+                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                i += 1
             when 'TDD'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↑↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             when 'SUL'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
                 name = row[0] + '↑'
-
-                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                i += 1
             when 'SDL'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             end
         end
 
@@ -187,28 +165,24 @@ helpers do
 
             case mode
             when 'FDD'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-
-                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
-                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                i += 1
+                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                i += 1
             when 'TDD'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↑↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             when 'SUL'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
                 name = row[0] + '↑'
-
-                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                i += 1
             when 'SDL'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             end
         end
 
@@ -218,28 +192,24 @@ helpers do
 
             case mode
             when 'FDD'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-
-                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
-                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                i += 1
+                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                i += 1
             when 'TDD'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↑↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             when 'SUL'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
                 name = row[0] + '↑'
-
-                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                i += 1
             when 'SDL'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             end
         end
 
@@ -249,32 +219,33 @@ helpers do
 
             case mode
             when 'FDD'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-
-                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
-                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                i += 1
+                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                i += 1
             when 'TDD'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↑↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             when 'SUL'
-                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
                 name = row[0] + '↑'
-
-                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                i += 1
             when 'SDL'
-                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
                 name = row[0] + '↓'
-
-                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                i += 1
             end
         end
 
-        html += write_ruler(tableAreaSize)
+        array.sort{|a, b| a[3].to_i <=> b[3].to_i }
+        array.each do |item|
+            html += write_box(item[0], item[1], item[2], item[3])
+        end
+
+        html += write_ruler(item[i][3])
 
         return html
     end

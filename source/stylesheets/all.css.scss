@@ -91,16 +91,17 @@ h1{
 }
 
 .box{
-    border:1em solid $black;
     box-sizing:border-box;
     font-size:1px;
     text-align:center;
 
     & > span{
-        color:$black;
+        color:$white;
         font-size:$box-font-size;
         font-weight:bold;
         text-align:center;
+        -webkit-text-stroke:$box-stroke-size $black;
+        text-stroke:$box-stroke-size $black;
     }
 
     &[data-visibillity='y']{
@@ -111,29 +112,29 @@ h1{
     }
 
     &.JP{
-        border-color:$red;
+        background-color:$red;
     }
     &.cellular,
     &.3GPP,
     &.DECT{
-        border-color:$right-blue;
+        background-color:$right-blue;
     }
     &.WiFi,
     &.BT,
     &.ISDBT,
     &.BS{
-        border-color:$blue;
+        background-color:$blue;
     }
     &.ETSI,
     &.IEEE802154,
     &.ISM{
-        border-color:$black;
+        background-color:$black;
     }
     &.NTT,
     &.KDDI,
     &.SB,
     &.RM{
-        border-color:$blue;
+        background-color:$blue;
     }
 }
 
