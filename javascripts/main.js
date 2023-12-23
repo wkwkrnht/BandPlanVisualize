@@ -162,10 +162,6 @@ function fillterDBs(){ // Toggle to control which DB appeared.
     loading.style.display = 'none';
 }
 
-function calcAmountOfMove(baseline, unit, times){ // Calculate the DOM will move how much.
-    return ((baseline * 0.025) + );
-}
-
 function adjustBoxLocation(){ // Set size and position for each air band boxes.
     let targets = document.getElementsByClassName('box'); // List of air band boxes
 
