@@ -241,7 +241,7 @@ helpers do
 
         array.sort{|a, b| a[3].to_i <=> b[3].to_i }
 
-        html += write_ruler(array.last[3])
+        html += write_ruler(array.last[3].to_i)
         array.each do |item|
             html += write_box(item[0], item[1], item[2], item[3])
         end
