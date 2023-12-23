@@ -54,6 +54,201 @@ helpers do
         return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up + '" data-down="' + down.to_s + '" style="left:' + down.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
     end
 
+    def write_elements()
+        tableAreaSize = 0
+        html = ''
+
+        CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('JP', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('ISM', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('ETSI', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/IEEE802154BandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('IEEE802154', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/BTBandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('BT', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/DECTBandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('DECT', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/ISDBTBandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('ISDBT', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/BSBandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('BS', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/Wi-FiBandPlan.csv', headers: true) do |row|
+            tableAreaSize = update_max(tableAreaSize, row['Up'].to_i)]
+            html += write_box('WiFi', row[0], row['down'], row['up'])
+
+        CSV.foreach('./data/NTTBandPlan.csv', headers: true) do |row|
+            dataset = 'NTT'
+            mode = row['Mode']
+
+            case mode
+            when 'FDD'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name0 = row[0] + '↑'
+                name1 = row[0] + '↓'
+
+                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
+                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+            when 'TDD'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↑↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            when 'SUL'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                name = row[0] + '↑'
+
+                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+            when 'SDL'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            end
+
+        CSV.foreach('./data/KDDIBandPlan.csv', headers: true) do |row|
+            dataset = 'KDDI'
+            mode = row['Mode']
+
+            case mode
+            when 'FDD'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name0 = row[0] + '↑'
+                name1 = row[0] + '↓'
+
+                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
+                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+            when 'TDD'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↑↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            when 'SUL'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                name = row[0] + '↑'
+
+                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+            when 'SDL'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            end
+
+        CSV.foreach('./data/SBBandPlan.csv', headers: true) do |row|
+            dataset = 'SB'
+            mode = row['Mode']
+
+            case mode
+            when 'FDD'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name0 = row[0] + '↑'
+                name1 = row[0] + '↓'
+
+                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
+                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+            when 'TDD'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↑↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            when 'SUL'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                name = row[0] + '↑'
+
+                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+            when 'SDL'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            end
+
+        CSV.foreach('./data/RMBandPlan.csv', headers: true) do |row|
+            dataset = 'RM'
+            mode = row['Mode']
+
+            case mode
+            when 'FDD'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name0 = row[0] + '↑'
+                name1 = row[0] + '↓'
+
+                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
+                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+            when 'TDD'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↑↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            when 'SUL'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                name = row[0] + '↑'
+
+                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+            when 'SDL'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            end
+
+        CSV.foreach('./data/3GPPBandPlan.csv', headers: true) do |row|
+            dataset = '3GPP'
+            mode = row['Mode']
+
+            case mode
+            when 'FDD'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name0 = row[0] + '↑'
+                name1 = row[0] + '↓'
+
+                html += write_box(dataset, name0, row['ULdown'], row['ULup'])
+                html += write_box(dataset, name1, row['DLdown'], row['DLup'])
+            when 'TDD'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↑↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            when 'SUL'
+                tableAreaSize = update_max(tableAreaSize, row['ULup'].to_i)
+                name = row[0] + '↑'
+
+                html += write_box(dataset, name, row['ULdown'], row['ULup'])
+            when 'SDL'
+                tableAreaSize = update_max(tableAreaSize, row['DLup'].to_i)
+                name = row[0] + '↓'
+
+                html += write_box(dataset, name, row['DLdown'], row['DLup'])
+            end
+
+        html += write_ruler(tableAreaSize)
+
+        return html
+    end
+
     def write_ruler(area_size = 0)
         freq = 0
         unit = 500
