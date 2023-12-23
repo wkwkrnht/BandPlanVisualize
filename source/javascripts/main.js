@@ -163,7 +163,7 @@ function fillterDBs(){ // Toggle to control which DB appeared.
 }
 
 function calcAmountOfMove(baseline, unit, times){ // Calculate the DOM will move how much.
-    return ((baseline * 0.025) + (times * unit * 1.2));
+    return ((baseline * 0.025) + );
 }
 
 function adjustBoxLocation(){ // Set size and position for each air band boxes.
@@ -187,7 +187,7 @@ function adjustBoxLocation(){ // Set size and position for each air band boxes.
             }
         }
 
-        targets[i].style.top = calcAmountOfMove(windowHeight, 50, number) + 'px';
+        targets[i].style.top = (number * 1.2 * 50) + 'px';
     }
 
     loading.style.display = 'none';

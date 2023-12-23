@@ -83,11 +83,14 @@ h1{
     font-size:1.5rem;
 }
 
+#main{
+    margin-top:$base-vertical-rhythm;
+}
+
 .box,
 .ruler{
     contain:size layout;
     height:$fixed-length;
-    margin-top:$base-vertical-rhythm;
     position:absolute;
 }
 

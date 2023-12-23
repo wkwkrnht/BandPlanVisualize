@@ -51,7 +51,7 @@ helpers do
 
     def write_box(dataset, name, down, up)
         width = up.to_i - down.to_i
-        return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up + '" data-down="' + down.to_s + '" style="left:' + down.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
+        return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" style="left:' + down.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
     end
 
     def write_elements()
