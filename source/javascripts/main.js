@@ -17,6 +17,18 @@ function updateDisplayDirection(){ // For set styles on elements, detect which d
     }
 }
 
+function typedSomeKey(){
+    if(e.code == 'KeyW' || e.code == 'ArrowUp'){
+		moveMainPart('↑');
+	}else if (e.code == 'KeyS' || e.code == 'ArrowDown'){
+		moveMainPart('↓');
+	}else if (e.code == 'KeyA' || e.code == 'ArrowLeft'){
+		moveMainPart('←');
+	}else if (e.code == 'KeyD' || e.code == 'ArrowRight'){
+		moveMainPart('→');
+	}
+}
+
 function updateUnitIndicator(){ // Update unit-prefix of the indicator on the view.
     let
     target = document.getElementById('unit'),
@@ -189,14 +201,14 @@ function adjustBoxLocation(){ // Set size and position for each air band boxes.
     loading.style.display = 'none';
 }
 
-function main(){ // Main function.
+function init_window(){ // Main function.
     loading.style.display = 'block';
 
     updateDisplayDirection();
     updateUnitIndicator();
 
     updateBoxSize();
-    adjustBoxLocation();
+    //adjustBoxLocation();
 
 
     const
@@ -223,6 +235,7 @@ function main(){ // Main function.
     e6.addEventListener('touchstart', moveMainPart, {passive: true});
     e7.addEventListener('click', updateVisibilltyFillterMenu);
     e7.addEventListener('touchstart', updateVisibilltyFillterMenu, {passive: true});
+    document.addEventListener('keydown', typedSomeKey)
 
     for( var i = 0; i < e8.length; i++ ){ // A loop to set event lisner on each elments to toggle DB visible state.
         e8[i].addEventListener('change', fillterDBs);
@@ -232,4 +245,4 @@ function main(){ // Main function.
 }
 
 window.addEventListener('resize', updateDisplayDirection());
-window.addEventListener('load', main()); // Fire main() after loaded whole of the HTML document.
+window.addEventListener('load', init_window()); // Fire main() after loaded whole of the HTML document.

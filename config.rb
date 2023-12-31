@@ -37,21 +37,37 @@ helpers do
     # Methods defined in the helpers block are available in templates
     # https://middlemanapp.com/basics/helper-methods/
 
-    def update_max(target = 0, chaser = 0)
-        if chaser > target
-            return chaser
-        elsif target > chaser
-            return target
-        elsif chaser === target
-            return target
-        else
-            return target
-        end
+    def write_box(dataset, name, down, up, count)
+        width = up.to_i - down.to_i
+        count = count.to_i * 1.2 * 50
+        return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" style="height:' + count.to_s + 'px;left:' + down.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
     end
 
-    def write_box(dataset, name, down, up)
-        width = up.to_i - down.to_i
-        return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" style="left:' + down.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
+    def addjust_box(array)
+        j = 0
+        l = array.length
+
+        array.each_with_index do |item, i|
+            c = 0
+            itemD = item[2].to_i
+            itemU = item[3].to_i
+            while j < l do
+                tempD = array[j][2].to_i
+                tempU = array[j][3].to_i
+
+                if ( (tempD < itemD) and (itemD < tempU) ) or ( (tempD < itemU) and (itemU < tempU) )
+                    c += 1
+                end
+
+                j += 1
+            end
+
+            if c > 0
+                item[4] = c
+                array[i] = item
+            end
+        end
+        return array
     end
 
     def write_elements()
@@ -60,47 +76,47 @@ helpers do
         array = []
 
         CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
-            array[i] = ['JP', row[0], row['down'], row['up']]
+            array[i] = ['JP', row[0], row['down'], row['up'], 0]
             i += 1
         end
 
         CSV.foreach('./data/ISMBandPlan.csv', headers: true) do |row|
-            array[i] = ['ISM', row[0], row['Down'], row['Up']]
+            array[i] = ['ISM', row[0], row['Down'], row['Up'], 0]
             i += 1
         end
 
         CSV.foreach('./data/ETSIBandPlan.csv', headers: true) do |row|
-            array[i] = ['ETSI', row[0], row['Down'], row['Up']]
+            array[i] = ['ETSI', row[0], row['Down'], row['Up'], 0]
             i += 1
         end
 
         CSV.foreach('./data/IEEE802154BandPlan.csv', headers: true) do |row|
-            array[i] = ['IEEE802154', row[0], row['Down'], row['Up']]
+            array[i] = ['IEEE802154', row[0], row['Down'], row['Up'], 0]
             i += 1
         end
 
         CSV.foreach('./data/BTBandPlan.csv', headers: true) do |row|
-            array[i] = ['BT', row[0], row['Down'], row['Up']]
+            array[i] = ['BT', row[0], row['Down'], row['Up'], 0]
             i += 1
         end
 
         CSV.foreach('./data/DECTBandPlan.csv', headers: true) do |row|
-            array[i] = ['DECT', row[0], row['Down'], row['Up']]
+            array[i] = ['DECT', row[0], row['Down'], row['Up'], 0]
             i += 1
         end
 
         CSV.foreach('./data/ISDBTBandPlan.csv', headers: true) do |row|
-            array[i] = ['ISDBT', row[0], row['Down'], row['Up']]
+            array[i] = ['ISDBT', row[0], row['Down'], row['Up'], 0]
             i += 1
         end
 
         CSV.foreach('./data/BSBandPlan.csv', headers: true) do |row|
-            array[i] = ['BS', row[0], row['Down'], row['Up']]
+            array[i] = ['BS', row[0], row['Down'], row['Up'], 0]
             i += 1
         end
 
         CSV.foreach('./data/Wi-FiBandPlan.csv', headers: true) do |row|
-            array[i] = ['WiFi', row[0], row['Down'], row['Up']]
+            array[i] = ['WiFi', row[0], row['Down'], row['Up'], 0]
             i += 1
         end
 
@@ -112,21 +128,21 @@ helpers do
             when 'FDD'
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name0, row['ULdown'], row['ULup'], 0]
                 i += 1
-                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name1, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'TDD'
                 name = row[0] + '↑↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'SUL'
                 name = row[0] + '↑'
-                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name, row['ULdown'], row['ULup'], 0]
                 i += 1
             when 'SDL'
                 name = row[0] + '↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             end
         end
@@ -139,21 +155,21 @@ helpers do
             when 'FDD'
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name0, row['ULdown'], row['ULup'], 0]
                 i += 1
-                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name1, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'TDD'
                 name = row[0] + '↑↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'SUL'
                 name = row[0] + '↑'
-                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name, row['ULdown'], row['ULup'], 0]
                 i += 1
             when 'SDL'
                 name = row[0] + '↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             end
         end
@@ -166,21 +182,21 @@ helpers do
             when 'FDD'
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name0, row['ULdown'], row['ULup'], 0]
                 i += 1
-                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name1, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'TDD'
                 name = row[0] + '↑↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'SUL'
                 name = row[0] + '↑'
-                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name, row['ULdown'], row['ULup'], 0]
                 i += 1
             when 'SDL'
                 name = row[0] + '↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             end
         end
@@ -193,21 +209,21 @@ helpers do
             when 'FDD'
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name0, row['ULdown'], row['ULup'], 0]
                 i += 1
-                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name1, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'TDD'
                 name = row[0] + '↑↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'SUL'
                 name = row[0] + '↑'
-                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name, row['ULdown'], row['ULup'], 0]
                 i += 1
             when 'SDL'
                 name = row[0] + '↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             end
         end
@@ -220,30 +236,31 @@ helpers do
             when 'FDD'
                 name0 = row[0] + '↑'
                 name1 = row[0] + '↓'
-                array[i] = [dataset, name0, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name0, row['ULdown'], row['ULup'], 0]
                 i += 1
-                array[i] = [dataset, name1, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name1, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'TDD'
                 name = row[0] + '↑↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             when 'SUL'
                 name = row[0] + '↑'
-                array[i] = [dataset, name, row['ULdown'], row['ULup']]
+                array[i] = [dataset, name, row['ULdown'], row['ULup'], 0]
                 i += 1
             when 'SDL'
                 name = row[0] + '↓'
-                array[i] = [dataset, name, row['DLdown'], row['DLup']]
+                array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
                 i += 1
             end
         end
 
         array.sort_by{| x | x[3].to_i }
-
         html += write_ruler(array.last[3].to_i)
+
+        array = addjust_box(array)
         array.each do |item|
-            html += write_box(item[0], item[1], item[2], item[3])
+            html += write_box(item[0], item[1], item[2], item[3], item[4])
         end
 
         return html

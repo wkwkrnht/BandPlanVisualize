@@ -95,6 +95,7 @@ h1{
 }
 
 .box{
+    background-color:$black;
     box-sizing:border-box;
     font-size:1px;
     text-align:center;
@@ -128,11 +129,6 @@ h1{
     &.ISDBT,
     &.BS{
         background-color:$blue;
-    }
-    &.ETSI,
-    &.IEEE802154,
-    &.ISM{
-        background-color:$black;
     }
     &.NTT,
     &.KDDI,
