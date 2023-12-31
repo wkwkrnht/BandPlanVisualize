@@ -63,7 +63,7 @@ helpers do
                 tempU = array[j][3].to_i
 
                 if ( (tempD < itemD) and (itemD < tempU) ) or ( (tempD < itemU) and (itemU < tempU) )
-                    c += 1
+                    count += 1
                 end
 
                 j += 1
