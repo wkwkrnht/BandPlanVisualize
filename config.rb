@@ -69,7 +69,7 @@ helpers do
                 j += 1
             end
 
-            if c > 0
+            if count > 0
                 temp[4] = count.floor
             end
 
