@@ -40,7 +40,7 @@ helpers do
     def write_box(dataset, name, down, up, count)
         width = up.to_i - down.to_i
         height = count.to_i * 1.2 * 50
-        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + height.to_s + '" style="left:' + down.to_s + 'em;top:' + count.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
+        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + count.to_s + '" style="left:' + down.to_s + 'em;top:' + height.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
     end
 
     def addjust_box(array)
