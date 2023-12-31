@@ -39,18 +39,25 @@ helpers do
 
     def write_box(dataset, name, down, up, count)
         width = up.to_i - down.to_i
-        count = count.to_i * 1.2 * 50
-        return '<div class="box ' + dataset + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" style="height:' + count.to_s + 'px;left:' + down.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
+        height = count.to_i * 1.2 * 50
+        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + height.to_s + '" style="left:' + down.to_s + 'em;top:' + count.to_s + 'em;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
     end
 
     def addjust_box(array)
         j = 0
         l = array.length
+        temp = ['', '', 0, 0, 0]
+        result = []
 
         array.each_with_index do |item, i|
-            c = 0
+            count = 0
             itemD = item[2].to_i
             itemU = item[3].to_i
+            temp[0] = item[0]
+            temp[1] = item[1]
+            temp[2] = item[2]
+            temp[3] = item[3]
+
             while j < l do
                 tempD = array[j][2].to_i
                 tempU = array[j][3].to_i
@@ -63,11 +70,12 @@ helpers do
             end
 
             if c > 0
-                item[4] = c
-                array[i] = item
+                temp[4] = count.floor
             end
+
+            result[i] = temp
         end
-        return array
+        return result
     end
 
     def write_elements()
