@@ -208,7 +208,7 @@ function init_window(){ // Main function.
     updateUnitIndicator();
 
     updateBoxSize();
-    adjustBoxLocation();
+    //adjustBoxLocation();
 
 
     const
