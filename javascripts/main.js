@@ -174,42 +174,13 @@ function fillterDBs(){ // Toggle to control which DB appeared.
     loading.style.display = 'none';
 }
 
-function adjustBoxLocation(){ // Set size and position for each air band boxes.
-    let targets = document.getElementsByClassName('box'); // List of air band boxes
-
-    loading.style.display = 'block';
-
-    for( var i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
-        let
-        d1D = targets[i].dataset.down,
-        d1U = targets[i].dataset.up,
-        number = 0; // Value of counting of colision
-
-        for( var j = 0; j < i; j++ ){ // Count Colision from sizes of the air band box and others.
-            let
-            d2D = targets[j].dataset.down, // DOM proparty of others.
-            d2U = targets[j].dataset.up; // DOM proparty of others.
-
-            if( ((d2D < d1D) && (d1D < d2U))  || ((d2D < d1U) && (d1U < d2U)) ){
-                number++;
-            }
-        }
-
-        targets[i].style.top = (number * 1.2 * 50) + 'px';
-    }
-
-    loading.style.display = 'none';
-}
 
 function init_window(){ // Main function.
     loading.style.display = 'block';
 
     updateDisplayDirection();
     updateUnitIndicator();
-
     updateBoxSize();
-    //adjustBoxLocation();
-
 
     const
     e1 = document.getElementById('scaler-up'),
