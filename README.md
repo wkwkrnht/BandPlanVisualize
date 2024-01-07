@@ -48,10 +48,6 @@ This repo contains an **[example website](https://middleman-netlify-cms.netlify.
 
 このレポジトリは、各国行政府の周波数割当、標準化団体が定めたチャンネルリスト、各無線網のチャンネルリストなどを図解で一覧するためのサイトをつくるものです。
 
-## データセット形式
-
-ファイル名にユニークな名前を持つCSVファイルをデータセットの単位とします。1行目に項目名を書いてください。1列目にバンド名を書いてください。TDDとFDDが混在する場合は、フィールドを作成し、バンドごとに明記してください。
-
 ## 対応済データセット一覧
 
 dataフォルダ配下のcsvファイルを読み込んで、以下の情報を描画しています。追加・修正等は、プルリクエストまたはイシューの登録をお願いいたします。
@@ -65,3 +61,51 @@ dataフォルダ配下のcsvファイルを読み込んで、以下の情報を�
 * DECT
 * 3GPP
 * 総務省
+
+## 新規データセットの作成と登録
+
+プルリクエストの作成において、新規データセットと、読み込みスクリプトをコードベースに追加する必要があります。この章では、それらを順に説明します。
+
+### 新規データセットの作成
+
+ファイル名にユニークな名前を持つCSVファイルをデータセットの単位とします。1行目に項目名を書いてください。1列目にバンド名を書いてください。TDDとFDDが混在する場合は、フィールドを作成し、バンドごとに明記してください。このデータセットを、dataフォルダ配下に追加してください。
+
+### 新規データセットのい読み込みスクリプトを追加する
+
+データセットの読み込みは、config.rbファイル内のwrite_elements関数にて行います。記述例を、通常版、FDDとTDDが混在する場合の順に示します。このスクリプトを追加したバージョンを添付してください。
+
+```ruby:config.rb
+CSV.foreach('./data/{データセット名}.csv', headers: true) do |row|
+    array[i] = ['{データセット名}', row[0], row['down'], row['up'], 0]
+    i += 1
+end
+```
+
+```ruby:config.rb
+CSV.foreach('./data/{データセット名}.csv', headers: true) do |row|
+    dataset = '{データセット名}'
+    mode = row['Mode']
+
+    case mode
+    when 'FDD'
+        name0 = row[0] + '↑'
+        name1 = row[0] + '↓'
+        array[i] = [dataset, name0, row['ULdown'], row['ULup'], 0]
+        i += 1
+        array[i] = [dataset, name1, row['DLdown'], row['DLup'], 0]
+        i += 1
+    when 'TDD'
+        name = row[0] + '↑↓'
+        array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
+        i += 1
+    when 'SUL'
+        name = row[0] + '↑'
+        array[i] = [dataset, name, row['ULdown'], row['ULup'], 0]
+        i += 1
+    when 'SDL'
+        name = row[0] + '↓'
+        array[i] = [dataset, name, row['DLdown'], row['DLup'], 0]
+        i += 1
+    end
+end
+```

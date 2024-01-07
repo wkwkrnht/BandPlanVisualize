@@ -45,7 +45,6 @@ helpers do
 
     def addjust_box(array)
         l = array.length
-        result = []
 
         array.each_with_index do |item, i|
             j = 0
@@ -53,7 +52,7 @@ helpers do
             itemD = item[2].to_i
             itemU = item[3].to_i
 
-            while j < i do
+            while j < l do
                 tempD = array[j][2].to_i
                 tempU = array[j][3].to_i
 
@@ -66,9 +65,7 @@ helpers do
                 j += 1
             end
 
-            if count > 0
-                array[i][4] = count.floor
-            end
+            array[i][4] = count.floor
         end
 
         return array
