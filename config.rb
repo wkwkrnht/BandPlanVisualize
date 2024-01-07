@@ -53,7 +53,7 @@ helpers do
             itemD = item[2].to_i
             itemU = item[3].to_i
 
-            while j < l do
+            while j < i do
                 tempD = array[j][2].to_i
                 tempU = array[j][3].to_i
 

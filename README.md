@@ -1,6 +1,6 @@
 # BandPlanVisualize
 
-[Generated from this repo](https://wkwkrnht.github.io/BandPlanVisualize/)
+[This website is generated from this repo.](https://wkwkrnht.github.io/BandPlanVisualize/)
 
 This repository for the website visualizing lists of air bands. You can access to the view made from this repository. At this document, air bands means band defined to telecommunication, or frequency ranges allocated by some government.
 
@@ -42,35 +42,26 @@ This repo contains an **[example website](https://middleman-netlify-cms.netlify.
 
 **Middleman** is a static site generator using all the shortcuts and tools in modern web development. Check out [middlemanapp.com](http://middlemanapp.com/) for detailed tutorials, including a [getting started guide](http://middlemanapp.com/basics/getting-started/).
 
-**Netlify CMS** is a CMS for static site generators. Give non-technical users a simple way to edit and add content to any site built with a static site generator.
+# 日本語版
 
-## Getting Started
+[このレポジトリから作られたページはこちら](https://wkwkrnht.github.io/BandPlanVisualize/)
 
-Netlify CMS can run in any frontend web environment, but the quickest way to try it out is by running it on a pre-configured starter site with Netlify. Use the deploy button below to copy the repository to your account.
+このレポジトリは、各国行政府の周波数割当、標準化団体が定めたチャンネルリスト、各無線網のチャンネルリストなどを図解で一覧するためのサイトをつくるものです。
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/tomrutgers/middleman-starter-netlify-cms&amp;stack=cms"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+## データセット形式
 
-After clicking that button, you’ll authenticate with GitHub and choose a repository name. Netlify will then automatically create a repository in your GitHub account with a copy of the files from the template. Next, it will build and deploy the new site on Netlify, bringing you to the site dashboard when the build is complete. To access the CMS, you’ll need to set up [Netlify identity](https://www.netlify.com/docs/identity/) service to authorize users to log in to the CMS. Make sure to enable [Git Gateway](https://www.netlify.com/docs/git-gateway/).
+ファイル名にユニークな名前を持つCSVファイルをデータセットの単位とします。1行目に項目名を書いてください。1列目にバンド名を書いてください。TDDとFDDが混在する場合は、フィールドを作成し、バンドごとに明記してください。
 
-### Make it work on your machine
+## 対応済データセット一覧
 
-## Using docker
-```
-$ docker-compose build
-$ docker-compose run --service-ports web middleman server
-```
+dataフォルダ配下のcsvファイルを読み込んで、以下の情報を描画しています。追加・修正等は、プルリクエストまたはイシューの登録をお願いいたします。
 
-## Without docker
-Be sure to check out the [middleman installation guide](https://middlemanapp.com/basics/install/)
-```
-$ git clone https://github.com/tomrutgers/middleman-starter-netlify-cms
-$ cd middleman-starter-netlify-cms
-$ bundle install
-$ middleman server
-```
-
-### Setting up the CMS
-Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick-start/#authentication) to set up authentication, and hosting.
-
-### Trouble?
-[![Gitter](https://badges.gitter.im/netlify/netlify.svg)](https://gitter.im/netlify/NetlifyCMS)
+* ISM
+* ETSI
+* ISDB-T
+* 日本の放送衛星
+* Bluetooth
+* Wi-Fi
+* DECT
+* 3GPP
+* 総務省
