@@ -39,17 +39,17 @@ helpers do
 
     def write_box(dataset, name, down, up, count)
         width = up.to_i - down.to_i
-        height = ((count.to_i + 1) * 1.2 * 50).floor
-        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + count.to_s + '" style="left:' + down.to_s + 'em;top:' + height.to_s + 'px;width:' + width.to_s + 'em;"><span>' + dataset + ' ' + name + '</span></div>'
+        top = ((count.to_f + 1) * 1.2 * 50).to_i
+        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + count.to_s + '" style="left:' + down.to_s + 'em;top:' + top.to_s + 'px;width:' + width.to_s + 'em;"><span>' + dataset + '<br>' + name + '</span></div>'
     end
 
     def addjust_box(array)
-        j = 0
         l = array.length
         temp = ['', '', 0, 0, 0]
         result = []
 
         array.each_with_index do |item, i|
+            j = 0
             count = 0
             itemD = item[2].to_i
             itemU = item[3].to_i
@@ -62,7 +62,9 @@ helpers do
                 tempD = array[j][2].to_i
                 tempU = array[j][3].to_i
 
-                if ( (tempD < itemD) and (itemD < tempU) ) or ( (tempD < itemU) and (itemU < tempU) )
+                if tempD < itemD && itemD < tempU
+                    count += 1
+                elsif tempD < itemU && itemU < tempU
                     count += 1
                 end
 
@@ -75,6 +77,7 @@ helpers do
 
             result[i] = temp
         end
+
         return result
     end
 
