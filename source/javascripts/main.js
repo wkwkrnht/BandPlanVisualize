@@ -3,8 +3,7 @@ windowWidth = document.documentElement.clientWidth, // Constant of the window wi
 windowHeight = document.documentElement.clientHeight, // Constant of the window height.
 displayDirection = '', // Variable for note which direction on the display is wider.
 unitWidth = 100,
-headerHeight = 0.06 * windowHeight, // Constant to note height of th view.
-loading = document.getElementById('loading'); // Constant of the elemnt to explain loading status.
+headerHeight = 0.06 * windowHeight; // Constant to note height of th view.
 
 function updateDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
     windowWidth = document.documentElement.clientWidth, // Constructor of the window width.
@@ -67,8 +66,6 @@ function updateUnitIndicator(){ // Update unit-prefix of the indicator on the vi
 }
 
 function updateBoxSize(){ // Update a size of each box by unit scaling.
-    loading.style.display = 'block';
-
     const initial = 1000; // This is defined by unit of elemnts from DBs.
     let
     target = document.getElementById('unit'),
@@ -79,8 +76,6 @@ function updateBoxSize(){ // Update a size of each box by unit scaling.
     for( var i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
         targets[i].style.fontSize = fontSize + 'px';
     }
-
-    loading.style.display = 'none';
 }
 
 function updateUnitInt(symbol){ // Update unit-prefix by input.
@@ -165,18 +160,13 @@ function fillterDBs(){ // Toggle to control which DB appeared.
     targetName = event.target.dataset.dbname,
     targets = document.getElementsByClassName(targetName);
 
-    loading.style.display = 'block';
-
     for( var i = 0; i < targets.length; i++ ){ // Set basic values of air bands style. If display is as landscape, height is fixed, width is valuable, position is set from left.
         updateVisibillity(targets[i]);
     }
-
-    loading.style.display = 'none';
 }
 
 
 function init_window(){ // Main function.
-    loading.style.display = 'block';
 
     updateDisplayDirection();
     updateUnitIndicator();
@@ -211,8 +201,6 @@ function init_window(){ // Main function.
     for( var i = 0; i < e8.length; i++ ){ // A loop to set event lisner on each elments to toggle DB visible state.
         e8[i].addEventListener('change', fillterDBs);
     }
-
-    loading.style.display = 'none';
 }
 
 window.addEventListener('resize', updateDisplayDirection());

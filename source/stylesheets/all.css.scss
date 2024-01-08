@@ -117,19 +117,17 @@ h1{
     }
     &.cellular,
     &.3GPP,
-    &.DECT{
+    &.DECT,
+    &.NTT,
+    &.KDDI,
+    &.SB,
+    &.RM{
         background-color:$right-blue;
     }
     &.WiFi,
     &.BT,
     &.ISDBT,
     &.BS{
-        background-color:$blue;
-    }
-    &.NTT,
-    &.KDDI,
-    &.SB,
-    &.RM{
         background-color:$blue;
     }
 }
@@ -236,31 +234,6 @@ h1{
         font-size:1.3rem;
         font-weight:bold;
     }
-}
-
-#loading{
-    display:none;
-    z-index:1000;
-}
-.pulse-container{
-    align-items:center;
-    display:flex;
-    justify-content:space-between;
-}
-.pulse-bubble{
-    background-color:$right-blue;
-    border-radius:50%;
-    height:20px;
-    width:20px;
-}
-.pulse-bubble-1{
-    animation:pulse .4s ease 0s infinite alternate;
-}
-.pulse-bubble-2{
-    animation:pulse .4s ease .2s infinite alternate;
-}
-.pulse-bubble-3{
-    animation:pulse .4s ease .4s infinite alternate;
 }
 
 /*@media (min-aspect-ratio: 1/1) {

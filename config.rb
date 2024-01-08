@@ -26,11 +26,11 @@ page "/partials/*", layout: false
 # pretty urls
 activate :directory_indexes
 activate :minify_html
-activate :social_image do |social_image|
-    social_image.window_size = '1200,600' # The size of the screenshot
-    social_image.selector = 'body > *' # Used to test that the social image url has loaded properly. The more specific this is, the better the chance of catching errors.
-    social_image.base_url = 'https://wkwkrnht.github.io/BandPlanVisualize/' # When building the site, fetch against this URL.
-end
+# activate :social_image do |social_image|
+#    social_image.window_size = '1200,600' # The size of the screenshot
+#    social_image.selector = 'body > *' # Used to test that the social image url has loaded properly. The more specific this is, the better the chance of catching errors.
+#    social_image.base_url = 'https://wkwkrnht.github.io/BandPlanVisualize/' # When building the site, fetch against this URL.
+# end
 
 helpers do
     # Helpers
@@ -40,7 +40,7 @@ helpers do
     def write_box(dataset, name, down, up, count)
         width = up.to_i - down.to_i
         top = ((count.to_f + 1) * 60).to_i # 1.2 * 50 = 60[px]
-        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + count.to_s + '" style="left:' + down.to_s + 'em;top:' + top.to_s + 'px;width:' + width.to_s + 'em;"><span>' + dataset + '<br>' + name + '</span></div>'
+        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" style="left:' + down.to_s + 'em;top:' + top.to_s + 'px;width:' + width.to_s + 'em;"><span>' + dataset + '<br>' + name + '</span></div>' # This part is stay for supporting data attribute to rule CSS. → data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + count.to_s + '"
     end
 
     def addjust_box(array)
@@ -276,7 +276,7 @@ helpers do
         until freq > times
             temp = (freq * unit).to_s
 
-            html += '<div class="ruler" style="left:' + temp + 'px;"><span>' + temp + '</span></div>'
+            html += '<div class="ruler" style="left:' + temp + 'px;">' + temp + '</div>'
 
             freq += 1
         end
