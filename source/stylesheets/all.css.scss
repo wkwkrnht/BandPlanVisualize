@@ -51,7 +51,6 @@ header,
 }
 
 header{
-    height:$header-height;
     margin-bottom:$base-vertical-rhythm;
     text-align:center;
     width:100%;
@@ -63,11 +62,11 @@ header{
     }
 
     &:first-child{
-        padding-top:1em;
+        padding-top:$base-vertical-rhythm;
     }
 
     &:last-child{
-        padding-bottom:1em;
+        padding-bottom:$base-vertical-rhythm;
     }
 }
 
@@ -77,7 +76,7 @@ h1{
 
 .box,
 .ruler{
-    contain:size layout;
+    contain:strict;
     content-visibility:auto;
     height:$fixed-length;
     position:absolute;
@@ -135,10 +134,11 @@ h1{
 #fillter-popup,
 .ui{
     background-color:$white;
-    contain:size layout paint;
+    contain:strict;
 }
 #unit,
 .ui{
+    bottom:$unit-indicator-position;
     color:$black;
     font-weight:bold;
     position:fixed;
@@ -147,14 +147,12 @@ h1{
 }
 
 #unit{
-    bottom:$unit-indicator-position;
     left:$unit-indicator-position;
     height:calc(#{$unit-indicator-size} / 2);
     width:$unit-indicator-size;
 }
 
 .ui{
-    bottom:$unit-indicator-position;
     display:grid;
     font-size:calc(#{$ui-size} * 0.9);
     grid-template-areas:
@@ -200,12 +198,11 @@ h1{
 }
 
 #fillter-popup{
-    bottom:calc(#{$unit-indicator-position} + #{$ui-size});
-    height:calc(96vh - (#{$unit-indicator-position} + (#{$ui-size} * 2)));
-    left:$ui-size;
-    margin:auto;
+    bottom:calc(#{$unit-indicator-position} + (#{$ui-size} * 2));
+    height:calc(100dvh - ((#{$unit-indicator-position} * 2) + (#{$ui-size} * 2)));
+    left:calc(#{$unit-indicator-position} + #{$unit-indicator-size});
     position:fixed;
-    width:calc(96vw - (#{$ui-size} * 4));
+    width:calc(100dvw - (#{$unit-indicator-size} + (#{$ui-size} * 4)));
     z-index:1000;
 
     & > label{
@@ -222,6 +219,6 @@ h1{
 
 @media (max-aspect-ratio: 1/1) {
     #main{
-        transform:rotate(90deg) translateX(10vw) translateY(10vh);
+        transform:rotate(90deg) translateX(75vw) translateY(10vh);
     }
 }
