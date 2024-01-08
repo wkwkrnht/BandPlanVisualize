@@ -55,8 +55,6 @@ header,
 }
 
 header{
-    background-color:$black;
-    color:$white;
     height:$header-height;
     left:0;
     margin-bottom:$base-vertical-rhythm;
@@ -86,6 +84,7 @@ h1{
 .box,
 .ruler{
     contain:size layout;
+    content-visibility:auto;
     height:$fixed-length;
     position:absolute;
 }
@@ -270,7 +269,7 @@ h1{
 
 @media (max-aspect-ratio: 1/1) {
     #main{
-        margin-top:-50vmin;
+        margin-right:-50vmin;
         transform:rotate(90deg);
     }
 }
