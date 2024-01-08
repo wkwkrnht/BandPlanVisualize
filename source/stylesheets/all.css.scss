@@ -19,24 +19,13 @@ $header-height:6vh;
 
 // Size values of boxes.
 $fixed-length:40px;
-$box-font-size:14px;
+$box-font-size:12px;
 $box-stroke-size:1px;
 
 // Size values of intaractive elements.
 $ui-size:3vh;
 $unit-indicator-size:5em;
 $unit-indicator-position:2rem;
-
-@keyframes pulse{ // Definision of loading animation
-    from{
-        opacity:1;
-        transform:scale(1);
-    }
-    to{
-        opacity:.25;
-        transform:scale(.75);
-    }
-}
 
 :root{
     font-family:'UD デジタル 教科書体 N-R',Meiryo,sans-serif;
@@ -54,12 +43,17 @@ header,
     padding:0;
 }
 
+[data-visibillity='y']{
+    display:block;
+}
+[data-visibillity='n']{
+    display:none;
+}
+
 header{
     height:$header-height;
-    left:0;
     margin-bottom:$base-vertical-rhythm;
     text-align:center;
-    top:0;
     width:100%;
     z-index:100;
 
@@ -105,13 +99,6 @@ h1{
         text-stroke:$box-stroke-size $black;
     }
 
-    &[data-visibillity='y']{
-        display:block;
-    }
-    &[data-visibillity='n']{
-        display:none;
-    }
-
     &.JP{
         background-color:$red;
     }
@@ -145,14 +132,12 @@ h1{
 }
 
 #unit,
-#loading,
 #fillter-popup,
 .ui{
     background-color:$white;
     contain:size layout paint;
 }
 #unit,
-#loading,
 .ui{
     color:$black;
     font-weight:bold;
@@ -161,8 +146,7 @@ h1{
     z-index:100;
 }
 
-#unit,
-#loading{
+#unit{
     bottom:$unit-indicator-position;
     left:$unit-indicator-position;
     height:calc(#{$unit-indicator-size} / 2);
@@ -196,20 +180,22 @@ h1{
     cursor:zoom-out;
     grid-area:scalerDown;
 }
-#move-left{
+#move-left,
+#move-right,
+#move-up,
+#move-down{
     cursor:all-scroll;
+}
+#move-left{
     grid-area:moveLeft;
 }
 #move-right{
-    cursor:all-scroll;
     grid-area:moveRight;
 }
 #move-up{
-    cursor:all-scroll;
     grid-area:moveUp;
 }
 #move-down{
-    cursor:all-scroll;
     grid-area:moveDown;
 }
 
@@ -222,17 +208,11 @@ h1{
     width:calc(96vw - (#{$ui-size} * 4));
     z-index:1000;
 
-    &[data-visibillity='y']{
-        display:block;
-    }
-    &[data-visibillity='n']{
-        display:none;
-    }
-
     & > label{
         display:block;
         font-size:1.3rem;
         font-weight:bold;
+        margin:0 auto;
     }
 }
 
@@ -242,7 +222,6 @@ h1{
 
 @media (max-aspect-ratio: 1/1) {
     #main{
-        rotate:90deg;
-        translate:50vh, -100vw;
+        transform:rotate(90deg) translateX(100vw) translateY(50vh);
     }
 }
