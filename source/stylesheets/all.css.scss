@@ -83,10 +83,6 @@ h1{
     font-size:1.5rem;
 }
 
-#main{
-    margin-top:$base-vertical-rhythm;
-}
-
 .box,
 .ruler{
     contain:size layout;
@@ -221,8 +217,9 @@ h1{
 }
 
 #fillter-popup{
-    bottom:$unit-indicator-position;
+    bottom:calc(#{$unit-indicator-position} + #{$ui-size});
     height:calc(96vh - (#{$unit-indicator-position} + (#{$ui-size} * 2)));
+    left:$ui-size;
     margin:auto;
     position:fixed;
     width:calc(96vw - (#{$ui-size} * 4));
@@ -273,6 +270,7 @@ h1{
 
 @media (max-aspect-ratio: 1/1) {
     #main{
+        margin-top:-50vmin;
         transform:rotate(90deg);
     }
 }
