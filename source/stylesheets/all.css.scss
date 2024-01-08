@@ -242,7 +242,6 @@ h1{
 
 @media (max-aspect-ratio: 1/1) {
     #main{
-        margin-right:-50vmin;
-        transform:rotate(90deg);
+        transform:rotate(90deg) translate(50%, 50%);
     }
 }
