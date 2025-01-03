@@ -78,6 +78,8 @@ h1{
 .ruler{
     contain:strict;
     content-visibility:auto;
+    contain-intrinsic-height:$fixed-length;
+    contain-intrinsic-height:auto 60em;
     height:$fixed-length;
     position:absolute;
 }
@@ -85,17 +87,14 @@ h1{
 .box{
     background-color:$right-gray;
     box-sizing:border-box;
-    color:$white;
     font-size:1px;
     text-align:center;
 
     & > span{
-        color:$white;
+        color:$black;
         font-size:$box-font-size;
         font-weight:bold;
         text-align:center;
-        -webkit-text-stroke:$box-stroke-size $black;
-        text-stroke:$box-stroke-size $black;
     }
 
     &.JP{
