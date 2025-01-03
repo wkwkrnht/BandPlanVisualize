@@ -1,4 +1,4 @@
-var
+let
 windowWidth = document.documentElement.clientWidth, // Constant of the window width.
 windowHeight = document.documentElement.clientHeight, // Constant of the window height.
 displayDirection = '', // Variable for note which direction on the display is wider.

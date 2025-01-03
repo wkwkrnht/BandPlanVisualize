@@ -40,7 +40,7 @@ helpers do
     def write_box(dataset, name, down, up, count)
         width = up.to_i - down.to_i
         top = ((count.to_f + 1) * 60).to_i # 1.2 * 50 = 60[px]
-        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + count.to_s + '" style="left:' + down.to_s + 'em;top:' + top.to_s + 'px;width:' + width.to_s + 'em;"><span>' + dataset + '<br>' + name + '</span></div>'
+        return '<div class="box ' + dataset.to_s + '" data-visibillity="y" style="left:' + down.to_s + 'em;top:' + top.to_s + 'px;width:' + width.to_s + 'em;"><span>' + dataset + '<br>' + name + '</span></div>' # This part is stay for supporting data attribute to rule CSS. → data-up="' + up.to_s + '" data-down="' + down.to_s + '" data-c="' + count.to_s + '"
     end
 
     def addjust_box(array)
