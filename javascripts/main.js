@@ -6,8 +6,10 @@ unitWidth = 100,
 headerHeight = 0.06 * windowHeight; // Constant to note height of th view.
 
 function updateDisplayDirection(){ // For set styles on elements, detect which direction on the display is wider.
-    windowWidth = document.documentElement.clientWidth, // Constructor of the window width.
-    windowHeight = document.documentElement.clientHeight; // Constructor of the window height.
+    const
+    d = document.documentElement,
+    windowWidth = d.clientWidth, // Constructor of the window width.
+    windowHeight = d.clientHeight; // Constructor of the window height.
 
     if(windowWidth > windowHeight){
         displayDirection = 'landscape';
@@ -66,10 +68,12 @@ function updateUnitIndicator(){ // Update unit-prefix of the indicator on the vi
 }
 
 function updateBoxSize(){ // Update a size of each box by unit scaling.
-    const initial = 1000; // This is defined by unit of elemnts from DBs.
+    const 
+    d = document, 
+    initial = 1000; // This is defined by unit of elemnts from DBs.
     let
-    target = document.getElementById('unit'),
-    targets = document.getElementsByClassName('box'),
+    target = d.getElementById('unit'),
+    targets = d.getElementsByClassName('box'),
     prefix = parseFloat(target.dataset.unitprefix), // Pull value of unit-prefix of box for now.
     fontSize = (1 / (prefix / initial)); // Transfer to value at the stylesheet.
 
@@ -166,14 +170,10 @@ function fillterDBs(){ // Toggle to control which DB appeared.
 }
 
 
-function init_window(){ // Main function.
-
+function init_window() { // Main function.
     updateDisplayDirection();
     updateUnitIndicator();
-    updateBoxSize();
-}
-
-function set_action_too_elements() { // Main function.
+    
     const
     d = document,
     e1 = d.getElementById('scaler-up'),
@@ -207,5 +207,5 @@ function set_action_too_elements() { // Main function.
 }
 
 window.addEventListener('resize', updateDisplayDirection());
-window.addEventListener('DOMContentLoaded', set_action_too_elements()); // Fire main() after loaded whole of the HTML document.
-window.addEventListener('load', init_window()); // Fire main() after loaded whole of the HTML document.
+window.addEventListener('DOMContentLoaded', init_window()); // Fire main() after loaded whole of the HTML document.
+window.addEventListener('load', updateBoxSize()); // Fire main() after loaded whole of the HTML document.
