@@ -171,16 +171,19 @@ function init_window(){ // Main function.
     updateDisplayDirection();
     updateUnitIndicator();
     updateBoxSize();
+}
 
+function set_action_too_elements() { // Main function.
     const
-    e1 = document.getElementById('scaler-up'),
-    e2 = document.getElementById('scaler-down'),
-    e3 = document.getElementById('move-left'),
-    e4 = document.getElementById('move-right'),
-    e5 = document.getElementById('move-up'),
-    e6 = document.getElementById('move-down'),
-    e7 = document.getElementById('fillter-menu');
-    let e8 = document.querySelectorAll('input[checked]'); //name 属性が categories の input 要素（ラジオボタン）の集まり（静的な NodeList）を取得
+    d = document,
+    e1 = d.getElementById('scaler-up'),
+    e2 = d.getElementById('scaler-down'),
+    e3 = d.getElementById('move-left'),
+    e4 = d.getElementById('move-right'),
+    e5 = d.getElementById('move-up'),
+    e6 = d.getElementById('move-down'),
+    e7 = d.getElementById('fillter-menu');
+    let e8 = d.querySelectorAll('input[checked]'); //name 属性が categories の input 要素（ラジオボタン）の集まり（静的な NodeList）を取得
 
     e1.addEventListener('click', {symbol: '+', handleEvent: updateUnitInt});
     e1.addEventListener('touchstart', {symbol: '+', handleEvent: updateUnitInt}, {passive: true});
@@ -204,4 +207,5 @@ function init_window(){ // Main function.
 }
 
 window.addEventListener('resize', updateDisplayDirection());
+window.addEventListener('DOMContentLoaded', set_action_too_elements()); // Fire main() after loaded whole of the HTML document.
 window.addEventListener('load', init_window()); // Fire main() after loaded whole of the HTML document.
