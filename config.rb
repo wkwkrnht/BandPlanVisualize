@@ -76,10 +76,10 @@ helpers do
         html = ''
         array = []
 
-        CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
-            array[i] = ['JP', row[0], row['down'], row['up'], 0]
-            i += 1
-        end
+        #CSV.foreach('./data/JPBandPlan.csv', headers: true) do |row|
+        #    array[i] = ['JP', row[0], row['down'], row['up'], 0]
+        #    i += 1
+        #end
 
         CSV.foreach('./data/JPMicrophone.csv', headers: true) do |row|
             array[i] = ['JPMic', row[0], row['down'], row['up'], 0]
