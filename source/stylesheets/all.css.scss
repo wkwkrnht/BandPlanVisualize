@@ -10,6 +10,7 @@ $red:red;
 $right-blue:#3ff9dc;
 $blue:#03a9f4;
 $yellow:#eae3b4;
+$green:#8fc400;
 
 // Size values utilized.
 $base-vertical-rhythm:1vh;
@@ -77,7 +78,6 @@ h1{
 .box,
 .ruler{
     contain:strict;
-    content-visibility:auto;
     contain-intrinsic-height:$fixed-length;
     contain-intrinsic-height:auto 60em;
     height:$fixed-length;
@@ -87,6 +87,7 @@ h1{
 .box{
     background-color:$right-gray;
     box-sizing:border-box;
+    content-visibility:auto;
     font-size:1px;
     text-align:center;
 
@@ -110,10 +111,14 @@ h1{
         background-color:$right-blue;
     }
     &.WiFi,
-    &.BT,
+    &.BT{
+        background-color:$blue;
+    }
+
+    &.JPmic,
     &.ISDBT,
     &.BS{
-        background-color:$blue;
+        background-color:$green;
     }
 }
 
